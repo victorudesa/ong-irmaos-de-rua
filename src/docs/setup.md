@@ -295,22 +295,41 @@ git push
 
 ```
 src/
+├── assets/              ← imagens e arquivos estáticos importados pelo bundler
 ├── components/
-│   ├── ui/          ← componentes do shadcn (não editar diretamente)
-├── lib/
-│   └── utils.ts     ← utilitário cn()
+│   └── ui/              ← componentes do shadcn (não editar diretamente)
+│       └── button.tsx
 ├── docs/
-│   └── setup.md     ← este arquivo
-├── App.tsx          ← raiz da aplicação, define rotas
-├── main.tsx         ← ponto de entrada, monta o React no DOM
-└── index.css        ← estilos globais + variáveis do shadcn + Tailwind
+│   └── setup.md         ← este arquivo
+├── lib/
+│   └── utils.ts         ← utilitário cn()
+├── pages/               ← páginas da aplicação (uma por rota)
+│   ├── Index.tsx        ← rota /
+│   ├── QuemSomos.tsx    ← rota /quem-somos
+│   ├── Voluntario.tsx   ← rota /voluntario
+│   ├── DoeAgora.tsx     ← rota /doe-agora
+│   └── NotFound.tsx     ← rota * (catch-all 404)
+├── App.tsx              ← raiz da aplicação, define rotas
+├── main.tsx             ← ponto de entrada, monta o React no DOM
+└── index.css            ← estilos globais + variáveis do shadcn + Tailwind
 ```
+
+### Dependências adicionais já instaladas
+
+Além do que foi descrito nos passos acima, o projeto também usa:
+
+- **`@fontsource-variable/inter`** — fonte Inter Variable importada localmente (sem depender do Google Fonts em runtime). Importada no topo do `index.css`.
+- **`tw-animate-css`** — utilitários de animação compatíveis com Tailwind v4. Importado no topo do `index.css`.
+- **`radix-ui`** — pacote unificado da Radix UI (substitui os pacotes individuais `@radix-ui/react-*`).
 
 ---
 
 ## Próximos passos
 
-- Configurar as cores da ONG nas variáveis CSS do `index.css`
-- Criar a pasta `src/pages/` e as páginas da aplicação
-- Copiar e adaptar componentes do projeto original (`irmaos-de-rua-oficial`)
-- Adicionar componentes do shadcn conforme necessidade
+A estrutura base e o esqueleto das páginas estão prontos. As próximas etapas são:
+
+1. **Definir o design system da ONG** — substituir as variáveis CSS neutras (cinza) em `:root` no `index.css` pelas cores institucionais (primary, secondary, accent etc.). Decidir também tipografia de display se for diferente da Inter.
+2. **Criar componentes de layout compartilhados** — `Header`, `Footer` e provavelmente um `Layout` que envolve as páginas, em vez de repetir essa estrutura em cada `*.tsx` de `src/pages/`.
+3. **Adicionar componentes do shadcn conforme necessidade** — por enquanto só o `button` foi adicionado. Conforme as páginas evoluírem, rodar `npx shadcn@latest add <componente>` (ex: `card`, `input`, `dialog`, `sheet` para menu mobile, `form`).
+4. **Construir o conteúdo das páginas** — começar pela `Index.tsx` (landing) e seguir para as demais. Reaproveitar conteúdo/copy do projeto original `irmaos-de-rua-oficial` quando fizer sentido.
+5. **Configurar deploy** — definir hospedagem (Vercel, Netlify, Cloudflare Pages) e conectar ao repositório do GitHub para deploy automático em cada push na `main`.

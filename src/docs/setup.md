@@ -297,39 +297,46 @@ git push
 src/
 ├── assets/              ← imagens e arquivos estáticos importados pelo bundler
 ├── components/
-│   └── ui/              ← componentes do shadcn (não editar diretamente)
-│       └── button.tsx
+│   ├── ui/              ← componentes do shadcn (não editar diretamente)
+│   │   └── button.tsx
+│   ├── Layout.tsx       ← envolve todas as páginas (Navbar + main + Footer + WhatsAppButton)
+│   ├── Navbar.tsx       ← navegação fixa com scroll shadow e menu mobile
+│   ├── Footer.tsx       ← rodapé em surface-dark com 4 colunas
+│   ├── WhatsAppButton.tsx ← botão flutuante fixo
+│   ├── Section.tsx      ← wrapper de seção com label + H2 + padding semântico
+│   ├── PageHero.tsx     ← hero padrão das páginas internas (breadcrumb + H1 + subtítulo)
+│   ├── Card.tsx         ← card com ícone + título + descrição
+│   ├── CtaBanner.tsx    ← banner CTA em fundo primary (props: title, subtitle, actions)
+│   └── MetricsGrid.tsx  ← grade 2x2/4x1 de métricas de impacto
 ├── docs/
-│   └── setup.md         ← este arquivo
+│   ├── setup.md         ← este arquivo
+│   └── design-system.md ← design system completo (paleta, tipografia, tokens, organismos)
 ├── lib/
 │   └── utils.ts         ← utilitário cn()
 ├── pages/               ← páginas da aplicação (uma por rota)
-│   ├── Index.tsx        ← rota /
-│   ├── QuemSomos.tsx    ← rota /quem-somos
-│   ├── Voluntario.tsx   ← rota /voluntario
-│   ├── DoeAgora.tsx     ← rota /doe-agora
+│   ├── Index.tsx        ← rota / (placeholder)
+│   ├── QuemSomos.tsx    ← rota /quem-somos (placeholder)
+│   ├── Voluntario.tsx   ← rota /voluntario (placeholder)
+│   ├── DoeAgora.tsx     ← rota /doe-agora (placeholder)
 │   └── NotFound.tsx     ← rota * (catch-all 404)
 ├── App.tsx              ← raiz da aplicação, define rotas
 ├── main.tsx             ← ponto de entrada, monta o React no DOM
-└── index.css            ← estilos globais + variáveis do shadcn + Tailwind
+└── index.css            ← design system completo (paleta OKLCH, tokens semânticos, tipografia)
 ```
 
-### Dependências adicionais já instaladas
+### Dependências instaladas
 
-Além do que foi descrito nos passos acima, o projeto também usa:
-
-- **`@fontsource-variable/inter`** — fonte Inter Variable importada localmente (sem depender do Google Fonts em runtime). Importada no topo do `index.css`.
-- **`tw-animate-css`** — utilitários de animação compatíveis com Tailwind v4. Importado no topo do `index.css`.
-- **`radix-ui`** — pacote unificado da Radix UI (substitui os pacotes individuais `@radix-ui/react-*`).
+- **`@fontsource-variable/inter`** — fonte Inter Variable (body/UI)
+- **`@fontsource-variable/fraunces`** — fonte Fraunces Variable (display, títulos a partir de text-3xl)
+- **`tw-animate-css`** — utilitários de animação compatíveis com Tailwind v4
+- **`radix-ui`** — pacote unificado da Radix UI
 
 ---
 
 ## Próximos passos
 
-A estrutura base e o esqueleto das páginas estão prontos. As próximas etapas são:
-
-1. **Definir o design system da ONG** — substituir as variáveis CSS neutras (cinza) em `:root` no `index.css` pelas cores institucionais (primary, secondary, accent etc.). Decidir também tipografia de display se for diferente da Inter.
-2. **Criar componentes de layout compartilhados** — `Header`, `Footer` e provavelmente um `Layout` que envolve as páginas, em vez de repetir essa estrutura em cada `*.tsx` de `src/pages/`.
-3. **Adicionar componentes do shadcn conforme necessidade** — por enquanto só o `button` foi adicionado. Conforme as páginas evoluírem, rodar `npx shadcn@latest add <componente>` (ex: `card`, `input`, `dialog`, `sheet` para menu mobile, `form`).
-4. **Construir o conteúdo das páginas** — começar pela `Index.tsx` (landing) e seguir para as demais. Reaproveitar conteúdo/copy do projeto original `irmaos-de-rua-oficial` quando fizer sentido.
-5. **Configurar deploy** — definir hospedagem (Vercel, Netlify, Cloudflare Pages) e conectar ao repositório do GitHub para deploy automático em cada push na `main`.
+1. **Envolver páginas com `<Layout>`** — adicionar `<Layout>` em `Index.tsx`, `QuemSomos.tsx`, `Voluntario.tsx` e `DoeAgora.tsx` para ver Navbar + Footer funcionando no `dev`.
+2. **Preencher `Index.tsx`** — home completa reusando os organismos criados.
+3. **Preencher `QuemSomos.tsx`, `Voluntario.tsx`, `DoeAgora.tsx`** — reusando `Layout`, `PageHero`, `Section`, `Card` etc.
+4. **Adicionar componentes shadcn conforme necessidade** — `sheet` (menu mobile), `accordion` (FAQ), `input`, `textarea`, `label`, `form` (formulário de voluntário), `sonner` (toast PIX copiado).
+5. **Configurar deploy** — Vercel ou Netlify conectado ao repositório GitHub para deploy automático em cada push na `main`.

@@ -1,4 +1,5 @@
 interface SectionProps {
+  id?: string
   label?: string
   title?: string
   centered?: boolean
@@ -9,6 +10,7 @@ interface SectionProps {
 }
 
 const Section = ({
+  id,
   label,
   title,
   centered = false,
@@ -22,7 +24,7 @@ const Section = ({
     : 'py-[var(--section-y)] md:py-[var(--section-y-md)]'
 
   return (
-    <section className={`${paddingY} ${dark ? 'bg-surface-dark text-surface-dark-foreground' : ''} ${className}`}>
+    <section id={id} className={`${paddingY} ${dark ? 'bg-surface-dark text-surface-dark-foreground' : ''} ${className}`}>
       <div className="container mx-auto px-6 md:px-8 max-w-[1200px]">
         {(label || title) && (
           <div className={`mb-10 ${centered ? 'text-center' : ''}`}>

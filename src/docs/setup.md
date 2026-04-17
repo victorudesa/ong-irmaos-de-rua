@@ -333,10 +333,16 @@ src/
 
 ---
 
+## Shadcn components instalados
+
+Além do `button` (instalado na inicialização):
+
+- **`accordion`** — FAQ em `/doe-agora` e `/voluntario`
+- **`sonner`** — toast de "PIX copiado" e confirmação de formulário. O `<Toaster />` está montado em `main.tsx`.
+
 ## Próximos passos
 
-1. **Envolver páginas com `<Layout>`** — adicionar `<Layout>` em `Index.tsx`, `QuemSomos.tsx`, `Voluntario.tsx` e `DoeAgora.tsx` para ver Navbar + Footer funcionando no `dev`.
-2. **Preencher `Index.tsx`** — home completa reusando os organismos criados.
-3. **Preencher `QuemSomos.tsx`, `Voluntario.tsx`, `DoeAgora.tsx`** — reusando `Layout`, `PageHero`, `Section`, `Card` etc.
-4. **Adicionar componentes shadcn conforme necessidade** — `sheet` (menu mobile), `accordion` (FAQ), `input`, `textarea`, `label`, `form` (formulário de voluntário), `sonner` (toast PIX copiado).
-5. **Configurar deploy** — Vercel ou Netlify conectado ao repositório GitHub para deploy automático em cada push na `main`.
+1. ~~**Checklist de acessibilidade**~~ ✓ — `lang="pt-BR"` adicionado ao `index.html`, skip link adicionado ao `Layout.tsx`, contraste `surface-dark-muted` verificado (11.8:1, AAA). Pendente apenas: ordem de foco no menu mobile (item 2).
+2. ~~**Menu mobile com `<Sheet />`**~~ ✓ — Navbar reescrito usando `SheetContent` do shadcn. Foco gerenciado automaticamente, ícone `X` nativo do Sheet, fecha ao navegar.
+3. **Substituir imagem hero** — trocar `hero-bg.jpg` pela foto definitiva da ONG.
+4. **Configurar deploy** — Vercel ou Netlify conectado ao repositório GitHub para deploy automático em cada push na `main`.

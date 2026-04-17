@@ -10,7 +10,7 @@ interface MetricsGridProps {
 const MetricsGrid = ({ metrics }: MetricsGridProps) => {
   return (
     <section className="py-[var(--section-y-compact)] md:py-[var(--section-y-compact-md)] bg-background">
-      <div className="container mx-auto px-6 md:px-8 max-w-[1200px]">
+      <div className="container-page">
         <div className="grid grid-cols-2 md:grid-cols-4">
           {metrics.map((metric, index) => (
             <div
@@ -21,7 +21,7 @@ const MetricsGrid = ({ metrics }: MetricsGridProps) => {
                 index < 2 ? 'max-md:border-b max-md:border-border' : ''
               }`}
             >
-              <span className="font-display text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+              <span className="font-display text-display-section font-bold tracking-tight text-foreground">
                 {metric.number}
               </span>
               <p className="text-sm text-muted-foreground mt-1">{metric.label}</p>

@@ -41,7 +41,7 @@ const Index = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-transparent" />
         <div className="relative z-10 container text-center text-primary-foreground px-6">
-          <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight leading-tight max-w-3xl mx-auto mb-6">
+          <h1 className="font-display text-display-hero font-bold tracking-tight leading-tight max-w-3xl mx-auto mb-6">
             Transformando vidas nas ruas do ABC e São Paulo
           </h1>
           <p className="text-lg md:text-xl leading-relaxed max-w-xl mx-auto mb-10 text-white/80">

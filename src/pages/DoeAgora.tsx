@@ -122,7 +122,7 @@ const DoeAgora = () => {
 
       {/* Impact reminder */}
       <section className="py-16 bg-primary">
-        <div className="container mx-auto px-6 md:px-8 max-w-[1200px] text-center">
+        <div className="container-page text-center">
           <p className="font-display text-xl md:text-2xl font-semibold text-primary-foreground leading-snug">
             Com R$30 você garante 10 marmitas para quem vive nas ruas
           </p>

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Heart } from 'lucide-react'
+import { Menu, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { useScrolled } from '@/hooks/useScrolled'
 
 const navLinks = [
   { label: 'Início', to: '/' },
@@ -11,15 +13,9 @@ const navLinks = [
 ]
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false)
+  const scrolled = useScrolled()
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     setMobileOpen(false)
@@ -39,6 +35,7 @@ const Navbar = () => {
           </span>
         </Link>
 
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
@@ -54,33 +51,44 @@ const Navbar = () => {
           </Button>
         </nav>
 
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 text-foreground"
-          aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
-        >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        {/* Mobile nav */}
+        <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+          <SheetTrigger asChild>
+            <button
+              className="md:hidden p-2 text-foreground"
+              aria-label="Abrir menu"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-72">
+            <SheetHeader>
+              <SheetTitle className="flex items-center gap-2">
+                <Heart className="w-5 h-5 text-primary fill-primary" />
+                <span className="text-sm font-semibold tracking-widest uppercase">
+                  Irmãos de Rua
+                </span>
+              </SheetTitle>
+            </SheetHeader>
+            <nav className="flex flex-col gap-1 mt-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg px-3 py-2.5 transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="pt-4 border-t border-border mt-2">
+                <Button size="sm" className="w-full" asChild>
+                  <Link to="/doe-agora">Doe Agora</Link>
+                </Button>
+              </div>
+            </nav>
+          </SheetContent>
+        </Sheet>
       </div>
-
-      {mobileOpen && (
-        <div className="md:hidden bg-background border-t">
-          <nav className="container flex flex-col gap-4 py-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Button size="sm" className="w-fit" asChild>
-              <Link to="/doe-agora">Doe Agora</Link>
-            </Button>
-          </nav>
-        </div>
-      )}
     </header>
   )
 }

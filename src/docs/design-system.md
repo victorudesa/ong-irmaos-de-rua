@@ -366,10 +366,10 @@ Manter o que o projeto antigo já fazia bem, e cobrir os gaps:
 - [x] `focus-visible` em todos os interativos (vem do shadcn)
 - [x] `rel="noopener noreferrer"` em links externos
 - [x] `alt` em todas as imagens (não só placeholder)
-- [ ] Verificar contraste de `surface-dark-muted` (texto branco com 70% opacity sobre `neutral-900`)
-- [ ] Ordem de foco lógica no menu mobile (resolve com `<Sheet />` do shadcn)
-- [ ] `lang="pt-BR"` no `<html>` (verificar `index.html`)
-- [ ] Skip link "Pular para conteúdo" no topo (acessibilidade WCAG)
+- [x] Verificar contraste de `surface-dark-muted` (texto branco com 70% opacity sobre `neutral-900`) — 11.8:1, passa AAA
+- [x] Ordem de foco lógica no menu mobile (resolve com `<Sheet />` do shadcn)
+- [x] `lang="pt-BR"` no `<html>` (verificar `index.html`)
+- [x] Skip link "Pular para conteúdo" no topo (acessibilidade WCAG)
 
 ---
 

@@ -10,7 +10,7 @@ interface PageHeroProps {
 const PageHero = ({ title, subtitle, breadcrumb }: PageHeroProps) => {
   return (
     <section className="py-[var(--section-y-compact-md)] md:py-[var(--section-y)] bg-surface-dark text-surface-dark-foreground">
-      <div className="container mx-auto px-6 md:px-8 max-w-[1200px] text-center">
+      <div className="container-page text-center">
         <nav className="flex items-center justify-center gap-1 text-sm text-surface-dark-muted mb-8">
           <Link to="/" className="hover:text-surface-dark-foreground transition-colors duration-200">
             Home
@@ -18,7 +18,7 @@ const PageHero = ({ title, subtitle, breadcrumb }: PageHeroProps) => {
           <ChevronRight className="w-4 h-4" />
           <span className="text-surface-dark-foreground">{breadcrumb}</span>
         </nav>
-        <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-4">
+        <h1 className="font-display text-display-page font-bold tracking-tight leading-tight mb-4">
           {title}
         </h1>
         {subtitle && (

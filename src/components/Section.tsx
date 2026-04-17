@@ -25,7 +25,7 @@ const Section = ({
 
   return (
     <section id={id} className={`${paddingY} ${dark ? 'bg-surface-dark text-surface-dark-foreground' : ''} ${className}`}>
-      <div className="container mx-auto px-6 md:px-8 max-w-[1200px]">
+      <div className="container-page">
         {(label || title) && (
           <div className={`mb-10 ${centered ? 'text-center' : ''}`}>
             {label && (
@@ -36,7 +36,7 @@ const Section = ({
               </span>
             )}
             {title && (
-              <h2 className={`font-display text-3xl md:text-4xl font-bold tracking-tight leading-tight ${
+              <h2 className={`font-display text-display-section font-bold tracking-tight leading-tight ${
                 dark ? 'text-surface-dark-foreground' : 'text-foreground'
               }`}>
                 {title}

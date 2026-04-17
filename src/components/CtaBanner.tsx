@@ -17,8 +17,8 @@ interface CtaBannerProps {
 const CtaBanner = ({ title, subtitle, primaryAction, secondaryAction }: CtaBannerProps) => {
   return (
     <section className="bg-primary py-[var(--section-y-compact-md)] md:py-[var(--section-y)]">
-      <div className="container mx-auto px-6 md:px-8 max-w-[1200px] text-center">
-        <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary-foreground mb-4">
+      <div className="container-page text-center">
+        <h2 className="font-display text-display-section font-bold tracking-tight leading-tight text-primary-foreground mb-4">
           {title}
         </h2>
         {subtitle && (

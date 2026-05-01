@@ -1,8 +1,8 @@
 import { Image, Eye, Sparkles, Target, Mail, Building, CalendarDays, MapPin, User } from 'lucide-react'
 import Layout from '@/components/Layout'
 import PageHero from '@/components/PageHero'
-import Section from '@/components/Section'
-import Card from '@/components/Card'
+import { Section } from '@/components/layout/section'
+import { FeatureCard } from '@/components/shared/feature-card'
 
 const missionCards = [
   { icon: Target, title: 'Missão', description: 'Levar acolhimento, alimentação e dignidade às pessoas em situação de rua no ABC Paulista e centro de São Paulo.' },
@@ -54,10 +54,10 @@ const QuemSomos = () => {
       </Section>
 
       {/* Nossa Missão */}
-      <Section label="Nossa Missão" title="O que nos move" centered className="bg-neutral-50">
+      <Section label="Nossa Missão" title="O que nos move" centered bg="muted">
         <div className="grid md:grid-cols-3 gap-6">
           {missionCards.map((card) => (
-            <Card key={card.title} icon={card.icon} title={card.title} description={card.description} />
+            <FeatureCard key={card.title} icon={card.icon} title={card.title} description={card.description} />
           ))}
         </div>
       </Section>
@@ -100,12 +100,12 @@ const QuemSomos = () => {
       </Section>
 
       {/* Nossa Equipe */}
-      <Section label="Nossa Equipe" title="As pessoas que fazem acontecer" centered className="bg-neutral-50">
+      <Section label="Nossa Equipe" title="As pessoas que fazem acontecer" centered bg="muted">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {team.map((member) => (
             <div
               key={member.name}
-              className="bg-card border border-border rounded-xl p-6 text-center shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200"
+              className="bg-card border border-border rounded-xl p-6 text-center shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-0.5 transition-all duration-200"
             >
               <div className="w-20 h-20 mx-auto mb-4 bg-muted border border-border rounded-xl flex items-center justify-center">
                 <User className="w-8 h-8 text-muted-foreground/40" strokeWidth={1.5} />

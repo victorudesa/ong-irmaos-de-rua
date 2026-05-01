@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import Layout from '@/components/Layout'
 import PageHero from '@/components/PageHero'
-import Section from '@/components/Section'
-import Card from '@/components/Card'
+import { Section } from '@/components/layout/section'
+import { FeatureCard } from '@/components/shared/feature-card'
 
 const whyCards = [
   { icon: UtensilsCrossed, title: 'Alimentação', description: 'Marmitas nutritivas e café da manhã solidário entregues semanalmente nas ruas.' },
@@ -55,10 +55,10 @@ const DoeAgora = () => {
       />
 
       {/* Por Que Doar */}
-      <Section label="Por Que Doar" title="Cada doação transforma uma vida" centered className="bg-neutral-50">
+      <Section label="Por Que Doar" title="Cada doação transforma uma vida" centered bg="muted">
         <div className="grid md:grid-cols-3 gap-6">
           {whyCards.map((card) => (
-            <Card key={card.title} icon={card.icon} title={card.title} description={card.description} />
+            <FeatureCard key={card.title} icon={card.icon} title={card.title} description={card.description} />
           ))}
         </div>
       </Section>
@@ -121,16 +121,14 @@ const DoeAgora = () => {
       </Section>
 
       {/* Impact reminder */}
-      <section className="py-16 bg-primary">
-        <div className="container mx-auto px-6 md:px-8 max-w-[1200px] text-center">
-          <p className="font-display text-xl md:text-2xl font-semibold text-primary-foreground leading-snug">
-            Com R$30 você garante 10 marmitas para quem vive nas ruas
-          </p>
-        </div>
-      </section>
+      <Section bg="primary" spacing="compact">
+        <p className="font-display text-xl md:text-2xl font-semibold text-primary-foreground leading-snug text-center">
+          Com R$30 você garante 10 marmitas para quem vive nas ruas
+        </p>
+      </Section>
 
       {/* FAQ */}
-      <Section label="Dúvidas Frequentes" title="Perguntas e respostas" centered className="bg-neutral-50">
+      <Section label="Dúvidas Frequentes" title="Perguntas e respostas" centered bg="muted">
         <div className="max-w-[800px] mx-auto">
           <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, i) => (

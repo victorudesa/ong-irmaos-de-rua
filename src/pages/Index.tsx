@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import { ChevronDown, Users, UtensilsCrossed, Coffee, Shirt, Droplets, Heart, Wallet, Share2, ChevronRight, Image } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Layout from '@/components/Layout'
-import Section from '@/components/Section'
-import Card from '@/components/Card'
+import { Section } from '@/components/layout/section'
+import { FeatureCard } from '@/components/shared/feature-card'
 import CtaBanner from '@/components/CtaBanner'
 import MetricsGrid from '@/components/MetricsGrid'
 import heroBg from '@/assets/hero-bg.jpg'
@@ -51,7 +51,7 @@ const Index = () => {
             <Button size="lg" asChild>
               <Link to="/doe-agora">Doe Agora</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-white/30 text-white hover:border-white hover:bg-white/10" asChild>
+            <Button size="lg" variant="outline" className="border-white/30 text-white hover:border-white hover:bg-white/10 hover:text-white" asChild>
               <Link to="/voluntario">Seja Voluntário</Link>
             </Button>
           </div>
@@ -89,10 +89,10 @@ const Index = () => {
       </Section>
 
       {/* O Que Fazemos */}
-      <Section label="O Que Fazemos" title="Ações que transformam" className="bg-neutral-50">
+      <Section label="O Que Fazemos" title="Ações que transformam" bg="muted">
         <div className="grid sm:grid-cols-2 gap-5 md:gap-6">
           {actions.map((action) => (
-            <Card key={action.title} icon={action.icon} title={action.title} description={action.description} />
+            <FeatureCard key={action.title} icon={action.icon} title={action.title} description={action.description} />
           ))}
         </div>
       </Section>
@@ -129,7 +129,7 @@ const Index = () => {
       </Section>
 
       {/* Instagram */}
-      <Section label="Instagram" title="@ongirmaosderua" centered className="bg-neutral-50">
+      <Section label="Instagram" title="@ongirmaosderua" centered bg="muted">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="bg-muted rounded-xl aspect-square flex items-center justify-center">

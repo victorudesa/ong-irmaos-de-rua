@@ -126,3 +126,12 @@ Aqui mantemos um registro das etapas já executadas a partir destas diretrizes.
   - `src/components/layout/section.tsx`: O wrapper universal das páginas. Gera a tag `<section>` semântica com o espaçamento dinâmico (`spacing="default|compact|none"`) baseado nos tokens `var(--section-y)`. Também embute opcionalmente o container centralizado de `1200px`. Suporta mudança rápida de fundo (`bg="default|primary|muted|dark"`).
   - `src/components/shared/feature-card.tsx`: O Card de destaque desenhado no figma. Já traz o ícone com fundo `neutral-100`, título, descrição, e as sombras baseadas nos tokens (`shadow-card`), além da animação de elevação nativa ao passar o mouse.
 - **Refatoração de Uso:** O componente `CtaBanner.tsx` substituiu a tag manual de `<section>` + `<div className="container...">` pelo limpo `<Section bg="primary" spacing="compact">`.
+
+### Etapa 4: Migração das Páginas
+- **O que foi feito:** O componente `Section` foi enriquecido para aceitar as props `label`, `title` e `centered` (usando internamente os novos `<SectionLabel>` e `<Heading>`), tornando-o um substituto direto do componente legado.
+- **Páginas refatoradas:**
+  - `Index.tsx`: Migrado de `@/components/Section` e `@/components/Card` para `@/components/layout/section` e `@/components/shared/feature-card`. Fundos de seção passaram a usar `bg="muted"` em vez de `className="bg-neutral-50"`.
+  - `QuemSomos.tsx`: Mesma migração. Todos os cards de Missão/Visão/Valores usam agora o `<FeatureCard>`.
+  - `DoeAgora.tsx`: Mesma migração. O bloco de impacto (`<section className="py-16 bg-primary">`) foi substituído pelo elegante `<Section bg="primary" spacing="compact">`.
+  - `Voluntario.tsx`: Mesma migração de `Section` e remoção do componente legado `Card`.
+- **Resultado:** Os componentes legados `Section.tsx` e `Card.tsx` deixaram de ser usados nas páginas. O código ficou mais legível e aderente ao Design System.

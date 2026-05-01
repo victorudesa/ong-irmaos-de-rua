@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import Layout from '@/components/Layout'
 import PageHero from '@/components/PageHero'
-import Section from '@/components/Section'
+import { Section } from '@/components/layout/section'
 import CtaBanner from '@/components/CtaBanner'
 
 const reasons = [
@@ -128,7 +128,7 @@ const Voluntario = () => {
       </Section>
 
       {/* Como Funciona */}
-      <Section label="Como Funciona" title="Três passos para começar" className="bg-neutral-50">
+      <Section label="Como Funciona" title="Três passos para começar" bg="muted">
         <div className="grid md:grid-cols-3 gap-8 md:gap-10">
           {steps.map((step) => (
             <div key={step.number} className="flex flex-col items-start">
@@ -238,7 +238,7 @@ const Voluntario = () => {
       </Section>
 
       {/* FAQ */}
-      <Section label="Dúvidas Frequentes" title="Perguntas e respostas" centered className="bg-neutral-50">
+      <Section label="Dúvidas Frequentes" title="Perguntas e respostas" centered bg="muted">
         <div className="max-w-[800px] mx-auto">
           <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, i) => (

@@ -1,12 +1,10 @@
-import { useState } from 'react'
 import { Heart, Users, Lightbulb, Globe, Image, MapPin, Phone, Mail, Clock } from 'lucide-react'
-import { toast } from 'sonner'
-import { Button } from '@/components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import Layout from '@/components/Layout'
 import PageHero from '@/components/PageHero'
 import { Section } from '@/components/layout/section'
 import CtaBanner from '@/components/CtaBanner'
+import { VoluntarioForm } from '@/components/forms/VoluntarioForm'
 
 const reasons = [
   { icon: Heart, text: 'Impacte vidas diretamente' },
@@ -36,70 +34,7 @@ const faqs = [
   { q: 'Posso levar amigos?', a: 'Claro! Quanto mais pessoas engajadas, mais vidas conseguimos impactar. Traga sua família e amigos — todos são bem-vindos.' },
 ]
 
-const availabilityOptions = ['Manhã', 'Tarde', 'Noite', 'Fins de semana']
-const interestOptions = ['Distribuição de alimentos', 'Acolhimento', 'Logística', 'Comunicação', 'Outro']
-
-const formatPhone = (value: string) => {
-  const digits = value.replace(/\D/g, '').slice(0, 11)
-  if (digits.length <= 2) return digits
-  if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`
-  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`
-}
-
-interface FormErrors {
-  nome?: string
-  email?: string
-  telefone?: string
-  cidade?: string
-  disponibilidade?: string
-  interesse?: string
-}
-
-const inputClass = (error?: string) =>
-  `w-full bg-muted border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none focus:ring-2 focus:ring-primary/30 ${
-    error ? 'border-destructive' : 'border-border'
-  }`
-
 const Voluntario = () => {
-  const [form, setForm] = useState({
-    nome: '', email: '', telefone: '', cidade: '',
-    disponibilidade: [] as string[], interesse: '', mensagem: '',
-  })
-  const [errors, setErrors] = useState<FormErrors>({})
-
-  const validate = (): boolean => {
-    const e: FormErrors = {}
-    if (!form.nome.trim()) e.nome = 'Nome é obrigatório'
-    else if (form.nome.trim().length > 100) e.nome = 'Máximo 100 caracteres'
-    if (!form.email.trim()) e.email = 'Email é obrigatório'
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) e.email = 'Email inválido'
-    const phoneDigits = form.telefone.replace(/\D/g, '')
-    if (!phoneDigits) e.telefone = 'Telefone é obrigatório'
-    else if (phoneDigits.length < 10) e.telefone = 'Telefone inválido'
-    if (!form.cidade.trim()) e.cidade = 'Cidade/Bairro é obrigatório'
-    if (form.disponibilidade.length === 0) e.disponibilidade = 'Selecione ao menos uma opção'
-    if (!form.interesse) e.interesse = 'Selecione uma área'
-    setErrors(e)
-    return Object.keys(e).length === 0
-  }
-
-  const handleSubmit = (ev: React.SyntheticEvent<HTMLFormElement>) => {
-    ev.preventDefault()
-    if (!validate()) return
-    toast.success('Cadastro enviado com sucesso!', { description: 'Entraremos em contato em breve. Obrigado!' })
-    setForm({ nome: '', email: '', telefone: '', cidade: '', disponibilidade: [], interesse: '', mensagem: '' })
-    setErrors({})
-  }
-
-  const toggleDisponibilidade = (opt: string) => {
-    setForm((prev) => ({
-      ...prev,
-      disponibilidade: prev.disponibilidade.includes(opt)
-        ? prev.disponibilidade.filter((d) => d !== opt)
-        : [...prev.disponibilidade, opt],
-    }))
-  }
-
   return (
     <Layout>
       <PageHero
@@ -145,76 +80,9 @@ const Voluntario = () => {
       {/* Formulário */}
       <Section id="formulario" label="Formulário" title="Cadastre-se">
         <div className="grid md:grid-cols-3 gap-10 md:gap-12">
-          <form onSubmit={handleSubmit} className="md:col-span-2 space-y-5">
-            <div className="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label className="text-sm font-medium text-foreground mb-1.5 block">Nome Completo</label>
-                <input type="text" className={inputClass(errors.nome)} value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} placeholder="Seu nome completo" />
-                {errors.nome && <p className="text-xs text-destructive mt-1">{errors.nome}</p>}
-              </div>
-              <div>
-                <label className="text-sm font-medium text-foreground mb-1.5 block">Email</label>
-                <input type="email" className={inputClass(errors.email)} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="seu@email.com" />
-                {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
-              </div>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label className="text-sm font-medium text-foreground mb-1.5 block">Telefone</label>
-                <input type="tel" className={inputClass(errors.telefone)} value={form.telefone} onChange={(e) => setForm({ ...form, telefone: formatPhone(e.target.value) })} placeholder="(11) 99999-9999" />
-                {errors.telefone && <p className="text-xs text-destructive mt-1">{errors.telefone}</p>}
-              </div>
-              <div>
-                <label className="text-sm font-medium text-foreground mb-1.5 block">Cidade / Bairro</label>
-                <input type="text" className={inputClass(errors.cidade)} value={form.cidade} onChange={(e) => setForm({ ...form, cidade: e.target.value })} placeholder="Ex: São Caetano do Sul" />
-                {errors.cidade && <p className="text-xs text-destructive mt-1">{errors.cidade}</p>}
-              </div>
-            </div>
-
-            <div>
-              <label className="text-sm font-medium text-foreground mb-2 block">Disponibilidade</label>
-              <div className="flex flex-wrap gap-3">
-                {availabilityOptions.map((opt) => (
-                  <label key={opt} className={`flex items-center gap-2 px-4 py-2.5 rounded-lg border text-sm cursor-pointer transition-all duration-200 ${
-                    form.disponibilidade.includes(opt)
-                      ? 'bg-primary-subtle border-primary text-primary font-medium'
-                      : 'bg-muted border-border text-foreground hover:bg-neutral-50'
-                  }`}>
-                    <input type="checkbox" className="sr-only" checked={form.disponibilidade.includes(opt)} onChange={() => toggleDisponibilidade(opt)} />
-                    {opt}
-                  </label>
-                ))}
-              </div>
-              {errors.disponibilidade && <p className="text-xs text-destructive mt-1">{errors.disponibilidade}</p>}
-            </div>
-
-            <div>
-              <label className="text-sm font-medium text-foreground mb-1.5 block">Área de Interesse</label>
-              <select className={inputClass(errors.interesse)} value={form.interesse} onChange={(e) => setForm({ ...form, interesse: e.target.value })}>
-                <option value="">Selecione uma área</option>
-                {interestOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
-              </select>
-              {errors.interesse && <p className="text-xs text-destructive mt-1">{errors.interesse}</p>}
-            </div>
-
-            <div>
-              <label className="text-sm font-medium text-foreground mb-1.5 block">
-                Mensagem <span className="text-muted-foreground font-normal">(opcional)</span>
-              </label>
-              <textarea
-                className={`${inputClass()} resize-none`}
-                rows={4}
-                value={form.mensagem}
-                onChange={(e) => setForm({ ...form, mensagem: e.target.value.slice(0, 1000) })}
-                placeholder="Conte como gostaria de contribuir..."
-              />
-            </div>
-
-            <Button type="submit" size="lg" className="w-full sm:w-auto">
-              Quero Ser Voluntário
-            </Button>
-          </form>
+          <div className="md:col-span-2">
+            <VoluntarioForm />
+          </div>
 
           <aside className="space-y-6">
             <div className="bg-neutral-50 rounded-xl p-6 space-y-5">

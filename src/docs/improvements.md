@@ -135,3 +135,12 @@ Aqui mantemos um registro das etapas já executadas a partir destas diretrizes.
   - `DoeAgora.tsx`: Mesma migração. O bloco de impacto (`<section className="py-16 bg-primary">`) foi substituído pelo elegante `<Section bg="primary" spacing="compact">`.
   - `Voluntario.tsx`: Mesma migração de `Section` e remoção do componente legado `Card`.
 - **Resultado:** Os componentes legados `Section.tsx` e `Card.tsx` deixaram de ser usados nas páginas. O código ficou mais legível e aderente ao Design System.
+
+### Etapa 5: Formulário de Voluntário (react-hook-form + Zod)
+- **O que foi feito:** O formulário manual de voluntário (com `useState` + validação artesanal) foi extraído para um componente próprio e refeito com as bibliotecas padrão de mercado.
+- **Dependências instaladas:** `react-hook-form`, `zod`, `@hookform/resolvers`.
+- **Componentes shadcn adicionados:** `input`, `label`, `textarea` (via `npx shadcn add`).
+- **Arquivos criados:**
+  - `src/lib/schemas/voluntario.ts`: Schema Zod centralizado com todas as regras de validação do formulário. É a **fonte única de verdade** — o TypeScript infere o tipo `VoluntarioFormData` a partir dele.
+  - `src/components/forms/VoluntarioForm.tsx`: Componente do formulário usando `useForm` + `zodResolver`. Usa `Input`, `Label` e `Textarea` do shadcn. Inclui estado de `isSubmitting` para desabilitar o botão durante o envio.
+- **Refatoração de Uso:** `Voluntario.tsx` foi limpo de toda lógica de formulário. Hoje ele é apenas layout + dados. O formulário vira `<VoluntarioForm />` em uma linha.

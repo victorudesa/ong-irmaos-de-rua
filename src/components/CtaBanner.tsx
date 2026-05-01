@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import { Heading } from '@/components/ui/heading'
+import { Section } from '@/components/layout/section'
 
 interface Action {
   label: string
@@ -16,11 +18,11 @@ interface CtaBannerProps {
 
 const CtaBanner = ({ title, subtitle, primaryAction, secondaryAction }: CtaBannerProps) => {
   return (
-    <section className="bg-primary py-[var(--section-y-compact-md)] md:py-[var(--section-y)]">
-      <div className="container mx-auto px-6 md:px-8 max-w-[1200px] text-center">
-        <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary-foreground mb-4">
+    <Section bg="primary" spacing="compact">
+      <div className="text-center">
+        <Heading color="inverted" className="mb-4">
           {title}
-        </h2>
+        </Heading>
         {subtitle && (
           <p className="text-primary-foreground/80 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
             {subtitle}
@@ -28,16 +30,16 @@ const CtaBanner = ({ title, subtitle, primaryAction, secondaryAction }: CtaBanne
         )}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           {primaryAction.to ? (
-            <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold transition-all duration-200 hover:scale-[1.02]" asChild>
+            <Button variant="inverted" size="lg" asChild>
               <Link to={primaryAction.to}>{primaryAction.label}</Link>
             </Button>
           ) : (
-            <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold transition-all duration-200 hover:scale-[1.02]">
+            <Button variant="inverted" size="lg">
               {primaryAction.label}
             </Button>
           )}
           {secondaryAction && (
-            <Button size="lg" variant="outline" className="border-white/30 text-white hover:border-white hover:bg-white/10 font-semibold transition-all duration-200" asChild>
+            <Button variant="outline" size="lg" className="border-white/30 text-white hover:border-white hover:bg-white/10 hover:text-white" asChild>
               {secondaryAction.to ? (
                 <Link to={secondaryAction.to}>{secondaryAction.label}</Link>
               ) : (
@@ -47,7 +49,7 @@ const CtaBanner = ({ title, subtitle, primaryAction, secondaryAction }: CtaBanne
           )}
         </div>
       </div>
-    </section>
+    </Section>
   )
 }
 

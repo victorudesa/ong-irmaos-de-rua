@@ -43,4 +43,12 @@ export const voluntarioSchema = z.object({
 export type VoluntarioFormData = z.infer<typeof voluntarioSchema>
 
 export const availabilityOptions = ['Manhã', 'Tarde', 'Noite', 'Fins de semana'] as const
-export const interestOptions = ['Distribuição de alimentos', 'Acolhimento', 'Logística', 'Comunicação', 'Outro'] as const
+export const interestOptions = [
+  'Distribuição de alimentos',
+  'Preparação de marmitas',
+  'Distribuição de roupas e kits',
+  'Acolhimento e escuta',
+  'Comunicação e redes sociais',
+  'Logística e organização',
+  'Outro',
+] as const

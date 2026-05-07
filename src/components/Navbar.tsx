@@ -4,10 +4,9 @@ import { Menu, X, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const navLinks = [
-  { label: 'Início', to: '/' },
-  { label: 'Quem Somos', to: '/quem-somos' },
+  { label: 'Sobre Nós', to: '/sobre' },
   { label: 'Seja Voluntário', to: '/voluntario' },
-  { label: 'Doe Agora', to: '/doe-agora' },
+  { label: 'Parceiros', to: '/parceiros' }
 ]
 
 const Navbar = () => {
@@ -27,9 +26,8 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b transition-shadow duration-200 ${
-        scrolled ? 'shadow-card' : 'shadow-none'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b transition-shadow duration-200 ${scrolled ? 'shadow-card' : 'shadow-none'
+        }`}
     >
       <div className="container flex items-center justify-between h-16">
         <Link to="/" className="flex items-center gap-2">

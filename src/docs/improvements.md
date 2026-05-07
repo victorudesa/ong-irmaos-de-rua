@@ -144,3 +144,31 @@ Aqui mantemos um registro das etapas já executadas a partir destas diretrizes.
   - `src/lib/schemas/voluntario.ts`: Schema Zod centralizado com todas as regras de validação do formulário. É a **fonte única de verdade** — o TypeScript infere o tipo `VoluntarioFormData` a partir dele.
   - `src/components/forms/VoluntarioForm.tsx`: Componente do formulário usando `useForm` + `zodResolver`. Usa `Input`, `Label` e `Textarea` do shadcn. Inclui estado de `isSubmitting` para desabilitar o botão durante o envio.
 - **Refatoração de Uso:** `Voluntario.tsx` foi limpo de toda lógica de formulário. Hoje ele é apenas layout + dados. O formulário vira `<VoluntarioForm />` em uma linha.
+
+---
+
+## 5. Roadmap
+
+Mapa de todas as etapas planejadas, com status atual.
+
+### Concluído ✅
+
+| Etapa | O que foi feito | Commit |
+|---|---|---|
+| Tokens base (`index.css`) | OKLCH, Fraunces/Inter, sombras, raios, espaçamentos | `9d3b545` |
+| Etapa 1 — Button | Variantes `default`, `inverted`, `whatsapp`, `outline` com CVA | `9d3b545` |
+| Etapa 2 — Tipografia | `Heading` e `SectionLabel` com CVA, `font-display` (Fraunces) | `9d3b545` |
+| Etapa 3 — Layout | `Section` universal e `FeatureCard` com sombras do DS | `9d3b545` |
+| Etapa 4 — Migração das Páginas | Todas as páginas usando os novos componentes; legados deletados | `6379190` |
+| Etapa 5 — Formulário de Voluntário | `react-hook-form` + `zod`, `Input`/`Label`/`Textarea` do shadcn | `5fb3249` |
+
+### Pendente 🔲
+
+| Etapa | O que fazer | Prioridade |
+|---|---|---|
+| **Etapa 6 — Menu Mobile** | Substituir toggle hambúrguer manual da Navbar por `<Sheet />` do shadcn. Melhora acessibilidade de foco. | Média |
+| **Etapa 7 — Acessibilidade** | (1) `lang="pt-BR"` no `index.html`; (2) Verificar contraste `surface-dark-muted`; (3) Skip link "Pular para conteúdo". | Média |
+| **Etapa 8 — WhatsAppButton** | Usar o token `bg-whatsapp` e `variant="whatsapp"` em vez de `bg-[#25D366]` hardcoded. | Baixa |
+| **Etapa 9 — Reorganização** | Mover `PageHero.tsx` e `CtaBanner.tsx` para `components/layout/`. | Baixa |
+| **Etapa 10 — Badge** | Criar `badge.tsx` com variantes `default`, `primary`, `success`, `warning`, `destructive` e estilos `solid`/`outline`/`soft`. | Futura |
+

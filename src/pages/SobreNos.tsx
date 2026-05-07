@@ -28,8 +28,8 @@ const QuemSomos = () => {
   return (
     <Layout>
       <PageHero
-        title="Quem Somos"
-        breadcrumb="Quem Somos"
+        title="Sobre Nós"
+        breadcrumb="Sobre Nós"
         subtitle="Conheça a história e as pessoas por trás da Irmãos de Rua"
       />
 

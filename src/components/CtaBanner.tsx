@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { LinkButton } from '@/components/ui/link-button'
 
 interface Action {
   label: string
@@ -20,25 +20,37 @@ interface CtaBannerProps {
 }
 
 const CtaBanner = ({ quote, quoteEm, title, subtitle, primaryAction, secondaryAction }: CtaBannerProps) => {
-  const renderPrimary = (isInverted: boolean) => {
-    const cls = "inline-flex items-center gap-2 font-sans text-base font-bold px-7 py-3.5 rounded-[10px] border-none cursor-pointer no-underline transition-all duration-150 hover:-translate-y-px"
-    const style = isInverted
-      ? { background: 'white', color: 'var(--color-primary)' }
-      : { background: 'var(--color-primary)', color: 'white' }
+  const renderPrimary = () => {
     if (primaryAction.to) {
-      return <Link to={primaryAction.to} className={cls} style={style}>{primaryAction.label}</Link>
+      return <LinkButton to={primaryAction.to} variant="inverted" size="lg">{primaryAction.label}</LinkButton>
     }
-    return <a href={primaryAction.href} target="_blank" rel="noopener noreferrer" className={cls} style={style}>{primaryAction.label}</a>
+    return (
+      <a
+        href={primaryAction.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 h-11 px-6 text-base bg-white text-primary rounded-[10px] no-underline font-medium transition-all duration-150 hover:opacity-90"
+      >
+        {primaryAction.label}
+      </a>
+    )
   }
 
   const renderSecondary = () => {
     if (!secondaryAction) return null
-    const cls = "inline-flex items-center gap-2 font-sans text-sm font-semibold px-6 py-3 rounded-[10px] cursor-pointer no-underline transition-all duration-150 text-white hover:border-white hover:bg-white/10"
-    const style = { background: 'transparent', border: '1.5px solid rgba(255,255,255,0.35)' }
     if (secondaryAction.to) {
-      return <Link to={secondaryAction.to} className={cls} style={style}>{secondaryAction.label}</Link>
+      return <LinkButton to={secondaryAction.to} variant="outline-light" size="lg">{secondaryAction.label}</LinkButton>
     }
-    return <a href={secondaryAction.href} target="_blank" rel="noopener noreferrer" className={cls} style={style}>{secondaryAction.label}</a>
+    return (
+      <a
+        href={secondaryAction.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 h-11 px-6 text-base bg-transparent text-white border-[1.5px] border-current rounded-[10px] no-underline font-medium transition-all duration-150 hover:bg-white/10"
+      >
+        {secondaryAction.label}
+      </a>
+    )
   }
 
   const useQuoteStyle = !!quote
@@ -69,7 +81,7 @@ const CtaBanner = ({ quote, quoteEm, title, subtitle, primaryAction, secondaryAc
               )}
             </p>
             <div className="flex gap-3 flex-wrap">
-              {renderPrimary(true)}
+              {renderPrimary()}
               {renderSecondary()}
             </div>
           </div>
@@ -90,7 +102,7 @@ const CtaBanner = ({ quote, quoteEm, title, subtitle, primaryAction, secondaryAc
               </p>
             )}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {renderPrimary(true)}
+              {renderPrimary()}
               {renderSecondary()}
             </div>
           </div>

@@ -1,4 +1,5 @@
-import { useRouteError, isRouteErrorResponse, Link } from 'react-router-dom'
+import { useRouteError, isRouteErrorResponse } from 'react-router-dom'
+import { LinkButton } from '@/components/ui/link-button'
 import Layout from '@/components/Layout'
 
 export default function RouteError() {
@@ -26,13 +27,13 @@ export default function RouteError() {
               : 'Ocorreu um erro inesperado nesta página.'}
           </p>
         </div>
-        <Link
+        <LinkButton
           to="/"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[10px] text-sm font-bold text-white transition-all duration-150 hover:-translate-y-px"
-          style={{ background: 'var(--color-primary)' }}
+          variant="default"
+          size="sm"
         >
           Voltar para o início
-        </Link>
+        </LinkButton>
       </div>
     </Layout>
   )

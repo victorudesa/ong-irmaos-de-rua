@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UtensilsCrossed, Coffee, Shirt, Droplets, Heart, Wallet, Users, Share2, Image } from 'lucide-react'
 import { HeartIcon } from '@/components/icons/HeartIcon'
+import { LinkButton } from '@/components/ui/link-button'
 import Layout from '@/components/Layout'
 import CtaBanner from '@/components/CtaBanner'
 import MetricsGrid from '@/components/MetricsGrid'
@@ -258,8 +259,8 @@ const Index = () => {
           className="relative z-10 container mx-auto px-6 md:px-8 max-w-[1200px]"
           style={{ padding: 'clamp(40px,8vh,100px) clamp(20px,5vw,60px) clamp(50px,8vh,80px)' }}
         >
-          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-end">
-            {/* Left — headline */}
+          <div className="flex flex-col gap-8 md:gap-10 text-center md:text-left md:max-w-[600px]">
+            {/* Headline */}
             <h1
               className="font-display text-white leading-[1.0] tracking-tight text-balance text-[clamp(48px,6.5vw,96px)]"
             >
@@ -268,31 +269,33 @@ const Index = () => {
               ruas do ABC
             </h1>
 
-            {/* Right — sub + CTAs */}
-            <div className="flex flex-col gap-8 pb-2">
-              <p
-                className="leading-[1.7]"
-                style={{ fontSize: 'clamp(15px, 1.3vw, 18px)', color: 'oklch(1 0 0 / 0.65)', maxWidth: '380px' }}
+            {/* Subtitle */}
+            <p
+              className="leading-[1.7]"
+              style={{ fontSize: 'clamp(15px, 1.3vw, 18px)', color: 'oklch(1 0 0 / 0.65)' }}
+            >
+              Somos mais de 200 voluntários que levam alimentação, dignidade e acolhimento a quem vive nas ruas da região do ABC Paulista e do centro de São Paulo.
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col md:flex-row gap-3 md:justify-start justify-center">
+              <LinkButton
+                to="/doe-agora"
+                variant="default"
+                size="lg"
+                className="justify-center md:justify-start"
               >
-                Somos mais de 200 voluntários que levam alimentação, dignidade e acolhimento a quem vive nas ruas da região do ABC Paulista e do centro de São Paulo.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  to="/doe-agora"
-                  className="inline-flex items-center gap-2 font-sans font-bold text-white rounded-[10px] no-underline transition-all duration-150 hover:-translate-y-px hover:opacity-90"
-                  style={{ background: 'var(--color-primary)', fontSize: '15px', padding: '14px 30px' }}
-                >
-                  <HeartIcon width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" />
-                  Doe Agora
-                </Link>
-                <Link
-                  to="/voluntario"
-                  className="inline-flex items-center gap-2 font-sans font-semibold text-white rounded-[10px] no-underline transition-all duration-150 hover:border-white hover:bg-white/10"
-                  style={{ fontSize: '15px', padding: '13px 28px', background: 'transparent', border: '1.5px solid var(--color-on-dark-low)' }}
-                >
-                  Seja Voluntário
-                </Link>
-              </div>
+                <HeartIcon width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" />
+                Doe Agora
+              </LinkButton>
+              <LinkButton
+                to="/voluntario"
+                variant="outline-light"
+                size="lg"
+                className="justify-center md:justify-start"
+              >
+                Seja Voluntário
+              </LinkButton>
             </div>
           </div>
         </div>
@@ -339,20 +342,20 @@ const Index = () => {
                 Oficialmente registrada como ONG em <strong style={{ color: 'var(--color-ink)', fontWeight: 700 }}>2018</strong>, mantemos o mesmo espírito de família que nos uniu no início: a crença de que ninguém deveria ser invisível.
               </p>
               <div className="flex gap-3 flex-wrap pt-4">
-                <Link
+                <LinkButton
                   to="/sobre"
-                  className="inline-flex items-center font-sans font-bold rounded-[10px] no-underline transition-all duration-150 hover:-translate-y-px hover:opacity-90 text-white"
-                  style={{ background: 'var(--color-primary)', fontSize: '15px', padding: '12px 26px' }}
+                  variant="default"
+                  size="default"
                 >
                   Nossa história
-                </Link>
-                <Link
+                </LinkButton>
+                <LinkButton
                   to="/sobre"
-                  className="inline-flex items-center font-sans font-semibold rounded-[10px] no-underline transition-all duration-150 hover:bg-neutral-100"
-                  style={{ fontSize: '15px', padding: '12px 26px', background: 'transparent', border: '1.5px solid var(--color-border-soft)', color: 'var(--color-ink)' }}
+                  variant="outline"
+                  size="default"
                 >
                   Ver ações
-                </Link>
+                </LinkButton>
               </div>
             </div>
 

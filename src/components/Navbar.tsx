@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const navLinks = [
   { label: 'Sobre Nós', to: '/sobre' },
   { label: 'Seja Voluntário', to: '/voluntario' },
-  { label: 'Parceiros', to: '/parceiros' }
 ]
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const location = useLocation()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -20,9 +18,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => {
-    setMobileOpen(false)
-  }, [location])
 
   return (
     <header
@@ -79,6 +74,7 @@ const Navbar = () => {
               <Link
                 key={link.to}
                 to={link.to}
+                onClick={() => setMobileOpen(false)}
                 className="text-sm font-medium transition-colors duration-150 hover:text-foreground"
                 style={{ color: 'var(--color-ink-mid)' }}
               >
@@ -86,7 +82,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Button size="sm" className="w-fit" asChild>
-              <Link to="/doe-agora">Doe Agora</Link>
+              <Link to="/doe-agora" onClick={() => setMobileOpen(false)}>Doe Agora</Link>
             </Button>
           </nav>
         </div>

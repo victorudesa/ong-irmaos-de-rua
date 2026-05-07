@@ -355,7 +355,7 @@ src/
 ## Próximos passos
 
 1. **Substituir `hero-bg.jpg`** por foto real de uma ação da ONG.
-2. **Implementar redesign nas páginas internas** — `QuemSomos`, `Voluntario`, `DoeAgora` com DM Serif Display e ink scale.
-3. **Menu mobile** — substituir toggle hambúrguer por `<Sheet />` do shadcn.
-4. **Deploy** — Vercel ou Netlify com CI/CD no push da `main`.
-5. **Toast PIX copiado** — adicionar `sonner` para feedback ao copiar chave PIX.
+2. **Redesign páginas internas** — `QuemSomos` e `Voluntario` com DM Serif Display e ink scale. (`DoeAgora` já concluída.)
+3. **Reativar Parceiros na Navbar** — após alinhamento com a chefe. Arquivos `src/pages/Parceiros.tsx` e rota em `App.tsx` estão preservados.
+4. **Menu mobile** — substituir toggle hambúrguer por `<Sheet />` do shadcn.
+5. **Deploy** — Vercel ou Netlify com CI/CD no push da `main`.

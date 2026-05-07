@@ -255,7 +255,7 @@ const DoeAgora = () => {
             <Accordion type="single" collapsible className="flex flex-col gap-2">
               {faqs.map((faq, i) => (
                 <AccordionItem
-                  key={i}
+                  key={faq.q}
                   value={`faq-${i}`}
                   className="bg-white border rounded-[18px] overflow-hidden data-[state=open]:shadow-[0_4px_20px_oklch(0_0_0/0.06)] transition-shadow duration-150"
                   style={{ borderColor: 'oklch(0.10 0.008 50 / 0.09)' }}

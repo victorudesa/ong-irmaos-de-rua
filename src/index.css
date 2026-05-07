@@ -1,10 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/fraunces";
 
-/* DM Serif Display + Plus Jakarta Sans via Google Fonts injected by main.tsx */
+/* DM Serif Display + Plus Jakarta Sans via Google Fonts — index.html */
 
 @custom-variant dark (&:is(.dark *));
 

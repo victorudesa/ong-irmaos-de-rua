@@ -258,7 +258,7 @@ export function VoluntarioForm() {
             <svg
               width="18" height="18" viewBox="0 0 24 24" fill="none"
               stroke="white" strokeWidth="2" strokeLinecap="round"
-              style={{ animation: 'spin 0.8s linear infinite' }}
+              className="animate-spin"
             >
               <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="8" />
             </svg>
@@ -272,7 +272,6 @@ export function VoluntarioForm() {
             Quero Ser Voluntário
           </>
         )}
-        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </button>
     </form>
   )

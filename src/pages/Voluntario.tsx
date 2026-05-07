@@ -284,7 +284,7 @@ const Voluntario = () => {
             <Accordion type="single" collapsible>
               {faqs.map((faq, i) => (
                 <AccordionItem
-                  key={i}
+                  key={faq.q}
                   value={`faq-${i}`}
                   className="mb-2 border rounded-[18px] bg-white overflow-hidden transition-shadow duration-150 data-[state=open]:shadow-[0_4px_20px_oklch(0_0_0/0.06)]"
                   style={{ borderColor: 'oklch(0.10 0.008 50 / 0.09)' }}

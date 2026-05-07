@@ -14,7 +14,7 @@ const MetricsGrid = ({ metrics }: MetricsGridProps) => {
         <div className="grid grid-cols-2 md:grid-cols-4">
           {metrics.map((metric, index) => (
             <div
-              key={index}
+              key={metric.label}
               className="py-9 px-7"
               style={{
                 borderRight: index < metrics.length - 1 ? '1px solid oklch(0.10 0.008 50 / 0.08)' : 'none',

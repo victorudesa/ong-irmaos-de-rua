@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Image, Copy, Check, MessageCircle } from 'lucide-react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { Button } from '@/components/ui/button'
 import Layout from '@/components/Layout'
 import PageHero from '@/components/PageHero'
 
@@ -122,17 +123,19 @@ const DoeAgora = () => {
                   <p className="text-[11px] mb-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Chave PIX (CNPJ)</p>
                   <p className="text-[16px] font-bold text-white tracking-[0.02em]">{PIX_KEY}</p>
                 </div>
-                <button
+                <Button
                   onClick={handleCopy}
+                  variant="ghost"
+                  size="icon-sm"
+                  className="flex-shrink-0"
                   aria-label="Copiar chave PIX"
-                  className="w-10 h-10 rounded-[10px] flex items-center justify-center flex-shrink-0 border-none cursor-pointer transition-all duration-150 hover:scale-105"
-                  style={{ background: copied ? 'oklch(0.65 0.18 145)' : 'var(--color-amber)' }}
+                  style={{ background: copied ? 'oklch(0.65 0.18 145)' : 'var(--color-amber)', color: copied ? 'white' : 'var(--color-ink)' }}
                 >
                   {copied
-                    ? <Check className="w-4 h-4 text-white" strokeWidth={2.5} />
-                    : <Copy className="w-4 h-4" style={{ stroke: 'var(--color-ink)' }} strokeWidth={2} />
+                    ? <Check className="w-4 h-4" strokeWidth={2.5} />
+                    : <Copy className="w-4 h-4" strokeWidth={2} />
                   }
-                </button>
+                </Button>
               </div>
 
               {/* QR placeholder */}
@@ -199,8 +202,7 @@ const DoeAgora = () => {
                   href="https://wa.me/5511999999999?text=Olá! Quero saber mais sobre doação recorrente."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-[11px] rounded-[10px] text-[14px] font-bold text-white border-none cursor-pointer no-underline transition-all duration-150 hover:-translate-y-px"
-                  style={{ background: 'var(--color-primary)' }}
+                  className="inline-flex items-center gap-2 h-9 px-4 text-sm bg-primary text-white rounded-[10px] no-underline font-medium transition-all duration-150 hover:opacity-90 hover:-translate-y-px"
                 >
                   <MessageCircle className="w-4 h-4" strokeWidth={2} />
                   Quero ser doador recorrente
@@ -230,8 +232,7 @@ const DoeAgora = () => {
           </p>
           <a
             href="#como-doar"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-[10px] text-[15px] font-bold border-none cursor-pointer no-underline transition-all duration-150 hover:opacity-90 hover:-translate-y-px"
-            style={{ background: 'white', color: 'var(--color-primary)' }}
+            className="inline-flex items-center gap-2 h-11 px-7 text-base bg-white text-primary rounded-[10px] no-underline font-medium transition-all duration-150 hover:opacity-90 hover:-translate-y-px"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>

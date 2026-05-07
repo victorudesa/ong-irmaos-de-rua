@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UtensilsCrossed, Coffee, Shirt, Droplets, Heart, Wallet, Users, Share2, Image } from 'lucide-react'
+import { HeartIcon } from '@/components/icons/HeartIcon'
 import Layout from '@/components/Layout'
 import CtaBanner from '@/components/CtaBanner'
 import MetricsGrid from '@/components/MetricsGrid'
@@ -109,9 +110,9 @@ function ActionsCarousel() {
         disabled={!canPrev}
         aria-label="Anterior"
         className="absolute left-[-22px] top-[40%] z-10 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none"
-        style={{ background: 'white', border: '1px solid oklch(0.10 0.008 50 / 0.12)', boxShadow: '0 4px 16px oklch(0 0 0 / 0.08)' }}
+        style={{ background: 'white', border: '1px solid var(--color-border-mid)', boxShadow: '0 4px 16px oklch(0 0 0 / 0.08)' }}
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ color: 'var(--color-ink)' }}><polyline points="15 18 9 12 15 6"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-ink"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
 
       <div
@@ -123,17 +124,12 @@ function ActionsCarousel() {
           <div
             key={action.title}
             data-card
-            className="flex-none flex flex-col rounded-[28px] overflow-hidden transition-all duration-200 hover:-translate-y-0.5"
+            className="flex-none flex flex-col rounded-[28px] overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_oklch(0_0_0/0.10)] bg-white border border-[var(--color-border-faint)]"
             style={{
               width: 'calc((100% - 40px) / 3)',
               minWidth: '280px',
               scrollSnapAlign: 'start',
-              background: 'white',
-              border: '1px solid oklch(0.10 0.008 50 / 0.07)',
-              boxShadow: 'none',
             }}
-            onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 16px 40px oklch(0 0 0 / 0.10)')}
-            onMouseLeave={e => (e.currentTarget.style.boxShadow = 'none')}
           >
             {/* Image placeholder */}
             <div
@@ -142,7 +138,7 @@ function ActionsCarousel() {
                 background: 'repeating-linear-gradient(135deg, oklch(0.82 0.016 58) 0px, oklch(0.82 0.016 58) 2px, oklch(0.88 0.018 58) 2px, oklch(0.88 0.018 58) 14px)',
               }}
             >
-              <Image className="w-8 h-8 opacity-25" strokeWidth={1.5} style={{ color: 'var(--color-ink-soft)' } as React.CSSProperties} />
+              <Image className="w-8 h-8 opacity-25 text-ink-soft" strokeWidth={1.5} />
               <div
                 className="absolute bottom-0 left-0 right-0 h-20"
                 style={{ background: 'linear-gradient(to bottom, transparent, white)' }}
@@ -176,9 +172,9 @@ function ActionsCarousel() {
         disabled={!canNext}
         aria-label="Próximo"
         className="absolute right-[-22px] top-[40%] z-10 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none hover:bg-ink"
-        style={{ background: 'white', border: '1px solid oklch(0.10 0.008 50 / 0.12)', boxShadow: '0 4px 16px oklch(0 0 0 / 0.08)' }}
+        style={{ background: 'white', border: '1px solid var(--color-border-mid)', boxShadow: '0 4px 16px oklch(0 0 0 / 0.08)' }}
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ color: 'var(--color-ink)' }}><polyline points="9 18 15 12 9 6"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-ink"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     </div>
   )
@@ -189,35 +185,20 @@ function HowToHelpCard({ item }: { item: typeof howToHelp[0] }) {
   return (
     <Link
       to={item.to}
-      className="flex flex-col gap-5 rounded-[28px] p-8 md:p-9 no-underline transition-all duration-200 hover:-translate-y-0.5"
-      style={{
-        background: 'white',
-        border: '1px solid oklch(0.10 0.008 50 / 0.08)',
-        color: 'var(--color-ink)',
-        textDecoration: 'none',
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.boxShadow = '0 16px 40px oklch(0 0 0 / 0.09)'
-        const arrow = e.currentTarget.querySelector('[data-arrow]') as HTMLElement
-        if (arrow) { arrow.style.background = 'var(--color-primary)'; arrow.style.transform = 'translateX(3px)' }
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.boxShadow = 'none'
-        const arrow = e.currentTarget.querySelector('[data-arrow]') as HTMLElement
-        if (arrow) { arrow.style.background = 'var(--color-ink)'; arrow.style.transform = 'translateX(0)' }
-      }}
+      className="group flex flex-col gap-5 rounded-[28px] p-8 md:p-9 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_oklch(0_0_0/0.09)] bg-white border border-[var(--color-border-subtle)]"
+      style={{ color: 'var(--color-ink)' }}
     >
       {item.main ? (
         <>
           <div>
-            <div className="font-display leading-none tracking-tight mb-4" style={{ fontSize: '64px', color: 'oklch(0.10 0.008 50 / 0.07)' }}>
+            <div className="font-display leading-none tracking-tight mb-4" style={{ fontSize: '64px', color: 'var(--color-ink-ghost)' }}>
               {item.num}
             </div>
             <div className="flex items-center justify-between">
               <div className="w-12 h-12 rounded-[10px] flex items-center justify-center" style={{ background: 'var(--color-surface-warm)' }}>
-                <Icon className="w-[22px] h-[22px]" strokeWidth={1.5} style={{ color: 'var(--color-ink)' } as React.CSSProperties} />
+                <Icon className="w-[22px] h-[22px] text-ink" strokeWidth={1.5} />
               </div>
-              <div data-arrow className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-150" style={{ background: 'var(--color-ink)' }}>
+              <div className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-150 bg-ink group-hover:bg-primary group-hover:translate-x-[3px]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </div>
             </div>
@@ -233,12 +214,12 @@ function HowToHelpCard({ item }: { item: typeof howToHelp[0] }) {
         </>
       ) : (
         <>
-          <div className="font-display leading-none tracking-tight" style={{ fontSize: '64px', color: 'oklch(0.10 0.008 50 / 0.07)' }}>
+          <div className="font-display leading-none tracking-tight" style={{ fontSize: '64px', color: 'var(--color-ink-ghost)' }}>
             {item.num}
           </div>
           <div className="flex items-center justify-between">
             <div className="w-12 h-12 rounded-[10px] flex items-center justify-center" style={{ background: 'var(--color-surface-warm)' }}>
-              <Icon className="w-[22px] h-[22px]" strokeWidth={1.5} style={{ color: 'var(--color-ink)' } as React.CSSProperties} />
+              <Icon className="w-[22px] h-[22px] text-ink" strokeWidth={1.5} />
             </div>
             <div data-arrow className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-150" style={{ background: 'var(--color-ink)' }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -280,8 +261,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-end">
             {/* Left — headline */}
             <h1
-              className="font-display text-white leading-[1.0] tracking-tight"
-              style={{ fontSize: 'clamp(48px, 6.5vw, 96px)', textWrap: 'balance' } as React.CSSProperties}
+              className="font-display text-white leading-[1.0] tracking-tight text-balance text-[clamp(48px,6.5vw,96px)]"
             >
               Transformando<br />
               <em className="font-display not-italic" style={{ color: 'var(--color-amber)', fontStyle: 'italic' }}>vidas</em> nas<br />
@@ -292,7 +272,7 @@ const Index = () => {
             <div className="flex flex-col gap-8 pb-2">
               <p
                 className="leading-[1.7]"
-                style={{ fontSize: 'clamp(15px, 1.3vw, 18px)', color: 'rgba(255,255,255,0.65)', maxWidth: '380px' }}
+                style={{ fontSize: 'clamp(15px, 1.3vw, 18px)', color: 'oklch(1 0 0 / 0.65)', maxWidth: '380px' }}
               >
                 Somos mais de 200 voluntários que levam alimentação, dignidade e acolhimento a quem vive nas ruas da região do ABC Paulista e do centro de São Paulo.
               </p>
@@ -302,13 +282,13 @@ const Index = () => {
                   className="inline-flex items-center gap-2 font-sans font-bold text-white rounded-[10px] no-underline transition-all duration-150 hover:-translate-y-px hover:opacity-90"
                   style={{ background: 'var(--color-primary)', fontSize: '15px', padding: '14px 30px' }}
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                  <HeartIcon width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" />
                   Doe Agora
                 </Link>
                 <Link
                   to="/voluntario"
                   className="inline-flex items-center gap-2 font-sans font-semibold text-white rounded-[10px] no-underline transition-all duration-150 hover:border-white hover:bg-white/10"
-                  style={{ fontSize: '15px', padding: '13px 28px', background: 'transparent', border: '1.5px solid rgba(255,255,255,0.35)' }}
+                  style={{ fontSize: '15px', padding: '13px 28px', background: 'transparent', border: '1.5px solid var(--color-on-dark-low)' }}
                 >
                   Seja Voluntário
                 </Link>
@@ -320,11 +300,11 @@ const Index = () => {
         {/* Scroll indicator */}
         <div
           className="absolute bottom-8 right-[clamp(20px,5vw,60px)] flex items-center gap-2.5 md:flex hidden"
-          style={{ color: 'rgba(255,255,255,0.35)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', writingMode: 'vertical-rl' }}
+          style={{ color: 'var(--color-on-dark-low)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', writingMode: 'vertical-rl' }}
           aria-hidden="true"
         >
           <span>Scroll</span>
-          <div style={{ width: '1px', height: '40px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.35))' }} />
+          <div style={{ width: '1px', height: '40px', background: 'linear-gradient(to bottom, transparent, var(--color-on-dark-low))' }} />
         </div>
       </section>
 
@@ -341,8 +321,8 @@ const Index = () => {
             Quem Somos
           </span>
           <h2
-            className="font-display leading-[1.08] tracking-tight"
-            style={{ fontSize: 'clamp(32px, 4vw, 56px)', color: 'var(--color-ink)', textWrap: 'balance' } as React.CSSProperties}
+            className="font-display leading-[1.08] tracking-tight text-balance text-[clamp(32px,4vw,56px)]"
+            style={{ color: 'var(--color-ink)' }}
           >
             Uma família que acolhe<br />quem a sociedade esqueceu
           </h2>
@@ -369,7 +349,7 @@ const Index = () => {
                 <Link
                   to="/sobre"
                   className="inline-flex items-center font-sans font-semibold rounded-[10px] no-underline transition-all duration-150 hover:bg-neutral-100"
-                  style={{ fontSize: '15px', padding: '12px 26px', background: 'transparent', border: '1.5px solid oklch(0.10 0.008 50 / 0.20)', color: 'var(--color-ink)' }}
+                  style={{ fontSize: '15px', padding: '12px 26px', background: 'transparent', border: '1.5px solid var(--color-border-soft)', color: 'var(--color-ink)' }}
                 >
                   Ver ações
                 </Link>
@@ -380,7 +360,7 @@ const Index = () => {
               className="aspect-[4/3] rounded-[28px] flex items-center justify-center flex-col gap-3 text-center p-5"
               style={{
                 background: 'var(--color-surface-warm)',
-                border: '1px solid oklch(0.10 0.008 50 / 0.07)',
+                border: '1px solid var(--color-border-faint)',
                 fontFamily: 'monospace',
                 fontSize: '12px',
                 color: 'var(--color-ink-soft)',
@@ -488,7 +468,7 @@ const Index = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center font-sans font-semibold rounded-[10px] no-underline transition-all duration-150 hover:bg-neutral-100 whitespace-nowrap"
-              style={{ fontSize: '13px', padding: '9px 18px', background: 'transparent', border: '1.5px solid oklch(0.10 0.008 50 / 0.20)', color: 'var(--color-ink)' }}
+              style={{ fontSize: '13px', padding: '9px 18px', background: 'transparent', border: '1.5px solid var(--color-border-soft)', color: 'var(--color-ink)' }}
             >
               Ver no Instagram →
             </a>

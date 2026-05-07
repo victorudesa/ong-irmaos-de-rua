@@ -64,6 +64,7 @@ export function VoluntarioForm() {
           Obrigado pelo seu interesse. Nossa equipe entrará em contato pelo WhatsApp em breve para dar os próximos passos.
         </p>
         <button
+          type="button"
           onClick={() => {
             setSuccess(false)
             reset()

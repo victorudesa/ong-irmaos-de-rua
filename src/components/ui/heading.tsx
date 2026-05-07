@@ -1,29 +1,7 @@
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import { type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-
-const headingVariants = cva(
-  "font-display font-bold tracking-tight text-foreground",
-  {
-    variants: {
-      size: {
-        default: "text-3xl md:text-4xl leading-tight",
-        sm: "text-2xl md:text-3xl leading-snug",
-        lg: "text-4xl md:text-5xl leading-tight",
-        hero: "text-5xl md:text-6xl leading-[1.05]",
-      },
-      color: {
-        default: "text-foreground",
-        primary: "text-primary",
-        inverted: "text-primary-foreground",
-      }
-    },
-    defaultVariants: {
-      size: "default",
-      color: "default",
-    },
-  }
-)
+import { headingVariants } from "./heading.variants"
 
 export interface HeadingProps
   extends Omit<React.HTMLAttributes<HTMLHeadingElement>, "color">,
@@ -44,4 +22,4 @@ const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
 )
 Heading.displayName = "Heading"
 
-export { Heading, headingVariants }
+export { Heading }

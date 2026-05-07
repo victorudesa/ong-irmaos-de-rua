@@ -4,6 +4,8 @@
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/fraunces";
 
+/* DM Serif Display + Plus Jakarta Sans via Google Fonts injected by main.tsx */
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -36,8 +38,8 @@
 
 @theme inline {
     /* Tipografia */
-    --font-sans: 'Inter Variable', sans-serif;
-    --font-display: 'Fraunces Variable', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', 'Inter Variable', sans-serif;
+    --font-display: 'DM Serif Display', 'Fraunces Variable', Georgia, serif;
 
     /* Escala tipográfica (modular 1.25) */
     --text-xs:   0.75rem;    /* 12px */
@@ -112,6 +114,21 @@
 
     /* Externo */
     --color-whatsapp: oklch(0.74 0.17 150);
+
+    /* Amber accent */
+    --color-amber:      oklch(0.72 0.17 55);
+    --color-amber-dark: oklch(0.60 0.17 55);
+
+    /* Surface warm (off-white com tom quente) */
+    --color-surface-warm: oklch(0.94 0.016 58);
+
+    /* Background page (off-white quente) */
+    --color-bg-warm: oklch(0.97 0.012 60);
+
+    /* Ink scale */
+    --color-ink:      oklch(0.10 0.008 50);
+    --color-ink-mid:  oklch(0.38 0.010 50);
+    --color-ink-soft: oklch(0.58 0.010 50);
 
     /* Focus ring */
     --color-ring: var(--primary-500);

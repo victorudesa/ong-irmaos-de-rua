@@ -162,13 +162,35 @@ Mapa de todas as etapas planejadas, com status atual.
 | Etapa 4 — Migração das Páginas | Todas as páginas usando os novos componentes; legados deletados | `6379190` |
 | Etapa 5 — Formulário de Voluntário | `react-hook-form` + `zod`, `Input`/`Label`/`Textarea` do shadcn | `5fb3249` |
 
+### Etapa 6: Redesign da Homepage (Claude Design handoff)
+- **O que foi feito:** Redesign completo da homepage com base no arquivo de design `Irmãos de Rua - Redesign Homepage.html`.
+- **Fontes migradas:** DM Serif Display + Plus Jakarta Sans (Google Fonts) substituíram Fraunces Variable + Inter Variable. Tokens `--font-display` e `--font-sans` atualizados.
+- **Novos tokens adicionados ao `index.css`:**
+  - `--color-amber` / `--color-amber-dark` — acento editorial itálico no hero
+  - `--color-ink` / `--color-ink-mid` / `--color-ink-soft` — ink scale para superfícies densas
+  - `--color-surface-warm` / `--color-bg-warm` — off-white quente para fundos
+- **Componentes atualizados:**
+  - `Navbar.tsx` — logo mark ink (fundo quase preto) em vez de vermelho; background `--color-bg-warm`
+  - `Footer.tsx` — fundo `--color-ink`; colunas com headers a 35% opacidade; logo mark vermelho
+  - `MetricsGrid.tsx` — números display grandes, prefixo `+` em `--color-primary`
+  - `CtaBanner.tsx` — interface dual: `quote`/`quoteEm` (layout editorial) OU `title`/`subtitle` (layout centered legado). Overlay gradiente radial. Backwards-compatible.
+  - `WhatsAppButton.tsx` — glow shadow usando `--color-whatsapp`
+- **Homepage (`Index.tsx`) reescrita:**
+  - Hero 2 colunas com tipografia fluida `clamp(48px, 6.5vw, 96px)` e itálico amber
+  - `ActionsCarousel` — scroll horizontal com `useRef`, botões prev/next com estado
+  - `HowToHelpGrid` — grid assimétrico (card "01" span 2 rows), layout mobile separado
+  - Seção "Sobre" editorial com imagem placeholder e CTAs inline
+  - Grid Instagram 2×2 com header inline (título + botão na mesma linha)
+- **Build:** `tsc -b && vite build` passa limpo em 848ms, zero erros TypeScript.
+- **Commit:** `d4fdcb0`
+
 ### Pendente 🔲
 
 | Etapa | O que fazer | Prioridade |
 |---|---|---|
-| **Etapa 6 — Menu Mobile** | Substituir toggle hambúrguer manual da Navbar por `<Sheet />` do shadcn. Melhora acessibilidade de foco. | Média |
-| **Etapa 7 — Acessibilidade** | (1) `lang="pt-BR"` no `index.html`; (2) Verificar contraste `surface-dark-muted`; (3) Skip link "Pular para conteúdo". | Média |
-| **Etapa 8 — WhatsAppButton** | Usar o token `bg-whatsapp` e `variant="whatsapp"` em vez de `bg-[#25D366]` hardcoded. | Baixa |
-| **Etapa 9 — Reorganização** | Mover `PageHero.tsx` e `CtaBanner.tsx` para `components/layout/`. | Baixa |
+| **Etapa 7 — Menu Mobile** | Substituir toggle hambúrguer manual da Navbar por `<Sheet />` do shadcn. Melhora acessibilidade de foco. | Média |
+| **Etapa 8 — Acessibilidade** | Verificar contraste `surface-dark-muted`; Skip link "Pular para conteúdo". (`lang="pt-BR"` já foi adicionado no redesign.) | Média |
+| **Etapa 9 — Redesign páginas internas** | Aplicar DM Serif Display, ink scale e nova linguagem visual em `QuemSomos`, `Voluntario`, `DoeAgora`. | Futura |
 | **Etapa 10 — Badge** | Criar `badge.tsx` com variantes `default`, `primary`, `success`, `warning`, `destructive` e estilos `solid`/`outline`/`soft`. | Futura |
+| **Etapa 11 — Deploy** | Configurar Vercel/Netlify com CI/CD no push da `main`. | Futura |
 

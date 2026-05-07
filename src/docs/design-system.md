@@ -1,7 +1,6 @@
-# Design System — Irmãos de Rua (proposta refinada)
+# Design System — Irmãos de Rua
 
-> Documento de **proposta** para o novo projeto. Ainda não aplicado no código.
-> Comparar com o design system antigo em `irmaos-de-rua-oficial/src/docs/design-system.md` antes de implementar.
+> Documento **implementado e vigente**. Reflete o estado atual do código após o redesign da homepage (commit `d4fdcb0`).
 
 ---
 
@@ -21,23 +20,34 @@ Três princípios que guiam todas as decisões abaixo. Quando estiver em dúvida
 
 ### Famílias
 
-| Papel | Família | Como instalar |
+| Papel | Família | Fonte de entrega |
 | --- | --- | --- |
-| **Display** (títulos hero, page titles) | **Fraunces** | `npm i @fontsource-variable/fraunces` |
-| **Sans** (body, navbar, botões, cards) | **Inter** | já instalada |
+| **Display** (títulos hero, page titles) | **DM Serif Display** | Google Fonts (via `<link>` no `index.html`) |
+| **Sans** (body, navbar, botões, cards) | **Plus Jakarta Sans** | Google Fonts (via `<link>` no `index.html`) |
 
-> **Por que Fraunces:** serifada humanista variable, com eixos `wght` (peso), `opsz` (tamanho ótico) e `SOFT` (suavidade dos cantos). Dá personalidade editorial sem parecer "casamento". Compensa o vermelho institucional com calor visual.
+> **Por que DM Serif Display:** serifada editorial limpa, com eixo itálico expressivo. É usada diretamente no hero para criar contraste emocional com o sans. O itálico em amber (`color: var(--color-amber)`) é o elemento visual mais marcante da homepage.
+
+> **Por que Plus Jakarta Sans:** sans-serif geométrica humanista com excelente legibilidade em todos os pesos. Substitui Inter e Fraunces Variable, eliminando a dependência do `@fontsource-variable`.
+
+> **Fallbacks configurados no `@theme`:** `--font-display` cai para `'Fraunces Variable'` (ainda instalada via npm) e depois `Georgia`. `--font-sans` cai para `'Inter Variable'` e depois `sans-serif`.
 
 ### Setup no `index.css`
 
 ```css
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/fraunces";
+/* DM Serif Display + Plus Jakarta Sans via Google Fonts — injetado em index.html */
 
 @theme inline {
-  --font-sans: 'Inter Variable', sans-serif;
-  --font-display: 'Fraunces Variable', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', 'Inter Variable', sans-serif;
+  --font-display: 'DM Serif Display', 'Fraunces Variable', Georgia, serif;
 }
+```
+
+### Setup no `index.html`
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 ```
 
 ### Escala tipográfica (modular scale 1.25 — "major third")
@@ -106,6 +116,8 @@ text-xs font-semibold uppercase tracking-widest text-primary-foreground/80
 ### Paleta primary (vermelho do coração — escala completa de 9 tons)
 
 Base: `oklch(0.55 0.20 25)` ≈ vermelho médio caloroso (matiz próximo ao do projeto antigo `hsl(0 72% 51%)`, recalibrado em OKLCH para variações consistentes).
+
+**Uso especial no redesign:** o `+` das métricas (`MetricsGrid`) é renderizado em `var(--color-primary)` enquanto o número em si usa `var(--color-ink)`. Gera contraste editorial sutil.
 
 | Token | OKLCH | Uso |
 | --- | --- | --- |
@@ -179,9 +191,27 @@ Esses são os nomes que vão no `@theme inline` — apontam para os valores acim
   /* Externo */
   --color-whatsapp: oklch(0.74 0.17 150);   /* #25D366 em OKLCH */
 
+  /* Amber accent — itálico no hero, destaques editoriais */
+  --color-amber:      oklch(0.72 0.17 55);
+  --color-amber-dark: oklch(0.60 0.17 55);
+
+  /* Surface warm — off-white quente para fundos de seção */
+  --color-surface-warm: oklch(0.94 0.016 58);
+  --color-bg-warm:      oklch(0.97 0.012 60);
+
+  /* Ink scale — usada no lugar de neutral-800/900 para superfícies densas */
+  --color-ink:      oklch(0.10 0.008 50);   /* quase preto — footer, logo dark mark */
+  --color-ink-mid:  oklch(0.38 0.010 50);   /* texto médio */
+  --color-ink-soft: oklch(0.58 0.010 50);   /* texto suave, captions */
+
   /* Focus ring */
   --color-ring: var(--primary-500);
 }
+```
+
+> **Por que `--color-ink` em vez de `--color-surface-dark`:** `surface-dark` (`neutral-900`) é `oklch(0.13 0.005 50)`. O `ink` é ainda mais escuro (`oklch(0.10 0.008 50)`) e ligeiramente mais cromático. Usado no logo mark do Navbar (fundo do box do coração) e no Footer para um preto mais rico que o neutro puro.
+
+> **Por que `--color-amber`:** o hero usa `<em style={{ color: 'var(--color-amber)' }}>vidas</em>` em itálico para criar o ponto focal emocional da página. Amber foi escolhido por complementar o vermelho primário sem competir com ele (hue distante, H=55 vs H=25).
 ```
 
 > **Observação sobre `secondary`:** o projeto antigo usava `--secondary: 0 0% 13%` para texto escuro **e** para fundo escuro. Isso é confuso — uma cor não deveria servir como "fundo do hero" e "cor do título" simultaneamente. Aqui separamos: títulos usam `--color-foreground` (`neutral-800`), e superfícies escuras usam `--color-surface-dark` (`neutral-900`). Mais explícito.
@@ -270,7 +300,7 @@ Gera utilitárias `shadow-card` e `shadow-card-hover` automaticamente. Substitui
 
 ## 5. Organismos compartilhados (Atomic Design — camada de organismos)
 
-Componentes que aparecem em múltiplas páginas. **Criar antes de preencher as páginas**, para não duplicar markup em 5 lugares.
+Componentes que aparecem em múltiplas páginas.
 
 ### `<Layout />`
 Envolve toda página com Navbar + Footer + WhatsAppButton + `<main>` com padding-top do navbar fixo.
@@ -315,14 +345,32 @@ Hoje cada `AboutSection`, `HowToHelp`, `WhyDonate` repete a mesma estrutura. Res
 ### `<Card icon={Icon} title="..." description="..." />`
 Card padrão com ícone em fundo `primary-subtle`, título e descrição. Usado em "Por Que Doar", "Nossa Missão", "Como Ajudar".
 
-### `<CtaBanner title="..." subtitle="..." primaryAction={...} secondaryAction={...} />`
-Banner de chamada à ação em fundo primary. Usado em home e voluntário.
+### `<CtaBanner ... />`
+Banner de chamada à ação em fundo primary. **Interface dual:** aceita `quote`/`quoteEm` (layout editorial left-aligned, usado na home) OU `title`/`subtitle` (layout centered, usado nas páginas internas). O componente detecta o modo pelo prop `quote`.
+
+```tsx
+// Modo editorial (home):
+<CtaBanner
+  quote="Com R$30 você garante 10 marmitas para quem vive nas ruas."
+  primaryAction={{ label: 'Fazer uma doação', to: '/doe-agora' }}
+  secondaryAction={{ label: 'Via PIX ou TED', to: '/doe-agora' }}
+/>
+
+// Modo centered (páginas internas):
+<CtaBanner
+  title="Faça parte desta história"
+  subtitle="..."
+  primaryAction={{ label: 'Inscreva-se', to: '/voluntario' }}
+/>
+```
+
+Contém overlay de gradiente radial: `radial-gradient(circle at 80% 50%, oklch(0.65 0.20 25) 0%, transparent 60%)`.
 
 ### `<MetricsGrid metrics={[{number, label}]} />`
 Grade de métricas de impacto. Usada na home.
 
 ### `<WhatsAppButton />`
-Mantém igual, só trocar `bg-[#25D366]` por `bg-whatsapp`.
+Botão circular fixo (`bottom-7 right-7 z-50`). Usa `var(--color-whatsapp)` com glow shadow: `0 4px 20px oklch(0.74 0.17 150 / 0.4)`.
 
 ---
 
@@ -373,9 +421,9 @@ Manter o que o projeto antigo já fazia bem, e cobrir os gaps:
 
 ---
 
-## 9. Diferenças vs. design system antigo
+## 9. Histórico de mudanças do design system
 
-Resumo do que mudou e **por quê**:
+### v1 → v2 (design system base)
 
 | Aspecto | Antes | Agora | Por quê |
 | --- | --- | --- | --- |
@@ -391,30 +439,54 @@ Resumo do que mudou e **por quê**:
 | Cores `text-[#9CA3AF]` no footer | Hardcoded | Token `surface-dark-muted` | Consistência |
 | Estrutura de páginas | Markup duplicado (Navbar/Footer/Hero) | Organismos compartilhados (`Layout`, `PageHero`, `Section`) | DRY + facilita mudanças globais |
 
+### v2 → v3 (redesign homepage — commit `d4fdcb0`)
+
+| Aspecto | Antes | Agora | Por quê |
+| --- | --- | --- | --- |
+| Fonte display | Fraunces Variable (npm) | DM Serif Display (Google Fonts) | Visual mais limpo, itálico mais expressivo no hero |
+| Fonte sans | Inter Variable (npm) | Plus Jakarta Sans (Google Fonts) | Mais quente e amigável, melhor pra causa social |
+| Cor amber | Não existia | `--color-amber` + `--color-amber-dark` | Acento editorial no hero (itálico "vidas") |
+| Ink scale | Usava `neutral-800/900` | Tokens `--color-ink`, `--color-ink-mid`, `--color-ink-soft` | Preto mais rico e semântica mais explícita |
+| Surface warm | Não existia | `--color-surface-warm` + `--color-bg-warm` | Fundos de seção com tom quente consistente |
+| Logo mark Navbar | Caixa vermelha | Caixa ink (quase preta) | Menos impacto visual competindo com o CTA |
+| MetricsGrid | Layout genérico | Strip branca, números display grandes, `+` em primary | Impacto imediato nas métricas |
+| CtaBanner | Apenas layout centered | Dual: editorial left-aligned + centered (backwards-compatible) | Homepage usa layout editorial; páginas internas mantêm centered |
+| Homepage (Index.tsx) | Layout sem identidade visual forte | Hero 2-col com tipografia fluida, CarouselActions, grid assimétrico, 2×2 Instagram | Implementação do redesign do Claude Design handoff |
+
 ---
 
-## 10. Plano de implementação
+## 10. Estado de implementação
 
-Quando aprovarmos esta proposta, a ordem sugerida de aplicação é:
+### Implementado ✅
 
-1. **Instalar Fraunces** — `npm i @fontsource-variable/fraunces`
-2. **Reescrever `src/index.css`** — substituir `:root` neutro pelo bloco completo desta proposta (paleta + tipografia + tokens semânticos)
-3. **Remover bloco `.dark`** — sem dark mode por enquanto
-4. **Criar organismos compartilhados** — `Layout`, `Section`, `PageHero`, `Card`, `CtaBanner`, `MetricsGrid` em `src/components/`
-5. **Migrar Navbar e Footer** do projeto antigo, já refatorados pra usar tokens
-6. **Adicionar componentes shadcn restantes** conforme a página exigir (lista na seção 6)
-7. **Preencher `Index.tsx`** primeiro (home) — valida que os organismos cobrem o uso real
-8. **Preencher `QuemSomos`, `Voluntario`, `DoeAgora`** reusando tudo
-9. **Testar acessibilidade** — checklist da seção 8
+1. **`src/index.css`** — paleta OKLCH completa (primary, neutral, ink, amber, surface-warm), tokens semânticos, tipografia (DM Serif Display + Plus Jakarta Sans), sombras, raios, espaçamentos
+2. **`index.html`** — Google Fonts preconnect + link, `lang="pt-BR"`, título atualizado
+3. **Organismos compartilhados** — `Layout`, `Section`, `PageHero`, `CtaBanner` (dual-mode), `MetricsGrid`, `WhatsAppButton`
+4. **Navbar** — logo mark ink, fundo off-white quente
+5. **Footer** — fundo ink, logo mark vermelho, colunas tokenizadas
+6. **Homepage (`Index.tsx`)** — redesign completo: hero 2-col fluido, ActionsCarousel, HowToHelpGrid assimétrico, seção "Sobre", grid Instagram 2×2
+7. **Componentes shadcn instalados** — `button`, `input`, `label`, `textarea`
+8. **Formulário de voluntário** — `react-hook-form` + Zod, componente `VoluntarioForm`
+
+### Pendente 🔲
+
+| Etapa | O que fazer | Prioridade |
+|---|---|---|
+| **Menu mobile** | Substituir toggle hambúrguer manual da Navbar por `<Sheet />` do shadcn. Melhora acessibilidade de foco. | Média |
+| **Acessibilidade** | Verificar contraste `surface-dark-muted`; skip link "Pular para conteúdo". | Média |
+| **Redesign páginas internas** | Aplicar mesma linguagem visual do redesign em `QuemSomos`, `Voluntario`, `DoeAgora`. | Futura |
+| **Badge** | Criar `badge.tsx` com variantes `default`, `primary`, `success`, `warning`, `destructive`. | Futura |
+| **Deploy** | Configurar Vercel/Netlify com CI/CD no push da `main`. | Futura |
 
 ---
 
 ## 11. Decisões registradas
 
-Pontos que foram discutidos e fechados durante a elaboração desta proposta:
-
-1. **Fundo de ícone em card → `neutral-100`**, não `primary-50`. Justificativa na seção 2 (paleta primary).
-2. **Tom dos neutros → `H = 50` (warm gray sutil)**. Justificativa na seção 2 (paleta neutra).
-3. **Section label tem variante invertida** para fundos escuros. Definida na seção 1 (tipografia → section labels).
-4. **`<Card />` próprio**, não `<Card>` do shadcn. Cobre 100% do uso atual e elimina boilerplate de ícone+título+descrição.
-5. **Display (Fraunces) a partir de `text-3xl` (30px)** — garante consistência mobile/desktop nos H2 e dá peso editorial à identidade. Justificativa na seção 1 (regras de uso).
+1. **Fundo de ícone em card → `neutral-100`**, não `primary-50`. Vermelho sobre cinza tem contraste mais forte que vermelho sobre rosa pálido.
+2. **Tom dos neutros → `H = 50` (warm gray sutil)**. Cinzas frios comunicam "hospital/tech"; H=50 transmite acolhimento sem parecer "amarelo".
+3. **Section label tem variante invertida** para fundos escuros (texto branco/70% opacity em vez de vermelho, que briga com o fundo escuro).
+4. **`<Card />` próprio**, não `<Card>` do shadcn. Cobre 100% do uso atual.
+5. **Display a partir de `text-3xl` (30px)** — consistência mobile/desktop nos H2.
+6. **DM Serif Display em vez de Fraunces** — itálico mais expressivo, entrega via Google Fonts elimina dependência npm. (Fraunces permanece como fallback no `@theme`.)
+7. **CtaBanner dual-mode** — `quote` ativa layout editorial; ausência de `quote` mantém layout centered legado. Solução backwards-compatible que não quebrou `Voluntario.tsx`.
+8. **Grid assimétrico do HowToHelp** — card "01" usa `grid-row: 1 / 3` para span duplo no desktop. No mobile, renderiza um layout separado `flex flex-col md:hidden` porque `grid-row` não funciona em coluna única.

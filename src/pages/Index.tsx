@@ -1,153 +1,522 @@
+import { useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ChevronDown, Users, UtensilsCrossed, Coffee, Shirt, Droplets, Heart, Wallet, Share2, ChevronRight, Image } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { UtensilsCrossed, Coffee, Shirt, Droplets, Heart, Wallet, Users, Share2, Image } from 'lucide-react'
 import Layout from '@/components/Layout'
-import { Section } from '@/components/layout/section'
-import { FeatureCard } from '@/components/shared/feature-card'
 import CtaBanner from '@/components/CtaBanner'
 import MetricsGrid from '@/components/MetricsGrid'
 import heroBg from '@/assets/hero-bg.jpg'
 
 const actions = [
-  { icon: UtensilsCrossed, title: 'Entrega de Marmitas', description: 'Preparamos e distribuímos refeições completas todas as semanas para pessoas em situação de rua.' },
-  { icon: Coffee, title: 'Café da Manhã Solidário', description: 'Servimos café da manhã com pão, café e frutas para começar o dia com dignidade.' },
-  { icon: Shirt, title: 'Distribuição de Roupas e Cobertores', description: 'Arrecadamos e entregamos agasalhos, cobertores e roupas, especialmente no inverno.' },
-  { icon: Droplets, title: 'Kits de Higiene', description: 'Montamos kits com sabonete, escova de dentes, pasta e outros itens essenciais de higiene pessoal.' },
-  { icon: Heart, title: 'Acolhimento e Ressocialização', description: 'Oferecemos escuta, orientação e apoio para quem deseja reconstruir sua vida fora das ruas.' },
-]
-
-const howToHelp = [
-  { icon: Wallet, title: 'Doação Financeira', description: 'PIX, transferência ou recorrente' },
-  { icon: Users, title: 'Voluntariado', description: 'Participe das ações semanais' },
-  { icon: Share2, title: 'Divulgação', description: 'Compartilhe nas redes sociais' },
+  {
+    icon: UtensilsCrossed,
+    title: 'Entrega de Marmitas',
+    description: 'Preparamos e distribuímos refeições completas toda semana para pessoas em situação de rua.',
+    cta: { label: 'Conhecer mais', to: '/doe-agora' },
+  },
+  {
+    icon: Coffee,
+    title: 'Café da Manhã Solidário',
+    description: 'Pão, café e frutas para começar o dia com dignidade, aos sábados e domingos de manhã.',
+    cta: { label: 'Conhecer mais', to: '/doe-agora' },
+  },
+  {
+    icon: Heart,
+    title: 'Acolhimento e Ressocialização',
+    description: 'Escuta, orientação e apoio para quem deseja reconstruir sua vida fora das ruas.',
+    cta: { label: 'Ser voluntário', to: '/voluntario' },
+  },
+  {
+    icon: Shirt,
+    title: 'Roupas, Cobertores e Kits de Higiene',
+    description: 'Agasalhos e cobertores especialmente no inverno, além de kits de higiene essenciais montados com cuidado.',
+    cta: { label: 'Fazer doação', to: '/doe-agora' },
+  },
+  {
+    icon: Droplets,
+    title: 'Ações Semanais',
+    description: 'Todo sábado e domingo, das 8h às 12h, na região do ABC Paulista e no centro de São Paulo.',
+    cta: { label: 'Participar', to: '/voluntario' },
+  },
 ]
 
 const metrics = [
-  { number: '+5.000', label: 'Marmitas Entregues' },
-  { number: '+200', label: 'Voluntários Ativos' },
-  { number: '19', label: 'Anos de Atuação' },
-  { number: '+1.000', label: 'Pessoas Atendidas' },
+  { number: '+5.000', label: 'Marmitas entregues' },
+  { number: '+200', label: 'Voluntários ativos' },
+  { number: '19', label: 'Anos de atuação' },
+  { number: '+1.000', label: 'Pessoas atendidas' },
 ]
+
+const howToHelp = [
+  {
+    num: '01',
+    icon: Wallet,
+    title: 'Doação Financeira',
+    description: 'PIX, transferência bancária ou doação recorrente. Cada real chega diretamente a quem precisa — sem intermediários, sem burocracia.',
+    to: '/doe-agora',
+    main: true,
+  },
+  {
+    num: '02',
+    icon: Users,
+    title: 'Seja Voluntário',
+    description: 'Junte-se a mais de 200 voluntários que transformam vidas toda semana nas ruas do ABC.',
+    to: '/voluntario',
+    main: false,
+  },
+  {
+    num: '03',
+    icon: Share2,
+    title: 'Divulgue a Causa',
+    description: 'Compartilhe nosso trabalho nas redes sociais e ajude a ampliar nossa rede de impacto.',
+    to: '/',
+    main: false,
+  },
+]
+
+function ActionsCarousel() {
+  const carouselRef = useRef<HTMLDivElement>(null)
+  const [canPrev, setCanPrev] = useState(false)
+  const [canNext, setCanNext] = useState(true)
+
+  const updateBtns = () => {
+    const el = carouselRef.current
+    if (!el) return
+    setCanPrev(el.scrollLeft > 4)
+    setCanNext(el.scrollLeft < el.scrollWidth - el.clientWidth - 4)
+  }
+
+  useEffect(() => {
+    const el = carouselRef.current
+    if (!el) return
+    updateBtns()
+    el.addEventListener('scroll', updateBtns, { passive: true })
+    return () => el.removeEventListener('scroll', updateBtns)
+  }, [])
+
+  const scroll = (dir: 'prev' | 'next') => {
+    const el = carouselRef.current
+    if (!el) return
+    const card = el.querySelector('[data-card]') as HTMLElement
+    const amount = card ? card.offsetWidth + 20 : 320
+    el.scrollBy({ left: dir === 'next' ? amount : -amount, behavior: 'smooth' })
+  }
+
+  return (
+    <div className="relative mt-12">
+      {/* Prev */}
+      <button
+        onClick={() => scroll('prev')}
+        disabled={!canPrev}
+        aria-label="Anterior"
+        className="absolute left-[-22px] top-[40%] z-10 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none"
+        style={{ background: 'white', border: '1px solid oklch(0.10 0.008 50 / 0.12)', boxShadow: '0 4px 16px oklch(0 0 0 / 0.08)' }}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ color: 'var(--color-ink)' }}><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <div
+        ref={carouselRef}
+        className="flex gap-5 overflow-x-auto pb-2"
+        style={{ scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        {actions.map((action) => (
+          <div
+            key={action.title}
+            data-card
+            className="flex-none flex flex-col rounded-[28px] overflow-hidden transition-all duration-200 hover:-translate-y-0.5"
+            style={{
+              width: 'calc((100% - 40px) / 3)',
+              minWidth: '280px',
+              scrollSnapAlign: 'start',
+              background: 'white',
+              border: '1px solid oklch(0.10 0.008 50 / 0.07)',
+              boxShadow: 'none',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 16px 40px oklch(0 0 0 / 0.10)')}
+            onMouseLeave={e => (e.currentTarget.style.boxShadow = 'none')}
+          >
+            {/* Image placeholder */}
+            <div
+              className="relative h-[200px] flex items-center justify-center overflow-hidden"
+              style={{
+                background: 'repeating-linear-gradient(135deg, oklch(0.82 0.016 58) 0px, oklch(0.82 0.016 58) 2px, oklch(0.88 0.018 58) 2px, oklch(0.88 0.018 58) 14px)',
+              }}
+            >
+              <Image className="w-8 h-8 opacity-25" strokeWidth={1.5} style={{ color: 'var(--color-ink-soft)' } as React.CSSProperties} />
+              <div
+                className="absolute bottom-0 left-0 right-0 h-20"
+                style={{ background: 'linear-gradient(to bottom, transparent, white)' }}
+                aria-hidden="true"
+              />
+            </div>
+            {/* Body */}
+            <div className="flex flex-col gap-3 flex-1 px-6 pb-6 pt-5">
+              <h3 className="text-[17px] font-bold leading-snug" style={{ color: 'var(--color-ink)' }}>
+                {action.title}
+              </h3>
+              <p className="text-sm leading-[1.7] flex-1" style={{ color: 'var(--color-ink-mid)' }}>
+                {action.description}
+              </p>
+              <Link
+                to={action.cta.to}
+                className="inline-flex items-center gap-1.5 text-[13px] font-bold mt-1 transition-all duration-150 hover:gap-2.5"
+                style={{ color: 'var(--color-primary)', textDecoration: 'none' }}
+              >
+                {action.cta.label}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Next */}
+      <button
+        onClick={() => scroll('next')}
+        disabled={!canNext}
+        aria-label="Próximo"
+        className="absolute right-[-22px] top-[40%] z-10 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none hover:bg-ink"
+        style={{ background: 'white', border: '1px solid oklch(0.10 0.008 50 / 0.12)', boxShadow: '0 4px 16px oklch(0 0 0 / 0.08)' }}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ color: 'var(--color-ink)' }}><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  )
+}
+
+function HowToHelpCard({ item }: { item: typeof howToHelp[0] }) {
+  const Icon = item.icon
+  return (
+    <Link
+      to={item.to}
+      className="flex flex-col gap-5 rounded-[28px] p-8 md:p-9 no-underline transition-all duration-200 hover:-translate-y-0.5"
+      style={{
+        background: 'white',
+        border: '1px solid oklch(0.10 0.008 50 / 0.08)',
+        color: 'var(--color-ink)',
+        textDecoration: 'none',
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.boxShadow = '0 16px 40px oklch(0 0 0 / 0.09)'
+        const arrow = e.currentTarget.querySelector('[data-arrow]') as HTMLElement
+        if (arrow) { arrow.style.background = 'var(--color-primary)'; arrow.style.transform = 'translateX(3px)' }
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.boxShadow = 'none'
+        const arrow = e.currentTarget.querySelector('[data-arrow]') as HTMLElement
+        if (arrow) { arrow.style.background = 'var(--color-ink)'; arrow.style.transform = 'translateX(0)' }
+      }}
+    >
+      {item.main ? (
+        <>
+          <div>
+            <div className="font-display leading-none tracking-tight mb-4" style={{ fontSize: '64px', color: 'oklch(0.10 0.008 50 / 0.07)' }}>
+              {item.num}
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-12 rounded-[10px] flex items-center justify-center" style={{ background: 'var(--color-surface-warm)' }}>
+                <Icon className="w-[22px] h-[22px]" strokeWidth={1.5} style={{ color: 'var(--color-ink)' } as React.CSSProperties} />
+              </div>
+              <div data-arrow className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-150" style={{ background: 'var(--color-ink)' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="font-bold leading-snug mb-2.5" style={{ fontSize: 'clamp(20px, 2vw, 26px)', color: 'var(--color-ink)' }}>
+              {item.title}
+            </div>
+            <div className="text-[15px] leading-[1.7]" style={{ color: 'var(--color-ink-mid)' }}>
+              {item.description}
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="font-display leading-none tracking-tight" style={{ fontSize: '64px', color: 'oklch(0.10 0.008 50 / 0.07)' }}>
+            {item.num}
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="w-12 h-12 rounded-[10px] flex items-center justify-center" style={{ background: 'var(--color-surface-warm)' }}>
+              <Icon className="w-[22px] h-[22px]" strokeWidth={1.5} style={{ color: 'var(--color-ink)' } as React.CSSProperties} />
+            </div>
+            <div data-arrow className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-150" style={{ background: 'var(--color-ink)' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+          <div>
+            <div className="text-lg font-bold leading-snug mb-2" style={{ color: 'var(--color-ink)' }}>{item.title}</div>
+            <div className="text-sm leading-[1.7]" style={{ color: 'var(--color-ink-mid)' }}>{item.description}</div>
+          </div>
+        </>
+      )}
+    </Link>
+  )
+}
 
 const Index = () => {
   return (
     <Layout>
-      {/* Hero */}
-      <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+      {/* ── HERO ── */}
+      <section
+        className="relative overflow-hidden flex flex-col justify-end"
+        style={{ minHeight: '100svh', paddingTop: '64px' }}
+      >
         <img
           src={heroBg}
           alt="Voluntários ajudando pessoas em situação de rua"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-transparent" />
-        <div className="relative z-10 container text-center text-primary-foreground px-6">
-          <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight leading-tight max-w-3xl mx-auto mb-6">
-            Transformando vidas nas ruas do ABC e São Paulo
-          </h1>
-          <p className="text-lg md:text-xl leading-relaxed max-w-xl mx-auto mb-10 text-white/80">
-            Desde 2005 levando acolhimento, alimentação e esperança
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" asChild>
-              <Link to="/doe-agora">Doe Agora</Link>
-            </Button>
-            <Button size="lg" variant="outline" className="border-white/30 text-white hover:border-white hover:bg-white/10 hover:text-white" asChild>
-              <Link to="/voluntario">Seja Voluntário</Link>
-            </Button>
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(to bottom, oklch(0 0 0 / 0.52) 0%, oklch(0 0 0 / 0.35) 45%, oklch(0 0 0 / 0.72) 100%)' }}
+          aria-hidden="true"
+        />
+
+        <div
+          className="relative z-10 container mx-auto px-6 md:px-8 max-w-[1200px]"
+          style={{ padding: 'clamp(40px,8vh,100px) clamp(20px,5vw,60px) clamp(50px,8vh,80px)' }}
+        >
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-end">
+            {/* Left — headline */}
+            <h1
+              className="font-display text-white leading-[1.0] tracking-tight"
+              style={{ fontSize: 'clamp(48px, 6.5vw, 96px)', textWrap: 'balance' } as React.CSSProperties}
+            >
+              Transformando<br />
+              <em className="font-display not-italic" style={{ color: 'var(--color-amber)', fontStyle: 'italic' }}>vidas</em> nas<br />
+              ruas do ABC
+            </h1>
+
+            {/* Right — sub + CTAs */}
+            <div className="flex flex-col gap-8 pb-2">
+              <p
+                className="leading-[1.7]"
+                style={{ fontSize: 'clamp(15px, 1.3vw, 18px)', color: 'rgba(255,255,255,0.65)', maxWidth: '380px' }}
+              >
+                Somos mais de 200 voluntários que levam alimentação, dignidade e acolhimento a quem vive nas ruas da região do ABC Paulista e do centro de São Paulo.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  to="/doe-agora"
+                  className="inline-flex items-center gap-2 font-sans font-bold text-white rounded-[10px] no-underline transition-all duration-150 hover:-translate-y-px hover:opacity-90"
+                  style={{ background: 'var(--color-primary)', fontSize: '15px', padding: '14px 30px' }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                  Doe Agora
+                </Link>
+                <Link
+                  to="/voluntario"
+                  className="inline-flex items-center gap-2 font-sans font-semibold text-white rounded-[10px] no-underline transition-all duration-150 hover:border-white hover:bg-white/10"
+                  style={{ fontSize: '15px', padding: '13px 28px', background: 'transparent', border: '1.5px solid rgba(255,255,255,0.35)' }}
+                >
+                  Seja Voluntário
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-        <a
-          href="#sobre"
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 hover:text-white transition-colors duration-200"
-          aria-label="Rolar para baixo"
+
+        {/* Scroll indicator */}
+        <div
+          className="absolute bottom-8 right-[clamp(20px,5vw,60px)] flex items-center gap-2.5 md:flex hidden"
+          style={{ color: 'rgba(255,255,255,0.35)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', writingMode: 'vertical-rl' }}
+          aria-hidden="true"
         >
-          <ChevronDown className="w-8 h-8 animate-bounce" />
-        </a>
+          <span>Scroll</span>
+          <div style={{ width: '1px', height: '40px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.35))' }} />
+        </div>
       </section>
 
-      {/* Métricas */}
+      {/* ── MÉTRICAS ── */}
       <MetricsGrid metrics={metrics} />
 
-      {/* Quem Somos */}
-      <Section id="sobre" label="Quem Somos" title="Uma família que acolhe quem a sociedade esqueceu">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-          <div className="space-y-5">
-            <p className="text-base md:text-lg text-foreground leading-relaxed">
-              Tudo começou em 2005, quando um pequeno grupo de amigos decidiu que não podia mais ignorar as pessoas dormindo nas calçadas do ABC Paulista. Com marmitas preparadas em casa e muita vontade de ajudar, nasceu o Irmãos de Rua.
-            </p>
-            <p className="text-base md:text-lg text-foreground leading-relaxed">
-              Desde então, crescemos para uma rede de mais de 200 voluntários que atuam semanalmente na região do ABC e no centro de São Paulo, oferecendo alimentação, roupas, cobertores, kits de higiene e, acima de tudo, dignidade e acolhimento.
-            </p>
-            <p className="text-base md:text-lg text-foreground leading-relaxed">
-              Oficialmente registrada como ONG em 2018, mantemos o mesmo espírito de família que nos uniu no início: a crença de que ninguém deveria ser invisível.
-            </p>
-          </div>
-          <div className="bg-muted rounded-xl aspect-[4/3] flex items-center justify-center">
-            <Users className="w-16 h-16 text-muted-foreground/40" strokeWidth={1.5} />
+      {/* ── QUEM SOMOS ── */}
+      <section className="py-[var(--section-y)] md:py-[var(--section-y-md)]" style={{ background: 'white' }}>
+        <div className="container mx-auto px-6 md:px-8 max-w-[1200px]">
+          <span
+            className="inline-block text-[11px] font-extrabold tracking-[0.14em] uppercase mb-4"
+            style={{ color: 'var(--color-primary)' }}
+          >
+            Quem Somos
+          </span>
+          <h2
+            className="font-display leading-[1.08] tracking-tight"
+            style={{ fontSize: 'clamp(32px, 4vw, 56px)', color: 'var(--color-ink)', textWrap: 'balance' } as React.CSSProperties}
+          >
+            Uma família que acolhe<br />quem a sociedade esqueceu
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center mt-14">
+            <div className="space-y-5">
+              <p className="text-base leading-[1.8]" style={{ color: 'var(--color-ink-mid)' }}>
+                Tudo começou em <strong style={{ color: 'var(--color-ink)', fontWeight: 700 }}>2005</strong>, quando um pequeno grupo de amigos decidiu que não podia mais ignorar as pessoas dormindo nas calçadas do ABC Paulista. Com marmitas preparadas em casa e muita vontade de ajudar, nasceu o Irmãos de Rua.
+              </p>
+              <p className="text-base leading-[1.8]" style={{ color: 'var(--color-ink-mid)' }}>
+                Desde então, crescemos para uma rede de mais de <strong style={{ color: 'var(--color-ink)', fontWeight: 700 }}>200 voluntários</strong> que atuam semanalmente na região do ABC e no centro de São Paulo — levando alimentação, roupas, cobertores, kits de higiene e, acima de tudo, dignidade.
+              </p>
+              <p className="text-base leading-[1.8]" style={{ color: 'var(--color-ink-mid)' }}>
+                Oficialmente registrada como ONG em <strong style={{ color: 'var(--color-ink)', fontWeight: 700 }}>2018</strong>, mantemos o mesmo espírito de família que nos uniu no início: a crença de que ninguém deveria ser invisível.
+              </p>
+              <div className="flex gap-3 flex-wrap pt-4">
+                <Link
+                  to="/sobre"
+                  className="inline-flex items-center font-sans font-bold rounded-[10px] no-underline transition-all duration-150 hover:-translate-y-px hover:opacity-90 text-white"
+                  style={{ background: 'var(--color-primary)', fontSize: '15px', padding: '12px 26px' }}
+                >
+                  Nossa história
+                </Link>
+                <Link
+                  to="/sobre"
+                  className="inline-flex items-center font-sans font-semibold rounded-[10px] no-underline transition-all duration-150 hover:bg-neutral-100"
+                  style={{ fontSize: '15px', padding: '12px 26px', background: 'transparent', border: '1.5px solid oklch(0.10 0.008 50 / 0.20)', color: 'var(--color-ink)' }}
+                >
+                  Ver ações
+                </Link>
+              </div>
+            </div>
+
+            <div
+              className="aspect-[4/3] rounded-[28px] flex items-center justify-center flex-col gap-3 text-center p-5"
+              style={{
+                background: 'var(--color-surface-warm)',
+                border: '1px solid oklch(0.10 0.008 50 / 0.07)',
+                fontFamily: 'monospace',
+                fontSize: '12px',
+                color: 'var(--color-ink-soft)',
+              }}
+            >
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" style={{ opacity: 0.25 }}><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              foto · voluntários em ação
+            </div>
           </div>
         </div>
-      </Section>
+      </section>
 
-      {/* O Que Fazemos */}
-      <Section label="O Que Fazemos" title="Ações que transformam" bg="muted">
-        <div className="grid sm:grid-cols-2 gap-5 md:gap-6">
-          {actions.map((action) => (
-            <FeatureCard key={action.title} icon={action.icon} title={action.title} description={action.description} />
-          ))}
+      {/* ── O QUE FAZEMOS — carousel ── */}
+      <section
+        className="py-[var(--section-y)] md:py-[var(--section-y-md)]"
+        style={{ background: 'var(--color-bg-warm)' }}
+      >
+        <div className="container mx-auto px-6 md:px-8 max-w-[1200px]">
+          <span
+            className="inline-block text-[11px] font-extrabold tracking-[0.14em] uppercase mb-4"
+            style={{ color: 'var(--color-amber-dark)' }}
+          >
+            O Que Fazemos
+          </span>
+          <h2
+            className="font-display leading-[1.08] tracking-tight"
+            style={{ fontSize: 'clamp(32px, 4vw, 56px)', color: 'var(--color-ink)' }}
+          >
+            Ações que transformam
+          </h2>
+          <ActionsCarousel />
         </div>
-      </Section>
+      </section>
 
-      {/* CTA */}
+      {/* ── CTA IMPACTO ── */}
       <CtaBanner
-        title="Sua ajuda transforma vidas"
-        subtitle="Cada gesto faz a diferença para quem vive nas ruas"
-        primaryAction={{ label: 'Faça uma Doação', to: '/doe-agora' }}
-        secondaryAction={{ label: 'Seja Voluntário', to: '/voluntario' }}
+        quote="Com R$30 você garante 10 marmitas para quem vive nas ruas."
+        primaryAction={{ label: 'Fazer uma doação', to: '/doe-agora' }}
+        secondaryAction={{ label: 'Via PIX ou TED', to: '/doe-agora' }}
       />
 
-      {/* Como Ajudar */}
-      <Section label="Como Ajudar" title="Escolha sua forma de contribuir">
-        <div className="bg-card rounded-xl border border-border">
-          {howToHelp.map((item, index) => (
-            <div
-              key={item.title}
-              className={`flex items-center gap-4 p-5 md:p-6 cursor-pointer hover:bg-muted transition-all duration-200 ${
-                index < howToHelp.length - 1 ? 'border-b border-border' : ''
-              } ${index === 0 ? 'rounded-t-xl' : ''} ${index === howToHelp.length - 1 ? 'rounded-b-xl' : ''}`}
-            >
-              <div className="w-11 h-11 bg-muted rounded-lg flex items-center justify-center shrink-0">
-                <item.icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-              </div>
-              <ChevronRight className="w-5 h-5 text-muted-foreground shrink-0" strokeWidth={1.5} />
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Instagram */}
-      <Section label="Instagram" title="@ongirmaosderua" centered bg="muted">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="bg-muted rounded-xl aspect-square flex items-center justify-center">
-              <Image className="w-10 h-10 text-muted-foreground/40" strokeWidth={1.5} />
-            </div>
-          ))}
-        </div>
-        <p className="text-center mt-8">
-          <a
-            href="https://www.instagram.com/ongirmaosderua"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary font-semibold text-sm hover:underline transition-all duration-200"
+      {/* ── COMO AJUDAR ── */}
+      <section
+        className="py-[var(--section-y)] md:py-[var(--section-y-md)]"
+        style={{ background: 'var(--color-bg-warm)' }}
+      >
+        <div className="container mx-auto px-6 md:px-8 max-w-[1200px]">
+          <span
+            className="inline-block text-[11px] font-extrabold tracking-[0.14em] uppercase mb-4"
+            style={{ color: 'var(--color-primary)' }}
           >
-            Siga @ongirmaosderua no Instagram →
-          </a>
-        </p>
-      </Section>
+            Como Ajudar
+          </span>
+          <h2
+            className="font-display leading-[1.08] tracking-tight"
+            style={{ fontSize: 'clamp(32px, 4vw, 56px)', color: 'var(--color-ink)' }}
+          >
+            Escolha sua forma<br />de contribuir
+          </h2>
+
+          {/* Asymmetric grid: left col spans 2 rows, right col has 2 stacked cards */}
+          <div className="hidden md:grid gap-5 mt-14" style={{ gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'auto auto' }}>
+            <div style={{ gridColumn: '1', gridRow: '1 / 3' }}>
+              <HowToHelpCard item={howToHelp[0]} />
+            </div>
+            <div style={{ gridColumn: '2', gridRow: '1' }}>
+              <HowToHelpCard item={howToHelp[1]} />
+            </div>
+            <div style={{ gridColumn: '2', gridRow: '2' }}>
+              <HowToHelpCard item={howToHelp[2]} />
+            </div>
+          </div>
+          {/* Mobile: single column */}
+          <div className="flex flex-col gap-5 mt-14 md:hidden">
+            {howToHelp.map((item) => (
+              <HowToHelpCard key={item.num} item={item} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── INSTAGRAM — 2x2 grid ── */}
+      <section
+        className="py-[var(--section-y-compact)] md:py-[var(--section-y-compact-md)]"
+        style={{ background: 'var(--color-surface-warm)' }}
+      >
+        <div className="container mx-auto px-6 md:px-8 max-w-[1200px]">
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
+            <div>
+              <span
+                className="inline-block text-[11px] font-extrabold tracking-[0.14em] uppercase mb-3"
+                style={{ color: 'var(--color-amber-dark)' }}
+              >
+                Acompanhe nas redes sociais
+              </span>
+              <h2
+                className="font-display leading-[1.08] tracking-tight"
+                style={{ fontSize: 'clamp(24px, 3vw, 42px)', color: 'var(--color-ink)' }}
+              >
+                Nossa presença nas redes sociais
+              </h2>
+            </div>
+            <a
+              href="https://www.instagram.com/ongirmaosderua"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center font-sans font-semibold rounded-[10px] no-underline transition-all duration-150 hover:bg-neutral-100 whitespace-nowrap"
+              style={{ fontSize: '13px', padding: '9px 18px', background: 'transparent', border: '1.5px solid oklch(0.10 0.008 50 / 0.20)', color: 'var(--color-ink)' }}
+            >
+              Ver no Instagram →
+            </a>
+          </div>
+
+          <div
+            className="grid grid-cols-2 grid-rows-2 gap-3 rounded-[28px] overflow-hidden"
+          >
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div
+                key={i}
+                className="aspect-square rounded-[18px] flex items-center justify-center relative overflow-hidden cursor-pointer transition-opacity duration-200 hover:opacity-80"
+                style={{
+                  background: 'repeating-linear-gradient(135deg, oklch(0.86 0.018 58) 0px, oklch(0.86 0.018 58) 2px, oklch(0.90 0.014 58) 2px, oklch(0.90 0.014 58) 14px)',
+                }}
+              >
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ opacity: 0.25, color: 'var(--color-ink)' }}><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <div
+                  className="absolute bottom-0 left-0 right-0 text-center text-[10px] pb-2.5 pt-8"
+                  style={{ fontFamily: 'monospace', color: 'var(--color-ink-soft)', background: 'linear-gradient(to top, oklch(0.90 0.014 58 / 0.9), transparent)' }}
+                >
+                  foto da ação
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </Layout>
   )
 }

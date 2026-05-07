@@ -295,48 +295,67 @@ git push
 
 ```
 src/
-├── assets/              ← imagens e arquivos estáticos importados pelo bundler
+├── assets/
+│   └── hero-bg.jpg          ← placeholder do hero (substituir por foto real)
 ├── components/
-│   ├── ui/              ← componentes do shadcn (não editar diretamente)
-│   │   └── button.tsx
-│   ├── Layout.tsx       ← envolve todas as páginas (Navbar + main + Footer + WhatsAppButton)
-│   ├── Navbar.tsx       ← navegação fixa com scroll shadow e menu mobile
-│   ├── Footer.tsx       ← rodapé em surface-dark com 4 colunas
-│   ├── WhatsAppButton.tsx ← botão flutuante fixo
-│   ├── Section.tsx      ← wrapper de seção com label + H2 + padding semântico
-│   ├── PageHero.tsx     ← hero padrão das páginas internas (breadcrumb + H1 + subtítulo)
-│   ├── Card.tsx         ← card com ícone + título + descrição
-│   ├── CtaBanner.tsx    ← banner CTA em fundo primary (props: title, subtitle, actions)
-│   └── MetricsGrid.tsx  ← grade 2x2/4x1 de métricas de impacto
+│   ├── ui/                  ← componentes do shadcn (não editar diretamente)
+│   │   ├── button.tsx       ← variantes: default, inverted, whatsapp, outline
+│   │   ├── input.tsx
+│   │   ├── label.tsx
+│   │   └── textarea.tsx
+│   ├── layout/
+│   │   ├── section.tsx      ← wrapper universal com espaçamento semântico e bg variants
+│   │   └── (PageHero.tsx está em components/ ainda — mover futuramente)
+│   ├── forms/
+│   │   └── VoluntarioForm.tsx ← react-hook-form + zod
+│   ├── shared/
+│   │   └── feature-card.tsx  ← card com ícone + título + descrição
+│   ├── Layout.tsx            ← Navbar + main + Footer + WhatsAppButton
+│   ├── Navbar.tsx            ← logo mark ink, bg off-white quente, scroll shadow
+│   ├── Footer.tsx            ← fundo ink, 4 colunas, logo mark vermelho
+│   ├── WhatsAppButton.tsx    ← botão circular fixo com glow whatsapp
+│   ├── PageHero.tsx          ← hero padrão das páginas internas
+│   ├── CtaBanner.tsx         ← dual-mode: editorial (quote) ou centered (title/subtitle)
+│   └── MetricsGrid.tsx       ← strip branca, números display grandes, + em primary
 ├── docs/
-│   ├── setup.md         ← este arquivo
-│   └── design-system.md ← design system completo (paleta, tipografia, tokens, organismos)
+│   ├── setup.md              ← este arquivo
+│   ├── design-system.md      ← design system completo (paleta, tipografia, tokens)
+│   └── improvements.md       ← log de implementação e roadmap
 ├── lib/
-│   └── utils.ts         ← utilitário cn()
-├── pages/               ← páginas da aplicação (uma por rota)
-│   ├── Index.tsx        ← rota / (placeholder)
-│   ├── QuemSomos.tsx    ← rota /quem-somos (placeholder)
-│   ├── Voluntario.tsx   ← rota /voluntario (placeholder)
-│   ├── DoeAgora.tsx     ← rota /doe-agora (placeholder)
-│   └── NotFound.tsx     ← rota * (catch-all 404)
-├── App.tsx              ← raiz da aplicação, define rotas
-├── main.tsx             ← ponto de entrada, monta o React no DOM
-└── index.css            ← design system completo (paleta OKLCH, tokens semânticos, tipografia)
+│   ├── utils.ts              ← utilitário cn()
+│   └── schemas/
+│       └── voluntario.ts     ← schema Zod do formulário de voluntário
+├── pages/
+│   ├── Index.tsx             ← rota / — redesign completo
+│   ├── QuemSomos.tsx         ← rota /sobre
+│   ├── Voluntario.tsx        ← rota /voluntario
+│   ├── DoeAgora.tsx          ← rota /doe-agora
+│   ├── Parceiros.tsx         ← rota /parceiros
+│   └── NotFound.tsx          ← rota * (catch-all 404)
+├── App.tsx
+├── main.tsx
+└── index.css                 ← design system completo
 ```
 
 ### Dependências instaladas
 
-- **`@fontsource-variable/inter`** — fonte Inter Variable (body/UI)
-- **`@fontsource-variable/fraunces`** — fonte Fraunces Variable (display, títulos a partir de text-3xl)
-- **`tw-animate-css`** — utilitários de animação compatíveis com Tailwind v4
-- **`radix-ui`** — pacote unificado da Radix UI
+| Pacote | Motivo |
+|---|---|
+| `@fontsource-variable/inter` | Fallback para Plus Jakarta Sans |
+| `@fontsource-variable/fraunces` | Fallback para DM Serif Display |
+| `tw-animate-css` | Utilitários de animação compatíveis com Tailwind v4 |
+| `radix-ui` | Lógica acessível (base do shadcn) |
+| `react-hook-form` | Formulário de voluntário |
+| `zod` + `@hookform/resolvers` | Validação do formulário |
+
+> **DM Serif Display e Plus Jakarta Sans** são carregadas via Google Fonts (`index.html`), sem dependência npm.
 
 ---
 
 ## Próximos passos
 
-1. **Envolver páginas com `<Layout>`** — adicionar `<Layout>` em `Index.tsx`, `QuemSomos.tsx`, `Voluntario.tsx` e `DoeAgora.tsx` para ver Navbar + Footer funcionando no `dev`.
-2. **Preencher `Index.tsx`** — home completa reusando os organismos criados.
-3. **Preencher `QuemSomos.tsx`, `Voluntario.tsx`, `DoeAgora.tsx`** — reusando `Layout`, `PageHero`, `Section`, `Card` etc.
-4. **Adicionar componentes shadcn conforme necessidade** — `sheet` (menu mobile), `accordion` (FAQ), `input`, `textarea`, `label`, `form` (formulário de voluntário), `sonner` (toast PIX copiado).
-5. **Configurar deploy** — Vercel ou Netlify conectado ao repositório GitHub para deploy automático em cada push na `main`.
+1. **Substituir `hero-bg.jpg`** por foto real de uma ação da ONG.
+2. **Implementar redesign nas páginas internas** — `QuemSomos`, `Voluntario`, `DoeAgora` com DM Serif Display e ink scale.
+3. **Menu mobile** — substituir toggle hambúrguer por `<Sheet />` do shadcn.
+4. **Deploy** — Vercel ou Netlify com CI/CD no push da `main`.
+5. **Toast PIX copiado** — adicionar `sonner` para feedback ao copiar chave PIX.

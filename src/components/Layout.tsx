@@ -9,8 +9,15 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white"
+        style={{ background: 'var(--color-primary)' }}
+      >
+        Pular para o conteúdo
+      </a>
       <Navbar />
-      <main className="pt-16">
+      <main id="main" className="pt-16">
         {children}
       </main>
       <Footer />

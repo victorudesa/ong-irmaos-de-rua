@@ -97,10 +97,10 @@ const Footer = () => {
           className="pt-7 flex items-center justify-between flex-wrap gap-3"
           style={{ borderTop: '1px solid var(--color-on-dark-line)' }}
         >
-          <p className="text-xs" style={{ color: 'var(--color-on-dark-faint)' }}>
+          <p className="text-xs" style={{ color: 'var(--color-on-dark-mid)' }}>
             © {new Date().getFullYear()} Irmãos de Rua. Todos os direitos reservados. CNPJ: 00.000.000/0001-00
           </p>
-          <p className="text-xs" style={{ color: 'var(--color-on-dark-faint)' }}>
+          <p className="text-xs" style={{ color: 'var(--color-on-dark-mid)' }}>
             Feito com intenção ♥
           </p>
         </div>

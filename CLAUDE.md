@@ -87,7 +87,7 @@ Quick reference:
 </LinkButton>
 ```
 
-See [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) for complete reference, accessibility notes, and future-proofing
+See [src/docs/design-system.md](src/docs/design-system.md) for complete reference, accessibility notes, and future-proofing
 
 **Form Validation**
 - Schemas live in `src/lib/schemas/` with Zod
@@ -168,7 +168,7 @@ Never add raw Tailwind for typography — use the component variant instead.
 
 **How to add a variant:**
 1. Update [src/components/ui/button.variants.ts](src/components/ui/button.variants.ts)
-2. Document it in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) with use case
+2. Document it in [src/docs/design-system.md](src/docs/design-system.md) with use case
 3. Update this CLAUDE.md with the new row in the quick reference table
 
 ### Form Submission

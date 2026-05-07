@@ -1,21 +1,7 @@
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import { type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-
-const sectionLabelVariants = cva(
-  "text-xs font-semibold uppercase tracking-widest",
-  {
-    variants: {
-      variant: {
-        default: "text-primary",
-        inverted: "text-primary-foreground/80",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-)
+import { sectionLabelVariants } from "./section-label.variants"
 
 export interface SectionLabelProps
   extends React.HTMLAttributes<HTMLSpanElement>,
@@ -30,4 +16,4 @@ function SectionLabel({ className, variant, ...props }: SectionLabelProps) {
   )
 }
 
-export { SectionLabel, sectionLabelVariants }
+export { SectionLabel }

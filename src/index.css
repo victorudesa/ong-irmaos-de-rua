@@ -1,10 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/fraunces";
 
-/* DM Serif Display + Plus Jakarta Sans via Google Fonts injected by main.tsx */
+/* DM Serif Display + Plus Jakarta Sans via Google Fonts — index.html */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -133,6 +131,22 @@
     /* Focus ring */
     --color-ring: var(--primary-500);
 
+    /* Bordas sutis — usadas em cards, inputs e separadores */
+    --color-border-subtle: oklch(0.10 0.008 50 / 0.09);
+    --color-border-faint:  oklch(0.10 0.008 50 / 0.07);
+    --color-border-mid:    oklch(0.10 0.008 50 / 0.12);
+    --color-border-soft:   oklch(0.10 0.008 50 / 0.20);
+
+    /* Overlays sobre fundo escuro */
+    --color-on-dark-high:  oklch(1 0 0 / 0.55);
+    --color-on-dark-mid:   oklch(1 0 0 / 0.45);
+    --color-on-dark-low:   oklch(1 0 0 / 0.35);
+    --color-on-dark-faint: oklch(1 0 0 / 0.25);
+    --color-on-dark-line:  oklch(1 0 0 / 0.08);
+
+    /* Número decorativo em cards (opacidade 7%) */
+    --color-ink-ghost: oklch(0.10 0.008 50 / 0.07);
+
     /* Sidebar (shadcn — manter sem dark mode) */
     --color-sidebar:                    var(--neutral-50);
     --color-sidebar-foreground:         var(--neutral-800);
@@ -155,5 +169,10 @@
 
     html {
         @apply font-sans;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
     }
 }

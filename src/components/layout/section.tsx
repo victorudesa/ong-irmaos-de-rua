@@ -1,31 +1,9 @@
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import { type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { SectionLabel } from "@/components/ui/section-label"
 import { Heading } from "@/components/ui/heading"
-
-const sectionVariants = cva(
-  "w-full",
-  {
-    variants: {
-      spacing: {
-        default: "py-[var(--section-y)] md:py-[var(--section-y-md)]",
-        compact: "py-[var(--section-y-compact)] md:py-[var(--section-y-compact-md)]",
-        none: "py-0",
-      },
-      bg: {
-        default: "bg-background text-foreground",
-        primary: "bg-primary text-primary-foreground",
-        muted: "bg-neutral-50 text-foreground",
-        dark: "bg-surface-dark text-surface-dark-foreground",
-      }
-    },
-    defaultVariants: {
-      spacing: "default",
-      bg: "default",
-    },
-  }
-)
+import { sectionVariants } from "./section.variants"
 
 export interface SectionProps
   extends React.HTMLAttributes<HTMLElement>,
@@ -84,4 +62,4 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(
 )
 Section.displayName = "Section"
 
-export { Section, sectionVariants }
+export { Section }

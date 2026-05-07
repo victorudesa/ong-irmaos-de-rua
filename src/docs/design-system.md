@@ -465,8 +465,10 @@ Manter o que o projeto antigo já fazia bem, e cobrir os gaps:
 4. **Navbar** — logo mark ink, fundo off-white quente
 5. **Footer** — fundo ink, logo mark vermelho, colunas tokenizadas
 6. **Homepage (`Index.tsx`)** — redesign completo: hero 2-col fluido, ActionsCarousel, HowToHelpGrid assimétrico, seção "Sobre", grid Instagram 2×2
-7. **Componentes shadcn instalados** — `button`, `input`, `label`, `textarea`
+7. **Componentes shadcn instalados** — `button`, `input`, `label`, `textarea`, `accordion`
 8. **Formulário de voluntário** — `react-hook-form` + Zod, componente `VoluntarioForm`
+9. **Página Doe Agora** — redesign completo: hero photo-variant, impacto cards, PIX card dark, TED card, impact strip, FAQ accordion
+10. **Navbar** — link "Parceiros" removido temporariamente (aguarda alinhamento com chefe); arquivos da página preservados
 
 ### Pendente 🔲
 
@@ -474,7 +476,8 @@ Manter o que o projeto antigo já fazia bem, e cobrir os gaps:
 |---|---|---|
 | **Menu mobile** | Substituir toggle hambúrguer manual da Navbar por `<Sheet />` do shadcn. Melhora acessibilidade de foco. | Média |
 | **Acessibilidade** | Verificar contraste `surface-dark-muted`; skip link "Pular para conteúdo". | Média |
-| **Redesign páginas internas** | Aplicar mesma linguagem visual do redesign em `QuemSomos`, `Voluntario`, `DoeAgora`. | Futura |
+| **Redesign páginas internas** | Aplicar mesma linguagem visual do redesign em `QuemSomos` e `Voluntario`. (`DoeAgora` já concluída.) | Futura |
+| **Parceiros** | Reativar link "Parceiros" na Navbar após alinhamento com a chefe. Arquivos da página preservados. | Aguardando |
 | **Badge** | Criar `badge.tsx` com variantes `default`, `primary`, `success`, `warning`, `destructive`. | Futura |
 | **Deploy** | Configurar Vercel/Netlify com CI/CD no push da `main`. | Futura |
 

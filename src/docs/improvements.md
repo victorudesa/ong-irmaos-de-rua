@@ -184,13 +184,27 @@ Mapa de todas as etapas planejadas, com status atual.
 - **Build:** `tsc -b && vite build` passa limpo em 848ms, zero erros TypeScript.
 - **Commit:** `d4fdcb0`
 
+### Etapa 6b: Redesign da página Doe Agora (Claude Design handoff)
+- **O que foi feito:** Reescrita completa de `DoeAgora.tsx` com base no protótipo `Doe Agora - Redesign.html`.
+- **Seções implementadas:**
+  1. **PageHero** — `photoVariant`, título com `<em>` em amber itálico, subtítulo
+  2. **Impacto cards** — 3 cards (R$30 / R$60 / R$20) com fonte display, símbolo da moeda em `--color-ink` e número em `--color-primary`
+  3. **PIX card** — fundo `--color-ink`, botão amber que vira verde ao copiar, inline toast sem sonner, placeholder QR
+  4. **TED card** — fundo branco, tabela de dados bancários, box "Recomendado" com badge vermelho e link para WhatsApp
+  5. **Impact strip** — fundo `--color-primary` com gradiente radial, botão CTA branco
+  6. **FAQ** — fundo `--color-surface-warm`, shadcn `Accordion` com 5 perguntas
+- **Decisão técnica:** toast de "PIX copiado" implementado como JSX condicional inline (`{copied && <div>...</div>}`) — sonner removido
+- **Build:** zero erros TypeScript, `✓ built in 762ms`
+- **Navbar:** link "Parceiros" removido da Navbar enquanto a página aguarda alinhamento com a chefe
+
 ### Pendente 🔲
 
 | Etapa | O que fazer | Prioridade |
 |---|---|---|
 | **Etapa 7 — Menu Mobile** | Substituir toggle hambúrguer manual da Navbar por `<Sheet />` do shadcn. Melhora acessibilidade de foco. | Média |
 | **Etapa 8 — Acessibilidade** | Verificar contraste `surface-dark-muted`; Skip link "Pular para conteúdo". (`lang="pt-BR"` já foi adicionado no redesign.) | Média |
-| **Etapa 9 — Redesign páginas internas** | Aplicar DM Serif Display, ink scale e nova linguagem visual em `QuemSomos`, `Voluntario`, `DoeAgora`. | Futura |
-| **Etapa 10 — Badge** | Criar `badge.tsx` com variantes `default`, `primary`, `success`, `warning`, `destructive` e estilos `solid`/`outline`/`soft`. | Futura |
-| **Etapa 11 — Deploy** | Configurar Vercel/Netlify com CI/CD no push da `main`. | Futura |
+| **Etapa 9 — Redesign páginas internas** | Aplicar DM Serif Display, ink scale e nova linguagem visual em `QuemSomos` e `Voluntario`. (`DoeAgora` já concluída — ver Etapa 6b.) | Futura |
+| **Etapa 10 — Parceiros** | Reativar link "Parceiros" na Navbar após alinhamento com a chefe. | Aguardando |
+| **Etapa 11 — Badge** | Criar `badge.tsx` com variantes `default`, `primary`, `success`, `warning`, `destructive` e estilos `solid`/`outline`/`soft`. | Futura |
+| **Etapa 12 — Deploy** | Configurar Vercel/Netlify com CI/CD no push da `main`. | Futura |
 

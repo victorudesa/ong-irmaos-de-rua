@@ -9,27 +9,35 @@ interface MetricsGridProps {
 
 const MetricsGrid = ({ metrics }: MetricsGridProps) => {
   return (
-    <section className="py-[var(--section-y-compact)] md:py-[var(--section-y-compact-md)] bg-background">
+    <div className="bg-white border-b" style={{ borderColor: 'oklch(0.10 0.008 50 / 0.07)' }}>
       <div className="container mx-auto px-6 md:px-8 max-w-[1200px]">
         <div className="grid grid-cols-2 md:grid-cols-4">
           {metrics.map((metric, index) => (
             <div
               key={index}
-              className={`text-center py-6 px-4 ${
-                index < metrics.length - 1 ? 'border-r border-border' : ''
-              } ${index === 1 ? 'max-md:border-r-0' : ''} ${
-                index < 2 ? 'max-md:border-b max-md:border-border' : ''
-              }`}
+              className="py-9 px-7"
+              style={{
+                borderRight: index < metrics.length - 1 ? '1px solid oklch(0.10 0.008 50 / 0.08)' : 'none',
+              }}
             >
-              <span className="font-display text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-                {metric.number}
-              </span>
-              <p className="text-sm text-muted-foreground mt-1">{metric.label}</p>
+              <div className="font-display leading-none mb-1.5" style={{ fontSize: 'clamp(32px, 3.5vw, 52px)', color: 'var(--color-ink)' }}>
+                {metric.number.startsWith('+') ? (
+                  <>
+                    <span style={{ color: 'var(--color-primary)' }}>+</span>
+                    {metric.number.slice(1)}
+                  </>
+                ) : (
+                  metric.number
+                )}
+              </div>
+              <p className="text-xs font-semibold uppercase tracking-[0.05em]" style={{ color: 'var(--color-ink-soft)' }}>
+                {metric.label}
+              </p>
             </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   )
 }
 

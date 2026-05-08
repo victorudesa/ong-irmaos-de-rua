@@ -68,10 +68,10 @@ const CtaBanner = ({ quote, quoteEm, title, subtitle, primaryAction, secondaryAc
       <div className="relative z-10 container mx-auto px-6 md:px-8 max-w-[1200px]">
         {useQuoteStyle ? (
           /* Editorial left-aligned layout */
-          <div className="flex items-center justify-between gap-10 flex-wrap">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 md:gap-10">
             <p
               className="font-display leading-[1.15] tracking-tight text-white text-balance"
-              style={{ fontSize: 'clamp(26px, 3.5vw, 48px)', maxWidth: '680px' }}
+              style={{ fontSize: 'clamp(24px, 3.5vw, 48px)', maxWidth: '680px' }}
             >
               {quote}
               {quoteEm && (
@@ -80,7 +80,7 @@ const CtaBanner = ({ quote, quoteEm, title, subtitle, primaryAction, secondaryAc
                 </em>
               )}
             </p>
-            <div className="flex gap-3 flex-wrap">
+            <div className="flex flex-col sm:flex-row gap-3 sm:flex-wrap">
               {renderPrimary()}
               {renderSecondary()}
             </div>
@@ -90,8 +90,8 @@ const CtaBanner = ({ quote, quoteEm, title, subtitle, primaryAction, secondaryAc
           <div className="text-center">
             {title && (
               <h2
-                className="font-display leading-tight tracking-tight text-white mb-4"
-                style={{ fontSize: 'clamp(28px, 3.5vw, 48px)' }}
+                className="font-display leading-tight tracking-tight text-white mb-4 text-balance"
+                style={{ fontSize: 'clamp(26px, 3.5vw, 48px)' }}
               >
                 {title}
               </h2>
@@ -101,7 +101,7 @@ const CtaBanner = ({ quote, quoteEm, title, subtitle, primaryAction, secondaryAc
                 {subtitle}
               </p>
             )}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center">
               {renderPrimary()}
               {renderSecondary()}
             </div>

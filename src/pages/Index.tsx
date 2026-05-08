@@ -109,7 +109,7 @@ function ActionsCarousel() {
         onClick={() => scroll('prev')}
         disabled={!canPrev}
         aria-label="Anterior"
-        className="absolute left-[-22px] top-[40%] z-10 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none"
+        className="hidden md:flex absolute left-[-22px] top-[40%] z-10 w-11 h-11 rounded-full items-center justify-center transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none"
         style={{ background: 'white', border: '1px solid var(--color-border-mid)', boxShadow: '0 4px 16px oklch(0 0 0 / 0.08)' }}
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-ink"><polyline points="15 18 9 12 15 6"/></svg>
@@ -117,19 +117,15 @@ function ActionsCarousel() {
 
       <div
         ref={carouselRef}
-        className="flex gap-5 overflow-x-auto pb-2"
+        className="flex gap-4 sm:gap-5 overflow-x-auto pb-2 -mx-6 px-6 md:mx-0 md:px-0"
         style={{ scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {actions.map((action) => (
           <div
             key={action.title}
             data-card
-            className="flex-none flex flex-col rounded-[28px] overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_oklch(0_0_0/0.10)] bg-white border border-[var(--color-border-faint)]"
-            style={{
-              width: 'calc((100% - 40px) / 3)',
-              minWidth: '280px',
-              scrollSnapAlign: 'start',
-            }}
+            className="flex-none flex flex-col rounded-[28px] overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_oklch(0_0_0/0.10)] bg-white border border-[var(--color-border-faint)] w-[85vw] sm:w-[320px] md:w-[calc((100%-40px)/3)] md:min-w-[280px]"
+            style={{ scrollSnapAlign: 'start' }}
           >
             {/* Image placeholder */}
             <div
@@ -171,7 +167,7 @@ function ActionsCarousel() {
         onClick={() => scroll('next')}
         disabled={!canNext}
         aria-label="Próximo"
-        className="absolute right-[-22px] top-[40%] z-10 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none hover:bg-ink"
+        className="hidden md:flex absolute right-[-22px] top-[40%] z-10 w-11 h-11 rounded-full items-center justify-center transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none hover:bg-ink"
         style={{ background: 'white', border: '1px solid var(--color-border-mid)', boxShadow: '0 4px 16px oklch(0 0 0 / 0.08)' }}
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-ink"><polyline points="9 18 15 12 9 6"/></svg>
@@ -185,12 +181,12 @@ function HowToHelpCard({ item }: { item: typeof howToHelp[0] }) {
   return (
     <Link
       to={item.to}
-      className="group flex flex-col gap-5 rounded-[28px] p-8 md:p-9 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_oklch(0_0_0/0.09)] bg-white border border-[var(--color-border-subtle)] w-full"
+      className="group flex flex-col gap-5 rounded-[28px] p-6 sm:p-8 md:p-9 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_oklch(0_0_0/0.09)] bg-white border border-[var(--color-border-subtle)] w-full"
       style={{ color: 'var(--color-ink)' }}
     >
       {item.main ? (
         <>
-          <div className="font-display leading-none tracking-tight" style={{ fontSize: '64px', color: 'var(--color-ink-ghost)' }}>
+          <div className="font-display leading-none tracking-tight" style={{ fontSize: 'clamp(48px, 7vw, 64px)', color: 'var(--color-ink-ghost)' }}>
             {item.num}
           </div>
           <div className="flex-1" />
@@ -215,7 +211,7 @@ function HowToHelpCard({ item }: { item: typeof howToHelp[0] }) {
         </>
       ) : (
         <>
-          <div className="font-display leading-none tracking-tight" style={{ fontSize: '64px', color: 'var(--color-ink-ghost)' }}>
+          <div className="font-display leading-none tracking-tight" style={{ fontSize: 'clamp(48px, 7vw, 64px)', color: 'var(--color-ink-ghost)' }}>
             {item.num}
           </div>
           <div className="flex items-center justify-between">
@@ -241,8 +237,7 @@ const Index = () => {
     <Layout>
       {/* ── HERO ── */}
       <section
-        className="relative overflow-hidden flex flex-col justify-end"
-        style={{ minHeight: '100svh', paddingTop: '64px' }}
+        className="relative overflow-hidden flex flex-col justify-end min-h-[88svh] md:min-h-[100svh] pt-16"
       >
         <img
           src={heroBg}
@@ -256,17 +251,17 @@ const Index = () => {
         />
 
         <div
-          className="relative z-10 container mx-auto px-6 md:px-8 max-w-[1200px]"
-          style={{ padding: 'clamp(40px,8vh,100px) clamp(20px,5vw,60px) clamp(50px,8vh,80px)' }}
+          className="relative z-10 container mx-auto max-w-[1200px]"
+          style={{ padding: 'clamp(32px,6vh,100px) clamp(20px,5vw,60px) clamp(40px,7vh,80px)' }}
         >
-          <div className="flex flex-col gap-8 md:gap-10 text-center md:text-left md:max-w-[600px]">
+          <div className="flex flex-col gap-6 md:gap-10 text-center md:text-left md:max-w-[600px]">
             {/* Headline */}
             <h1
-              className="font-display text-white leading-[1.0] tracking-tight text-balance text-[clamp(48px,6.5vw,96px)]"
+              className="font-display text-white leading-[1.05] tracking-tight text-balance text-[clamp(40px,6.5vw,96px)]"
             >
-              Transformando<br />
-              <em className="font-display not-italic" style={{ color: 'var(--color-amber)', fontStyle: 'italic' }}>vidas</em> nas<br />
-              ruas do ABC
+              Transformando{' '}
+              <em className="font-display not-italic" style={{ color: 'var(--color-amber)', fontStyle: 'italic' }}>vidas</em>{' '}
+              nas ruas do ABC
             </h1>
 
             {/* Subtitle */}
@@ -278,12 +273,12 @@ const Index = () => {
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col md:flex-row gap-3 md:justify-start justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:justify-start justify-stretch">
               <LinkButton
                 to="/doe-agora"
                 variant="default"
                 size="lg"
-                className="justify-center md:justify-start"
+                className="w-full sm:w-auto"
               >
                 <HeartIcon width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" />
                 Doe Agora
@@ -292,7 +287,7 @@ const Index = () => {
                 to="/voluntario"
                 variant="outline-light"
                 size="lg"
-                className="justify-center md:justify-start"
+                className="w-full sm:w-auto"
               >
                 Seja Voluntário
               </LinkButton>
@@ -321,13 +316,13 @@ const Index = () => {
             Quem Somos
           </span>
           <h2
-            className="font-display leading-[1.08] tracking-tight text-balance text-[clamp(32px,4vw,56px)]"
+            className="font-display leading-[1.08] tracking-tight text-balance text-[clamp(28px,4vw,56px)]"
             style={{ color: 'var(--color-ink)' }}
           >
-            Uma família que acolhe<br />quem a sociedade esqueceu
+            Uma família que acolhe quem a sociedade esqueceu
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center mt-14">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-20 items-center mt-10 md:mt-14">
             <div className="space-y-5">
               <p className="text-base leading-[1.8]" style={{ color: 'var(--color-ink-mid)' }}>
                 Tudo começou em <strong style={{ color: 'var(--color-ink)', fontWeight: 700 }}>2005</strong>, quando um pequeno grupo de amigos decidiu que não podia mais ignorar as pessoas dormindo nas calçadas do ABC Paulista. Com marmitas preparadas em casa e muita vontade de ajudar, nasceu o Irmãos de Rua.
@@ -338,11 +333,12 @@ const Index = () => {
               <p className="text-base leading-[1.8]" style={{ color: 'var(--color-ink-mid)' }}>
                 Oficialmente registrada como ONG em <strong style={{ color: 'var(--color-ink)', fontWeight: 700 }}>2018</strong>, mantemos o mesmo espírito de família que nos uniu no início: a crença de que ninguém deveria ser invisível.
               </p>
-              <div className="flex gap-3 flex-wrap pt-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:flex-wrap pt-4">
                 <LinkButton
                   to="/sobre"
                   variant="default"
                   size="default"
+                  className="w-full sm:w-auto"
                 >
                   Nossa história
                 </LinkButton>
@@ -350,6 +346,7 @@ const Index = () => {
                   to="/sobre"
                   variant="outline"
                   size="default"
+                  className="w-full sm:w-auto"
                 >
                   Ver ações
                 </LinkButton>
@@ -411,10 +408,10 @@ const Index = () => {
             Como Ajudar
           </span>
           <h2
-            className="font-display leading-[1.08] tracking-tight"
-            style={{ fontSize: 'clamp(32px, 4vw, 56px)', color: 'var(--color-ink)' }}
+            className="font-display leading-[1.08] tracking-tight text-balance"
+            style={{ fontSize: 'clamp(28px, 4vw, 56px)', color: 'var(--color-ink)' }}
           >
-            Escolha sua forma<br />de contribuir
+            Escolha sua forma de contribuir
           </h2>
 
           {/* Asymmetric grid: left col spans 2 rows, right col has 2 stacked cards */}
@@ -444,7 +441,7 @@ const Index = () => {
         style={{ background: 'var(--color-surface-warm)' }}
       >
         <div className="container mx-auto px-6 md:px-8 max-w-[1200px]">
-          <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 md:gap-4 mb-8">
             <div>
               <span
                 className="inline-block text-[11px] font-extrabold tracking-[0.14em] uppercase mb-3"
@@ -453,8 +450,8 @@ const Index = () => {
                 Acompanhe nas redes sociais
               </span>
               <h2
-                className="font-display leading-[1.08] tracking-tight"
-                style={{ fontSize: 'clamp(24px, 3vw, 42px)', color: 'var(--color-ink)' }}
+                className="font-display leading-[1.08] tracking-tight text-balance"
+                style={{ fontSize: 'clamp(22px, 3vw, 42px)', color: 'var(--color-ink)' }}
               >
                 Nossa presença nas redes sociais
               </h2>
@@ -463,7 +460,7 @@ const Index = () => {
               href="https://www.instagram.com/ongirmaosderua"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center font-sans font-semibold rounded-[10px] no-underline transition-all duration-150 hover:bg-neutral-100 whitespace-nowrap"
+              className="inline-flex items-center self-start md:self-auto font-sans font-semibold rounded-[10px] no-underline transition-all duration-150 hover:bg-neutral-100 whitespace-nowrap"
               style={{ fontSize: '13px', padding: '9px 18px', background: 'transparent', border: '1.5px solid var(--color-border-soft)', color: 'var(--color-ink)' }}
             >
               Ver no Instagram →

@@ -94,8 +94,8 @@ const Voluntario = () => {
           <span className="inline-block text-[11px] font-extrabold tracking-[0.14em] uppercase mb-3.5" style={{ color: 'var(--color-primary)' }}>
             Por Que Ser Voluntário
           </span>
-          <h2 className="font-display leading-[1.08] tracking-tight" style={{ fontSize: 'clamp(28px,3.5vw,50px)', color: 'var(--color-ink)' }}>
-            Razões para<br />fazer parte
+          <h2 className="font-display leading-[1.08] tracking-tight text-balance" style={{ fontSize: 'clamp(26px,3.5vw,50px)', color: 'var(--color-ink)' }}>
+            Razões para fazer parte
           </h2>
 
           <div className="grid md:grid-cols-[1.1fr_1fr] gap-[clamp(40px,6vw,80px)] items-center mt-12">
@@ -138,21 +138,21 @@ const Voluntario = () => {
           <span className="inline-block text-[11px] font-extrabold tracking-[0.14em] uppercase mb-3.5" style={{ color: 'var(--color-primary)' }}>
             Como Funciona
           </span>
-          <h2 className="font-display leading-[1.08] tracking-tight" style={{ fontSize: 'clamp(28px,3.5vw,50px)', color: 'var(--color-ink)' }}>
-            Três passos<br />para começar
+          <h2 className="font-display leading-[1.08] tracking-tight text-balance" style={{ fontSize: 'clamp(26px,3.5vw,50px)', color: 'var(--color-ink)' }}>
+            Três passos para começar
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             {steps.map((step, i) => (
               <div
                 key={step.num}
-                className="relative bg-white rounded-[28px] border px-7 py-8 overflow-hidden"
+                className="relative bg-white rounded-[28px] border px-6 py-7 sm:px-7 sm:py-8 overflow-hidden"
                 style={{ borderColor: 'oklch(0.10 0.008 50 / 0.09)' }}
               >
                 {/* Ghost large number */}
                 <span
                   className="font-display absolute top-3 right-5 leading-none select-none pointer-events-none"
-                  style={{ fontSize: '80px', color: 'oklch(0.10 0.008 50 / 0.05)', letterSpacing: '-0.03em' }}
+                  style={{ fontSize: 'clamp(64px, 8vw, 80px)', color: 'oklch(0.10 0.008 50 / 0.05)', letterSpacing: '-0.03em' }}
                   aria-hidden="true"
                 >
                   {step.num}
@@ -190,21 +190,21 @@ const Voluntario = () => {
           <span className="inline-block text-[11px] font-extrabold tracking-[0.14em] uppercase mb-3.5" style={{ color: 'var(--color-primary)' }}>
             Formulário
           </span>
-          <h2 className="font-display leading-[1.08] tracking-tight mb-12" style={{ fontSize: 'clamp(28px,3.5vw,50px)', color: 'var(--color-ink)' }}>
+          <h2 className="font-display leading-[1.08] tracking-tight mb-10 md:mb-12" style={{ fontSize: 'clamp(26px,3.5vw,50px)', color: 'var(--color-ink)' }}>
             Cadastre-se
           </h2>
 
-          <div className="grid md:grid-cols-[1fr_360px] gap-12 items-start">
+          <div className="grid md:grid-cols-[1fr_360px] gap-8 md:gap-12 items-start">
             {/* Form card */}
             <div
-              className="rounded-[28px] border px-9 py-10"
+              className="rounded-[28px] border px-6 py-7 sm:px-9 sm:py-10"
               style={{ background: 'var(--color-bg-warm)', borderColor: 'oklch(0.10 0.008 50 / 0.09)' }}
             >
               <VoluntarioForm />
             </div>
 
             {/* Sidebar */}
-            <aside className="sticky top-[84px]">
+            <aside className="md:sticky md:top-[84px]">
               <div
                 className="rounded-[28px] border overflow-hidden"
                 style={{ background: 'white', borderColor: 'oklch(0.10 0.008 50 / 0.09)' }}
@@ -274,7 +274,7 @@ const Voluntario = () => {
           <span className="block text-center text-[11px] font-extrabold tracking-[0.14em] uppercase mb-3.5" style={{ color: 'var(--color-primary)' }}>
             Dúvidas Frequentes
           </span>
-          <h2 className="font-display text-center leading-[1.08] tracking-tight mb-12" style={{ fontSize: 'clamp(28px,3.5vw,50px)', color: 'var(--color-ink)' }}>
+          <h2 className="font-display text-center leading-[1.08] tracking-tight mb-10 md:mb-12 text-balance" style={{ fontSize: 'clamp(26px,3.5vw,50px)', color: 'var(--color-ink)' }}>
             Perguntas e respostas
           </h2>
 

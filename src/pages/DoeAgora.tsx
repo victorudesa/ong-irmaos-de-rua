@@ -69,15 +69,15 @@ const DoeAgora = () => {
           <span className="inline-block text-[11px] font-extrabold tracking-[0.14em] uppercase mb-3.5" style={{ color: 'var(--color-primary)' }}>
             Por Que Doar
           </span>
-          <h2 className="font-display text-[clamp(28px,3.5vw,50px)] leading-[1.08] tracking-[-0.02em]" style={{ color: 'var(--color-ink)' }}>
-            O que sua doação<br />coloca na mesa
+          <h2 className="font-display text-[clamp(26px,3.5vw,50px)] leading-[1.08] tracking-[-0.02em] text-balance" style={{ color: 'var(--color-ink)' }}>
+            O que sua doação coloca na mesa
           </h2>
 
           <div className="grid md:grid-cols-3 gap-5 mt-12">
             {impactoCards.map((card) => (
               <div
                 key={card.equiv}
-                className="bg-white rounded-[28px] border px-7 py-8 flex flex-col gap-4 transition-all duration-200 hover:shadow-[0_14px_36px_oklch(0_0_0/0.08)] hover:-translate-y-0.5"
+                className="bg-white rounded-[28px] border px-6 py-7 sm:px-7 sm:py-8 flex flex-col gap-4 transition-all duration-200 hover:shadow-[0_14px_36px_oklch(0_0_0/0.08)] hover:-translate-y-0.5"
                 style={{ borderColor: 'oklch(0.10 0.008 50 / 0.09)' }}
               >
                 <div className="font-display text-[clamp(36px,4vw,56px)] leading-none tracking-[-0.02em]" style={{ color: 'var(--color-ink)' }}>
@@ -102,26 +102,26 @@ const DoeAgora = () => {
           <span className="inline-block text-[11px] font-extrabold tracking-[0.14em] uppercase mb-3.5" style={{ color: 'var(--color-primary)' }}>
             Como Doar
           </span>
-          <h2 className="font-display text-[clamp(28px,3.5vw,50px)] leading-[1.08] tracking-[-0.02em]" style={{ color: 'var(--color-ink)' }}>
-            Escolha sua forma<br />de contribuir
+          <h2 className="font-display text-[clamp(26px,3.5vw,50px)] leading-[1.08] tracking-[-0.02em] text-balance" style={{ color: 'var(--color-ink)' }}>
+            Escolha sua forma de contribuir
           </h2>
 
           <div className="grid md:grid-cols-2 gap-6 mt-12 items-start">
 
             {/* PIX — dark card */}
-            <div className="rounded-[28px] flex flex-col p-10" style={{ background: 'var(--color-ink)' }}>
+            <div className="rounded-[28px] flex flex-col p-7 sm:p-10" style={{ background: 'var(--color-ink)' }}>
               <p className="text-[11px] font-extrabold tracking-[0.14em] uppercase mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>
                 Transferência instantânea
               </p>
-              <h3 className="font-display text-[32px] text-white leading-[1.1] mb-8">PIX</h3>
+              <h3 className="font-display text-[28px] sm:text-[32px] text-white leading-[1.1] mb-6 sm:mb-8">PIX</h3>
 
               <div
                 className="rounded-[18px] p-4 flex items-center justify-between gap-3 mb-7"
                 style={{ background: 'oklch(1 0 0 / 0.07)', border: '1px solid oklch(1 0 0 / 0.12)' }}
               >
-                <div>
+                <div className="min-w-0">
                   <p className="text-[11px] mb-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Chave PIX (CNPJ)</p>
-                  <p className="text-[16px] font-bold text-white tracking-[0.02em]">{PIX_KEY}</p>
+                  <p className="text-[14px] sm:text-[16px] font-bold text-white tracking-[0.02em] truncate">{PIX_KEY}</p>
                 </div>
                 <Button
                   onClick={handleCopy}
@@ -162,16 +162,16 @@ const DoeAgora = () => {
 
             {/* TED + Recorrente */}
             <div className="bg-white rounded-[28px] border flex flex-col overflow-hidden" style={{ borderColor: 'oklch(0.10 0.008 50 / 0.09)' }}>
-              <div className="px-8 py-7" style={{ borderBottom: '1px solid oklch(0.10 0.008 50 / 0.09)' }}>
+              <div className="px-6 py-6 sm:px-8 sm:py-7" style={{ borderBottom: '1px solid oklch(0.10 0.008 50 / 0.09)' }}>
                 <p className="text-[11px] font-extrabold tracking-[0.14em] uppercase mb-2" style={{ color: 'var(--color-ink-soft)' }}>
                   Transferência bancária
                 </p>
-                <h3 className="font-display text-[26px] leading-[1.1]" style={{ color: 'var(--color-ink)' }}>
+                <h3 className="font-display text-[22px] sm:text-[26px] leading-[1.1]" style={{ color: 'var(--color-ink)' }}>
                   TED / Transferência
                 </h3>
               </div>
 
-              <div className="px-8">
+              <div className="px-6 sm:px-8">
                 {bankDetails.map((item, i) => (
                   <div
                     key={item.label}
@@ -179,14 +179,14 @@ const DoeAgora = () => {
                     style={{ borderBottom: i < bankDetails.length - 1 ? '1px solid oklch(0.10 0.008 50 / 0.09)' : 'none' }}
                   >
                     <span className="text-[13px] flex-shrink-0" style={{ color: 'var(--color-ink-soft)' }}>{item.label}</span>
-                    <span className="text-[14px] font-bold text-right" style={{ color: 'var(--color-ink)' }}>{item.value}</span>
+                    <span className="text-[13px] sm:text-[14px] font-bold text-right break-all" style={{ color: 'var(--color-ink)' }}>{item.value}</span>
                   </div>
                 ))}
               </div>
 
               {/* Recorrente */}
               <div
-                className="px-8 py-7 mt-auto"
+                className="px-6 py-6 sm:px-8 sm:py-7 mt-auto"
                 style={{ background: 'oklch(0.96 0.04 25)', borderTop: '1px solid oklch(0.55 0.20 25 / 0.12)' }}
               >
                 <p className="text-[15px] font-bold flex items-center gap-2 mb-2" style={{ color: 'var(--color-ink)' }}>
@@ -225,10 +225,10 @@ const DoeAgora = () => {
           style={{ background: 'radial-gradient(circle at 80% 50%, oklch(0.65 0.20 25), transparent 60%)' }}
         />
         <div className="relative z-10 container mx-auto px-[clamp(20px,5vw,60px)] max-w-[720px] text-center">
-          <p className="font-display text-[clamp(22px,3.5vw,44px)] leading-[1.2] tracking-[-0.02em] text-white mb-7" style={{ textWrap: 'balance' } as React.CSSProperties}>
-            Com R$30 você garante<br />
-            <em className="font-display not-italic" style={{ opacity: 0.7 }}>10 marmitas</em> para quem<br />
-            vive nas ruas do ABC.
+          <p className="font-display text-[clamp(20px,3.5vw,44px)] leading-[1.25] tracking-[-0.02em] text-white mb-7" style={{ textWrap: 'balance' } as React.CSSProperties}>
+            Com R$30 você garante{' '}
+            <em className="font-display not-italic" style={{ opacity: 0.7 }}>10 marmitas</em>{' '}
+            para quem vive nas ruas do ABC.
           </p>
           <a
             href="#como-doar"
@@ -248,7 +248,7 @@ const DoeAgora = () => {
           <span className="block text-center text-[11px] font-extrabold tracking-[0.14em] uppercase mb-3.5" style={{ color: 'var(--color-primary)' }}>
             Dúvidas Frequentes
           </span>
-          <h2 className="font-display text-[clamp(28px,3.5vw,50px)] leading-[1.08] tracking-[-0.02em] text-center mb-0" style={{ color: 'var(--color-ink)', textWrap: 'balance' } as React.CSSProperties}>
+          <h2 className="font-display text-[clamp(26px,3.5vw,50px)] leading-[1.08] tracking-[-0.02em] text-center mb-0" style={{ color: 'var(--color-ink)', textWrap: 'balance' } as React.CSSProperties}>
             Perguntas e respostas
           </h2>
 

@@ -4,7 +4,6 @@ import { UtensilsCrossed, Coffee, Shirt, Droplets, Heart, Wallet, Users, Share2,
 import { HeartIcon } from '@/components/icons/HeartIcon'
 import { LinkButton } from '@/components/ui/link-button'
 import Layout from '@/components/Layout'
-import CtaBanner from '@/components/CtaBanner'
 import MetricsGrid from '@/components/MetricsGrid'
 import heroBg from '@/assets/hero-bg.jpg'
 
@@ -186,15 +185,16 @@ function HowToHelpCard({ item }: { item: typeof howToHelp[0] }) {
   return (
     <Link
       to={item.to}
-      className="group flex flex-col gap-5 rounded-[28px] p-8 md:p-9 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_oklch(0_0_0/0.09)] bg-white border border-[var(--color-border-subtle)]"
+      className="group flex flex-col gap-5 rounded-[28px] p-8 md:p-9 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_oklch(0_0_0/0.09)] bg-white border border-[var(--color-border-subtle)] w-full"
       style={{ color: 'var(--color-ink)' }}
     >
       {item.main ? (
         <>
-          <div>
-            <div className="font-display leading-none tracking-tight mb-4" style={{ fontSize: '64px', color: 'var(--color-ink-ghost)' }}>
-              {item.num}
-            </div>
+          <div className="font-display leading-none tracking-tight" style={{ fontSize: '64px', color: 'var(--color-ink-ghost)' }}>
+            {item.num}
+          </div>
+          <div className="flex-1" />
+          <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <div className="w-12 h-12 rounded-[10px] flex items-center justify-center" style={{ background: 'var(--color-surface-warm)' }}>
                 <Icon className="w-[22px] h-[22px] text-ink" strokeWidth={1.5} />
@@ -203,13 +203,13 @@ function HowToHelpCard({ item }: { item: typeof howToHelp[0] }) {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </div>
             </div>
-          </div>
-          <div>
-            <div className="font-bold leading-snug mb-2.5" style={{ fontSize: 'clamp(20px, 2vw, 26px)', color: 'var(--color-ink)' }}>
-              {item.title}
-            </div>
-            <div className="text-[15px] leading-[1.7]" style={{ color: 'var(--color-ink-mid)' }}>
-              {item.description}
+            <div>
+              <div className="font-bold leading-snug mb-2.5" style={{ fontSize: 'clamp(20px, 2vw, 26px)', color: 'var(--color-ink)' }}>
+                {item.title}
+              </div>
+              <div className="text-[15px] leading-[1.7]" style={{ color: 'var(--color-ink-mid)' }}>
+                {item.description}
+              </div>
             </div>
           </div>
         </>
@@ -272,7 +272,7 @@ const Index = () => {
             {/* Subtitle */}
             <p
               className="leading-[1.7]"
-              style={{ fontSize: 'clamp(15px, 1.3vw, 18px)', color: 'oklch(1 0 0 / 0.65)' }}
+              style={{ fontSize: 'clamp(15px, 1.3vw, 18px)', color: 'oklch(1 0 0 / 0.80)' }}
             >
               Somos mais de 200 voluntários que levam alimentação, dignidade e acolhimento a quem vive nas ruas da região do ABC Paulista e do centro de São Paulo.
             </p>
@@ -310,9 +310,6 @@ const Index = () => {
           <div style={{ width: '1px', height: '40px', background: 'linear-gradient(to bottom, transparent, var(--color-on-dark-low))' }} />
         </div>
       </section>
-
-      {/* ── MÉTRICAS ── */}
-      <MetricsGrid metrics={metrics} />
 
       {/* ── QUEM SOMOS ── */}
       <section className="py-[var(--section-y)] md:py-[var(--section-y-md)]" style={{ background: 'white' }}>
@@ -376,6 +373,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ── MÉTRICAS ── */}
+      <MetricsGrid metrics={metrics} />
+
       {/* ── O QUE FAZEMOS — carousel ── */}
       <section
         className="py-[var(--section-y)] md:py-[var(--section-y-md)]"
@@ -398,17 +398,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── CTA IMPACTO ── */}
-      <CtaBanner
-        quote="Com R$30 você garante 10 marmitas para quem vive nas ruas."
-        primaryAction={{ label: 'Fazer uma doação', to: '/doe-agora' }}
-        secondaryAction={{ label: 'Via PIX ou TED', to: '/doe-agora' }}
-      />
-
       {/* ── COMO AJUDAR ── */}
       <section
         className="py-[var(--section-y)] md:py-[var(--section-y-md)]"
-        style={{ background: 'var(--color-bg-warm)' }}
+        style={{ background: 'white' }}
       >
         <div className="container mx-auto px-6 md:px-8 max-w-[1200px]">
           <span
@@ -425,8 +418,8 @@ const Index = () => {
           </h2>
 
           {/* Asymmetric grid: left col spans 2 rows, right col has 2 stacked cards */}
-          <div className="hidden md:grid gap-5 mt-14" style={{ gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'auto auto' }}>
-            <div style={{ gridColumn: '1', gridRow: '1 / 3' }}>
+          <div className="hidden md:grid gap-5 mt-14" style={{ gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'auto auto', alignItems: 'stretch' }}>
+            <div style={{ gridColumn: '1', gridRow: '1 / 3', display: 'flex' }}>
               <HowToHelpCard item={howToHelp[0]} />
             </div>
             <div style={{ gridColumn: '2', gridRow: '1' }}>

@@ -326,11 +326,11 @@ Implementação em CVA: [src/components/ui/button.variants.ts](../components/ui/
 
 | Size | Altura | Padding X | Font | Uso |
 | --- | --- | --- | --- | --- |
-| `xs` | 24px | 10px | 12px | Badges, etiquetas |
-| `sm` | 32px | 12px | 14px | Botões pequenos, formulários secundários |
-| `default` | 36px | 16px | 14px | Botão padrão |
-| `lg` | 40px | 24px | 16px | CTAs principais, hero |
-| `xl` | 44px | 28px | 16px | Reservado para uso futuro |
+| `xs` | 24px | 12px | 12px | Badges, etiquetas |
+| `sm` | 36px | 16px | 14px | Botões pequenos, formulários secundários |
+| `default` | 40px | 20px | 14px | Botão padrão |
+| `lg` | 44px | 28px | 16px | CTAs principais, hero |
+| `xl` | 48px | 32px | 16px | Reservado para uso futuro |
 | `icon` | 36×36px | — | — | Ícone isolado |
 | `icon-sm` | 32×32px | — | — | Ícone pequeno (copiar) |
 | `icon-lg` | 40×40px | — | — | Ícone grande |

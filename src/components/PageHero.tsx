@@ -14,8 +14,8 @@ const PageHero = ({ title, subtitle, breadcrumb, photoVariant }: PageHeroProps) 
   if (photoVariant) {
     return (
       <section
-        className="relative overflow-hidden flex items-end"
-        style={{ minHeight: '52vh', paddingTop: '64px' }}
+        className="relative overflow-hidden flex items-end pt-16"
+        style={{ minHeight: 'clamp(360px, 52vh, 600px)' }}
       >
         {/* Diagonal stripe placeholder — replace with real <img> */}
         <div

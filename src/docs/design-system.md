@@ -298,7 +298,73 @@ Gera utilitárias `shadow-card` e `shadow-card-hover` automaticamente. Substitui
 
 ---
 
-## 5. Organismos compartilhados (Atomic Design — camada de organismos)
+## 5. Botões
+
+Todo botão do projeto passa por dois componentes — nunca estilos inline em `<button>` ou `<a>`.
+
+| Componente | Quando usar |
+| --- | --- |
+| `<Button>` | Ação nativa HTML: submit de form, `onClick`, reload |
+| `<LinkButton>` | Navegação interna via React Router (`<Link>`) |
+| `<a href>` | Links externos (fora do React Router) |
+
+Implementação em CVA: [src/components/ui/button.variants.ts](../components/ui/button.variants.ts).
+
+### Variantes
+
+| Variante | Aparência | Quando usar |
+| --- | --- | --- |
+| `default` | Fundo `--color-primary`, texto branco | CTA principal em qualquer fundo |
+| `outline` | Sem fundo, borda + texto primary | Ação secundária em fundos claros |
+| `outline-light` | Sem fundo, borda + texto branco | Ação secundária em fundos escuros (hero, CtaBanner) |
+| `inverted` | Fundo branco, texto primary | Ação principal sobre fundo primary (CtaBanner) |
+| `secondary` | Fundo `neutral-100`, texto escuro | Ações terciárias; raramente usado |
+| `ghost` | Sem estilos, apenas hover sutil | Botões de ícone (copiar PIX, ações discretas) |
+| `link` | Texto primary, underline no hover | Links informativos em linha |
+
+### Tamanhos
+
+| Size | Altura | Padding X | Font | Uso |
+| --- | --- | --- | --- | --- |
+| `xs` | 24px | 12px | 12px | Badges, etiquetas |
+| `sm` | 36px | 16px | 14px | Botões pequenos, formulários secundários |
+| `default` | 40px | 20px | 14px | Botão padrão |
+| `lg` | 44px | 28px | 16px | CTAs principais, hero |
+| `xl` | 48px | 32px | 16px | Reservado para uso futuro |
+| `icon` | 36×36px | — | — | Ícone isolado |
+| `icon-sm` | 32×32px | — | — | Ícone pequeno (copiar) |
+| `icon-lg` | 40×40px | — | — | Ícone grande |
+
+### Referência rápida por contexto
+
+| Contexto | Componente | Variante | Size |
+| --- | --- | --- | --- |
+| CTA principal hero / seção clara | `LinkButton` | `default` | `lg` |
+| CTA secundário em fundo escuro | `LinkButton` | `outline-light` | `lg` |
+| CTA secundário em fundo claro | `LinkButton` | `outline` | `default` |
+| Ação principal sobre fundo primary | `LinkButton` | `inverted` | `lg` |
+| Submit de formulário | `Button` | `default` | `lg` |
+| Botão de ícone (copiar, fechar) | `Button` | `ghost` | `icon-sm` |
+
+### Hover e estados
+
+- **`default` / `inverted`** — `hover:-translate-y-px hover:opacity-90` + `shadow-sm`
+- **`outline`** — `hover:bg-primary/5`
+- **`outline-light`** — `hover:bg-white/10`
+- **`disabled`** — `opacity-50 pointer-events-none` (todos)
+- **`focus-visible`** — ring via shadcn base (todos)
+
+### Regras
+
+1. Nunca estilize botões inline — sempre use `variant` + `size`
+2. Navegação interna → `<LinkButton to="...">`, nunca `<Button onClick={() => navigate(...)}`
+3. Links externos → `<a href target="_blank" rel="noopener noreferrer">` (não existe `LinkButton` para external)
+4. Ícones dentro do botão usam `size-4` (default/sm) ou `size-5` (lg/xl); SVGs sem classe `size-*` recebem `size-4` automaticamente via CVA base
+5. Adicione nova variante apenas se o comportamento não couber nas existentes — documente aqui e no `CLAUDE.md`
+
+---
+
+## 6. Organismos compartilhados (Atomic Design — camada de organismos)
 
 Componentes que aparecem em múltiplas páginas.
 
@@ -374,7 +440,7 @@ Botão circular fixo (`bottom-7 right-7 z-50`). Usa `var(--color-whatsapp)` com 
 
 ---
 
-## 6. Componentes shadcn necessários
+## 7. Componentes shadcn necessários
 
 Lista do que adicionar com `npx shadcn@latest add <nome>`, conforme as páginas evoluírem:
 
@@ -392,7 +458,7 @@ Lista do que adicionar com `npx shadcn@latest add <nome>`, conforme as páginas 
 
 ---
 
-## 7. Animações e transições
+## 8. Animações e transições
 
 | Elemento | Comportamento | Duração |
 | --- | --- | --- |
@@ -406,7 +472,7 @@ Lista do que adicionar com `npx shadcn@latest add <nome>`, conforme as páginas 
 
 ---
 
-## 8. Acessibilidade — checklist mínimo
+## 9. Acessibilidade — checklist mínimo
 
 Manter o que o projeto antigo já fazia bem, e cobrir os gaps:
 
@@ -421,7 +487,7 @@ Manter o que o projeto antigo já fazia bem, e cobrir os gaps:
 
 ---
 
-## 9. Histórico de mudanças do design system
+## 10. Histórico de mudanças do design system
 
 ### v1 → v2 (design system base)
 
@@ -455,7 +521,7 @@ Manter o que o projeto antigo já fazia bem, e cobrir os gaps:
 
 ---
 
-## 10. Estado de implementação
+## 11. Estado de implementação
 
 ### Implementado ✅
 
@@ -483,7 +549,7 @@ Manter o que o projeto antigo já fazia bem, e cobrir os gaps:
 
 ---
 
-## 11. Decisões registradas
+## 12. Decisões registradas
 
 1. **Fundo de ícone em card → `neutral-100`**, não `primary-50`. Vermelho sobre cinza tem contraste mais forte que vermelho sobre rosa pálido.
 2. **Tom dos neutros → `H = 50` (warm gray sutil)**. Cinzas frios comunicam "hospital/tech"; H=50 transmite acolhimento sem parecer "amarelo".

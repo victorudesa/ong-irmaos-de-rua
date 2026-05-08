@@ -65,16 +65,16 @@ const QuemSomos = () => {
       {/* Transparência */}
       <Section label="Transparência" title="Gestão transparente e responsável">
         <div className="grid md:grid-cols-2 gap-10">
-          <div className="border border-border rounded-xl p-8">
+          <div className="border border-border rounded-xl p-6 sm:p-8">
             <ul className="space-y-5">
               {orgDetails.map((item) => (
                 <li key={item.label} className="flex items-start gap-4">
                   <div className="w-9 h-9 bg-muted rounded-lg flex items-center justify-center shrink-0 mt-0.5">
                     <item.icon className="w-4 h-4 text-primary" strokeWidth={1.5} />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs text-muted-foreground">{item.label}</p>
-                    <p className="text-sm font-semibold text-foreground">{item.value}</p>
+                    <p className="text-sm font-semibold text-foreground break-words">{item.value}</p>
                   </div>
                 </li>
               ))}

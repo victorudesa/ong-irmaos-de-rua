@@ -3,9 +3,9 @@ import { HeartIcon } from '@/components/icons/HeartIcon'
 
 const Footer = () => {
   return (
-    <footer style={{ background: 'var(--color-ink)', paddingTop: '64px', paddingBottom: '32px' }}>
+    <footer className="pt-12 md:pt-16 pb-8" style={{ background: 'var(--color-ink)' }}>
       <div className="container mx-auto px-6 md:px-8 max-w-[1200px]">
-        <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-12 mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-8 md:gap-12 mb-10 md:mb-14">
 
           <div>
             <div className="flex items-center gap-2.5 mb-4">
@@ -94,13 +94,13 @@ const Footer = () => {
         </div>
 
         <div
-          className="pt-7 flex items-center justify-between flex-wrap gap-3"
+          className="pt-7 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
           style={{ borderTop: '1px solid var(--color-on-dark-line)' }}
         >
-          <p className="text-xs" style={{ color: 'var(--color-on-dark-mid)' }}>
+          <p className="text-xs leading-relaxed" style={{ color: 'var(--color-on-dark-mid)' }}>
             © {new Date().getFullYear()} Irmãos de Rua. Todos os direitos reservados. CNPJ: 00.000.000/0001-00
           </p>
-          <p className="text-xs" style={{ color: 'var(--color-on-dark-mid)' }}>
+          <p className="text-xs whitespace-nowrap" style={{ color: 'var(--color-on-dark-mid)' }}>
             Feito com intenção ♥
           </p>
         </div>

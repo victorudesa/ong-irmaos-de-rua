@@ -10,7 +10,7 @@ export const buttonVariants = cva(
         /* Outline — light backgrounds, primary border */
         outline: "bg-transparent border-[1.5px] border-current text-primary hover:bg-primary/5 duration-150",
         /* Outline inverted — dark/white backgrounds, light border */
-        "outline-light": "bg-transparent border-[1.5px] text-white hover:bg-white/10 duration-150",
+        "outline-light": "bg-transparent border-[1.5px] border-white text-white hover:bg-white/10 duration-150",
         /* Secondary — soft fill */
         secondary: "bg-neutral-100 text-neutral-900 hover:bg-neutral-200 duration-150",
         /* Ghost — no background, hover fill */
@@ -21,11 +21,11 @@ export const buttonVariants = cva(
         inverted: "bg-white text-primary hover:opacity-90 duration-150 shadow-sm",
       },
       size: {
-        xs: "h-6 gap-1 px-2.5 text-xs [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-8 gap-1 px-3",
-        default: "h-9 gap-1.5 px-4",
-        lg: "h-10 gap-1.5 px-6 text-base",
-        xl: "h-11 gap-2 px-7 text-base",
+        xs: "h-6 gap-1 px-3 text-xs [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-9 gap-1 px-5",
+        default: "h-10 gap-1.5 px-6",
+        lg: "h-11 gap-1.5 px-8 text-base",
+        xl: "h-12 gap-2 px-10 text-base",
         icon: "size-9",
         "icon-sm": "size-8",
         "icon-lg": "size-10",

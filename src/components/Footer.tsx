@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { HeartIcon } from '@/components/icons/HeartIcon'
+import logoPadrao from '@/assets/logo/padrao.png'
 
 const Footer = () => {
   return (
@@ -8,17 +8,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-8 md:gap-12 mb-10 md:mb-14">
 
           <div>
-            <div className="flex items-center gap-2.5 mb-4">
-              <div
-                className="w-[30px] h-[30px] rounded-[7px] flex items-center justify-center shrink-0"
-                style={{ background: 'var(--color-primary)' }}
-              >
-                <HeartIcon width="16" height="16" fill="white" />
-              </div>
-              <span className="text-xs font-bold tracking-[0.12em] uppercase text-white">
-                Irmãos de Rua
-              </span>
-            </div>
+            <img
+              src={logoPadrao}
+              alt="Irmãos de Rua"
+              className="h-24 w-auto object-contain mb-4"
+            />
             <p className="text-sm leading-relaxed max-w-[240px]" style={{ color: 'var(--color-on-dark-mid)' }}>
               Levando acolhimento e esperança para pessoas em situação de rua desde 2005.
             </p>

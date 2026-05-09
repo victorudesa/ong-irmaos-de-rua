@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { HeartIcon } from '@/components/icons/HeartIcon'
+import logoHorizontal from '@/assets/logo/horizontal-navbar.png'
 
 const navLinks = [
   { label: 'Sobre Nós', to: '/sobre' },
@@ -28,16 +28,12 @@ const Navbar = () => {
       style={{ background: 'oklch(0.97 0.012 60 / 0.92)' }}
     >
       <div className="container mx-auto px-6 md:px-8 max-w-[1200px] flex items-center justify-between h-16">
-        <Link to="/" className="flex items-center gap-2.5 text-ink no-underline">
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-            style={{ background: 'var(--color-ink)' }}
-          >
-            <HeartIcon width="18" height="18" style={{ fill: 'oklch(0.97 0.012 60)' }} />
-          </div>
-          <span className="text-xs font-bold tracking-[0.12em] uppercase whitespace-nowrap" style={{ color: 'var(--color-ink)' }}>
-            Irmãos de Rua
-          </span>
+        <Link to="/" className="flex items-center text-ink no-underline">
+          <img
+            src={logoHorizontal}
+            alt="Irmãos de Rua"
+            className="h-10 w-auto object-contain"
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">

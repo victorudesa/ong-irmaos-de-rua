@@ -1,11 +1,17 @@
 import { useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { UtensilsCrossed, Coffee, Shirt, Droplets, Heart, Wallet, Users, Share2, Image } from 'lucide-react'
+import { UtensilsCrossed, Coffee, Shirt, Droplets, Heart, Wallet, Users, Share2 } from 'lucide-react'
 import { HeartIcon } from '@/components/icons/HeartIcon'
 import { LinkButton } from '@/components/ui/link-button'
 import Layout from '@/components/Layout'
 import MetricsGrid from '@/components/MetricsGrid'
-import heroBg from '@/assets/hero-bg.jpg'
+import heroBg from '@/assets/images/grupo-hero-section.jpg'
+import quemSomosImg from '@/assets/images/sections/quem-somos/quem-somos.jpg'
+import imgMarmitas from '@/assets/images/sections/o-que-fazemos/marmitas.jpg'
+import imgCafe from '@/assets/images/sections/o-que-fazemos/cafe.jpg'
+import imgCorteCabelo from '@/assets/images/sections/o-que-fazemos/corte-cabelo.jpg'
+import imgSopas from '@/assets/images/sections/o-que-fazemos/sopas.jpg'
+import imgCozinhando from '@/assets/images/sections/o-que-fazemos/cozinhando.jpg'
 
 const actions = [
   {
@@ -13,30 +19,40 @@ const actions = [
     title: 'Entrega de Marmitas',
     description: 'Preparamos e distribuímos refeições completas toda semana para pessoas em situação de rua.',
     cta: { label: 'Conhecer mais', to: '/doe-agora' },
+    img: imgMarmitas,
+    imgAlt: 'Voluntários preparando marmitas para distribuição',
   },
   {
     icon: Coffee,
     title: 'Café da Manhã Solidário',
     description: 'Pão, café e frutas para começar o dia com dignidade, aos sábados e domingos de manhã.',
     cta: { label: 'Conhecer mais', to: '/doe-agora' },
+    img: imgCafe,
+    imgAlt: 'Voluntários servindo café da manhã nas ruas',
   },
   {
     icon: Heart,
     title: 'Acolhimento e Ressocialização',
     description: 'Escuta, orientação e apoio para quem deseja reconstruir sua vida fora das ruas.',
     cta: { label: 'Ser voluntário', to: '/voluntario' },
+    img: imgCorteCabelo,
+    imgAlt: 'Voluntário realizando corte de cabelo para pessoa em situação de rua',
   },
   {
     icon: Shirt,
     title: 'Roupas, Cobertores e Kits de Higiene',
     description: 'Agasalhos e cobertores especialmente no inverno, além de kits de higiene essenciais montados com cuidado.',
     cta: { label: 'Fazer doação', to: '/doe-agora' },
+    img: imgSopas,
+    imgAlt: 'Voluntários distribuindo sopas e mantimentos',
   },
   {
     icon: Droplets,
     title: 'Ações Semanais',
     description: 'Todo sábado e domingo, das 8h às 12h, na região do ABC Paulista e no centro de São Paulo.',
     cta: { label: 'Participar', to: '/voluntario' },
+    img: imgCozinhando,
+    imgAlt: 'Voluntários cozinhando para as ações semanais',
   },
 ]
 
@@ -127,31 +143,33 @@ function ActionsCarousel() {
             className="flex-none flex flex-col rounded-[28px] overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_oklch(0_0_0/0.10)] bg-white border border-[var(--color-border-faint)] w-[85vw] sm:w-[320px] md:w-[calc((100%-40px)/3)] md:min-w-[280px]"
             style={{ scrollSnapAlign: 'start' }}
           >
-            {/* Image placeholder */}
-            <div
-              className="relative h-[200px] flex items-center justify-center overflow-hidden"
-              style={{
-                background: 'repeating-linear-gradient(135deg, oklch(0.82 0.016 58) 0px, oklch(0.82 0.016 58) 2px, oklch(0.88 0.018 58) 2px, oklch(0.88 0.018 58) 14px)',
-              }}
-            >
-              <Image className="w-8 h-8 opacity-25 text-ink-soft" strokeWidth={1.5} />
+            {/* Image */}
+            <div className="relative h-[280px] overflow-hidden">
+              <img
+                src={action.img}
+                alt={action.imgAlt}
+                className="w-full h-full object-cover"
+                width={720}
+                height={400}
+                loading="lazy"
+              />
               <div
-                className="absolute bottom-0 left-0 right-0 h-20"
+                className="absolute bottom-0 left-0 right-0 h-12"
                 style={{ background: 'linear-gradient(to bottom, transparent, white)' }}
                 aria-hidden="true"
               />
             </div>
             {/* Body */}
-            <div className="flex flex-col gap-3 flex-1 px-6 pb-6 pt-5">
-              <h3 className="text-[17px] font-bold leading-snug" style={{ color: 'var(--color-ink)' }}>
+            <div className="flex flex-col gap-2 px-6 pb-4 pt-3">
+              <h3 className="text-[16px] font-bold leading-snug" style={{ color: 'var(--color-ink)' }}>
                 {action.title}
               </h3>
-              <p className="text-sm leading-[1.7] flex-1" style={{ color: 'var(--color-ink-mid)' }}>
+              <p className="text-xs leading-[1.6]" style={{ color: 'var(--color-ink-mid)' }}>
                 {action.description}
               </p>
               <Link
                 to={action.cta.to}
-                className="inline-flex items-center gap-1.5 text-[13px] font-bold mt-1 transition-all duration-150 hover:gap-2.5"
+                className="inline-flex items-center gap-1.5 text-[12px] font-bold mt-1.5 transition-all duration-150 hover:gap-2.5"
                 style={{ color: 'var(--color-primary)', textDecoration: 'none' }}
               >
                 {action.cta.label}
@@ -242,7 +260,10 @@ const Index = () => {
         <img
           src={heroBg}
           alt="Voluntários ajudando pessoas em situação de rua"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
         />
         <div
           className="absolute inset-0"
@@ -353,18 +374,15 @@ const Index = () => {
               </div>
             </div>
 
-            <div
-              className="aspect-[4/3] rounded-[28px] flex items-center justify-center flex-col gap-3 text-center p-5"
-              style={{
-                background: 'var(--color-surface-warm)',
-                border: '1px solid var(--color-border-faint)',
-                fontFamily: 'monospace',
-                fontSize: '12px',
-                color: 'var(--color-ink-soft)',
-              }}
-            >
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" style={{ opacity: 0.25 }}><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              foto · voluntários em ação
+            <div className="aspect-[4/3] rounded-[28px] overflow-hidden">
+              <img
+                src={quemSomosImg}
+                alt="Voluntários do Irmãos de Rua em ação"
+                className="w-full h-full object-cover"
+                width={800}
+                height={600}
+                loading="lazy"
+              />
             </div>
           </div>
         </div>

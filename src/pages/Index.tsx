@@ -5,6 +5,7 @@ import { HeartIcon } from '@/components/icons/HeartIcon'
 import { LinkButton } from '@/components/ui/link-button'
 import Layout from '@/components/Layout'
 import MetricsGrid from '@/components/MetricsGrid'
+import GalleryMasonry from '@/components/GalleryMasonry'
 import heroBg from '@/assets/images/grupo-hero-section.jpg'
 import quemSomosImg from '@/assets/images/sections/quem-somos/quem-somos.jpg'
 import imgMarmitas from '@/assets/images/sections/o-que-fazemos/marmitas.jpg'
@@ -12,6 +13,7 @@ import imgCafe from '@/assets/images/sections/o-que-fazemos/cafe.jpg'
 import imgCorteCabelo from '@/assets/images/sections/o-que-fazemos/corte-cabelo.jpg'
 import imgSopas from '@/assets/images/sections/o-que-fazemos/sopas.jpg'
 import imgCozinhando from '@/assets/images/sections/o-que-fazemos/cozinhando.jpg'
+import { galleryItems } from '@/lib/gallery'
 
 const actions = [
   {
@@ -453,58 +455,39 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── INSTAGRAM — 2x2 grid ── */}
+      {/* ── GALERIA ── */}
       <section
         className="py-[var(--section-y-compact)] md:py-[var(--section-y-compact-md)]"
         style={{ background: 'var(--color-surface-warm)' }}
       >
         <div className="container mx-auto px-6 md:px-8 max-w-[1200px]">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 md:gap-4 mb-8">
+          <div className="mb-8">
             <div>
               <span
                 className="inline-block text-[11px] font-extrabold tracking-[0.14em] uppercase mb-3"
                 style={{ color: 'var(--color-amber-dark)' }}
               >
-                Acompanhe nas redes sociais
+                Galeria
               </span>
               <h2
                 className="font-display leading-[1.08] tracking-tight text-balance"
                 style={{ fontSize: 'clamp(22px, 3vw, 42px)', color: 'var(--color-ink)' }}
               >
-                Nossa presença nas redes sociais
+                Momentos que contam nossa história
               </h2>
             </div>
-            <a
-              href="https://www.instagram.com/ongirmaosderua"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center self-start md:self-auto font-sans font-semibold rounded-[10px] no-underline transition-all duration-150 hover:bg-neutral-100 whitespace-nowrap"
-              style={{ fontSize: '13px', padding: '9px 18px', background: 'transparent', border: '1.5px solid var(--color-border-soft)', color: 'var(--color-ink)' }}
-            >
-              Ver no Instagram →
-            </a>
           </div>
 
-          <div
-            className="grid grid-cols-2 grid-rows-2 gap-3 rounded-[28px] overflow-hidden"
-          >
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div
-                key={i}
-                className="aspect-square rounded-[18px] flex items-center justify-center relative overflow-hidden cursor-pointer transition-opacity duration-200 hover:opacity-80"
-                style={{
-                  background: 'repeating-linear-gradient(135deg, oklch(0.86 0.018 58) 0px, oklch(0.86 0.018 58) 2px, oklch(0.90 0.014 58) 2px, oklch(0.90 0.014 58) 14px)',
-                }}
-              >
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ opacity: 0.25, color: 'var(--color-ink)' }}><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <div
-                  className="absolute bottom-0 left-0 right-0 text-center text-[10px] pb-2.5 pt-8"
-                  style={{ fontFamily: 'monospace', color: 'var(--color-ink-soft)', background: 'linear-gradient(to top, oklch(0.90 0.014 58 / 0.9), transparent)' }}
-                >
-                  foto da ação
-                </div>
-              </div>
-            ))}
+          <GalleryMasonry items={galleryItems} />
+
+          <div className="mt-8 flex justify-center">
+            <Link
+              to="/galeria"
+              className="inline-flex items-center font-sans font-semibold rounded-[10px] no-underline transition-all duration-150 hover:bg-neutral-100 whitespace-nowrap"
+              style={{ fontSize: '13px', padding: '9px 18px', background: 'transparent', border: '1.5px solid var(--color-border-soft)', color: 'var(--color-ink)' }}
+            >
+              Ver toda a galeria →
+            </Link>
           </div>
         </div>
       </section>

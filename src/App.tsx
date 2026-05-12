@@ -11,15 +11,18 @@ const Parceiros = lazy(() => import('@/pages/Parceiros'))
 const Galeria = lazy(() => import('@/pages/Galeria'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
 
-const router = createBrowserRouter([
-  { path: '/',          element: <Index />,     errorElement: <RouteError /> },
-  { path: '/sobre',     element: <SobreNos />,  errorElement: <RouteError /> },
-  { path: '/voluntario',element: <Voluntario />,errorElement: <RouteError /> },
-  { path: '/doe-agora', element: <DoeAgora />,  errorElement: <RouteError /> },
-  { path: '/parceiros', element: <Parceiros />, errorElement: <RouteError /> },
-  { path: '/galeria',   element: <Galeria />,   errorElement: <RouteError /> },
-  { path: '*',          element: <NotFound /> },
-])
+const router = createBrowserRouter(
+  [
+    { path: '/',          element: <Index />,     errorElement: <RouteError /> },
+    { path: '/sobre',     element: <SobreNos />,  errorElement: <RouteError /> },
+    { path: '/voluntario',element: <Voluntario />,errorElement: <RouteError /> },
+    { path: '/doe-agora', element: <DoeAgora />,  errorElement: <RouteError /> },
+    { path: '/parceiros', element: <Parceiros />, errorElement: <RouteError /> },
+    { path: '/galeria',   element: <Galeria />,   errorElement: <RouteError /> },
+    { path: '*',          element: <NotFound /> },
+  ],
+  { basename: import.meta.env.BASE_URL },
+)
 
 const App = () => (
   <ErrorBoundary>

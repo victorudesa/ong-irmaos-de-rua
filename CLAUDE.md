@@ -56,9 +56,10 @@ src/
 **Button Design System**
 All buttons use the variant system — never add inline styles to button elements.
 
-Two components:
+Three components:
 - `<Button>` — native HTML button (forms, actions)
-- `<LinkButton>` — React Router Link (navigation)
+- `<LinkButton>` — React Router Link (internal navigation)
+- `<ExternalLinkButton>` — `<a href>` for external links (WhatsApp, Instagram, parceiros) — auto adds `target="_blank"`, `rel="noopener noreferrer"`, external-link icon
 
 Quick reference:
 
@@ -70,6 +71,7 @@ Quick reference:
 | Form submit | Button | `default` | `lg` | "Quero Ser Voluntário" |
 | Icon button (copy, etc) | Button | `ghost` | `icon-sm` | Copy/Check |
 | Primary on primary bg | LinkButton | `inverted` | `lg` | CtaBanner "Fazer doação" |
+| External link (WhatsApp, redes) | ExternalLinkButton | `outline` | `default` | "Fale Conosco" |
 
 **Never do this:**
 ```tsx
@@ -147,7 +149,7 @@ Never add raw Tailwind for typography — use the component variant instead.
 4. **No prop drilling abstractions** — React 19 props are fine for this scope; no Redux/Context unless necessary
 5. **Tailwind for layout, CVA for components** — layout/spacing in classes, colors/sizes via variants
 6. **Form reset** — always reset form state after successful submission (see VoluntarioForm success state)
-7. **No inline button styles** — always use `<Button>` / `<LinkButton>` with variant prop, never style inline
+7. **No inline button styles** — always use `<Button>` / `<LinkButton>` / `<ExternalLinkButton>` with variant prop, never style inline
 
 ### Anti-Patterns to Avoid
 
@@ -157,7 +159,7 @@ Never add raw Tailwind for typography — use the component variant instead.
 - **Don't lazy-load without Suspense** — every lazy route must be wrapped in Suspense in App.tsx
 - **Don't break the Section wrapper** — use [src/components/layout/section.tsx](src/components/layout/section.tsx) for consistent layout
 - **Don't inline SVG without wrapping** — create icon components in [src/components/icons/](src/components/icons/)
-- **Don't style buttons inline** — ever. Always use `<Button>` / `<LinkButton>` with variant system
+- **Don't style buttons inline** — ever. Always use `<Button>` / `<LinkButton>` / `<ExternalLinkButton>` with variant system
 - **Don't add new button variants without reason** — check if existing ones fit first; add to button.variants.ts if truly needed
 
 ### When to Extend the Design System

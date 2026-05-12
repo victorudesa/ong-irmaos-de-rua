@@ -1,25 +1,22 @@
-import { Image, Eye, Sparkles, Target, Mail, Building, CalendarDays, MapPin, User } from 'lucide-react'
+import { Mail, Building, CalendarDays, MapPin, User } from 'lucide-react'
 import Layout from '@/components/Layout'
 import PageHero from '@/components/PageHero'
 import { Section } from '@/components/layout/section'
-import { FeatureCard } from '@/components/shared/feature-card'
-
-const missionCards = [
-  { icon: Target, title: 'Missão', description: 'Levar acolhimento, alimentação e dignidade às pessoas em situação de rua no ABC Paulista e centro de São Paulo.' },
-  { icon: Eye, title: 'Visão', description: 'Um mundo onde ninguém precisa dormir nas ruas sem amparo, sem comida e sem esperança.' },
-  { icon: Sparkles, title: 'Valores', description: 'Empatia, solidariedade, transparência e respeito à dignidade humana em tudo o que fazemos.' },
-]
+import aboutUsHeroBanner from '@/assets/images/about-us-hero-banner.jpg'
+import sedeAntiga from '@/assets/images/sede-antiga.jpg'
+import sedeAtual from '@/assets/images/sede-atual.jpg'
+import { ExternalLinkButton } from '@/components/ui/external-link-button'
 
 const orgDetails = [
-  { icon: Building, label: 'CNPJ', value: '00.000.000/0001-00' },
-  { icon: CalendarDays, label: 'Fundação', value: '2018' },
+  { icon: Building, label: 'CNPJ', value: '31.442.548/0001-15' },
+  { icon: CalendarDays, label: 'Fundação', value: '2005' },
   { icon: MapPin, label: 'Atuação', value: 'ABC Paulista e Centro de SP' },
   { icon: Mail, label: 'E-mail', value: 'contato@irmaosderua.org.br' },
 ]
 
 const team = [
-  { name: 'Carlos Henrique', role: 'Fundador' },
-  { name: 'Ana Paula Santos', role: 'Coordenadora de Voluntários' },
+  { name: 'Humberto', role: 'Fundador' },
+  { name: 'Cris', role: 'Coordenadora de Voluntários' },
   { name: 'Ricardo Oliveira', role: 'Responsável por Logística' },
   { name: 'Juliana Mendes', role: 'Comunicação e Redes Sociais' },
 ]
@@ -28,17 +25,32 @@ const QuemSomos = () => {
   return (
     <Layout>
       <PageHero
+        photoVariant
+        bgImage={aboutUsHeroBanner}
+        bgImageAlt="Voluntários do Irmãos de Rua reunidos em uma ação"
         title="Sobre Nós"
         breadcrumb="Sobre Nós"
-        subtitle="Conheça a história e as pessoas por trás da Irmãos de Rua"
+        subtitle="Com mais de 20 anos nas ruas, a ONG Irmãos de Rua cresce a cada ação com a ajuda de centenas de voluntários que levam alimento, agasalho e acolhimento a quem mais precisa."
       />
 
       {/* Nossa História */}
       <Section label="Nossa História" title="De um gesto simples a uma missão de vida">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          <div className="aspect-[4/3] bg-muted border border-border rounded-xl flex items-center justify-center">
-            <Image className="w-10 h-10 text-muted-foreground/40" strokeWidth={1.5} />
-          </div>
+        <div className="grid md:grid-cols-2 gap-10 items-start">
+          <figure>
+            <div className="aspect-[4/3] rounded-xl overflow-hidden max-w-[440px] mx-auto">
+              <img
+                src={sedeAntiga}
+                alt="Sede antiga da ONG Irmãos de Rua com veículos da operação"
+                className="w-full h-full object-cover"
+                width={800}
+                height={600}
+                loading="lazy"
+              />
+            </div>
+            <figcaption className="mt-3 text-sm text-center text-muted-foreground italic">
+              Sede antiga da ONG, onde tudo começou!
+            </figcaption>
+          </figure>
           <div className="space-y-5 text-base text-foreground leading-relaxed">
             <p>
               Tudo começou em <strong>2005</strong>, quando um pequeno grupo de amigos decidiu levar marmitas e palavras de acolhimento às pessoas em situação de rua na região do ABC Paulista. O que era um gesto espontâneo se transformou em compromisso.
@@ -51,14 +63,31 @@ const QuemSomos = () => {
             </p>
           </div>
         </div>
-      </Section>
 
-      {/* Nossa Missão */}
-      <Section label="Nossa Missão" title="O que nos move" centered bg="muted">
-        <div className="grid md:grid-cols-3 gap-6">
-          {missionCards.map((card) => (
-            <FeatureCard key={card.title} icon={card.icon} title={card.title} description={card.description} />
-          ))}
+        <div className="grid md:grid-cols-2 gap-10 items-start mt-16">
+          <div className="space-y-5 text-base text-foreground leading-relaxed order-2 md:order-1">
+            <p>
+              Com o crescimento da rede de voluntários e o aumento das demandas, <strong>reformamos e expandimos recentemente</strong> a nossa sede — um espaço maior e mais estruturado para receber doações, preparar marmitas e organizar as ações semanais com mais eficiência.
+            </p>
+            <p>
+              É daqui que partem os times todo sábado e domingo, levando alimento, agasalho e acolhimento às ruas. A sede atual representa não só o crescimento da ONG, mas também a confiança de cada voluntário, doador e parceiro que abraçou a causa.
+            </p>
+          </div>
+          <figure className="order-1 md:order-2">
+            <div className="aspect-[4/3] rounded-xl overflow-hidden max-w-[440px] mx-auto">
+              <img
+                src={sedeAtual}
+                alt="Sede atual da ONG Irmãos de Rua"
+                className="w-full h-full object-cover"
+                width={800}
+                height={600}
+                loading="lazy"
+              />
+            </div>
+            <figcaption className="mt-3 text-sm text-center text-muted-foreground italic">
+              Sede atual da ONG, onde a missão continua.
+            </figcaption>
+          </figure>
         </div>
       </Section>
 
@@ -87,14 +116,13 @@ const QuemSomos = () => {
             <p>
               Cada real doado é direcionado para ações que impactam diretamente a vida de quem mais precisa — da compra de alimentos e cobertores ao suporte de ressocialização.
             </p>
-            <a
+            <ExternalLinkButton
               href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre a gestão da ONG."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold text-primary hover:underline transition-colors duration-200 w-fit"
+              variant="outline"
+              className="w-fit"
             >
-              Fale Conosco →
-            </a>
+              Fale Conosco no WhatsApp
+            </ExternalLinkButton>
           </div>
         </div>
       </Section>

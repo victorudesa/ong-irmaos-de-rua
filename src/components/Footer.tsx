@@ -8,11 +8,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-8 md:gap-12 mb-10 md:mb-14">
 
           <div>
-            <img
-              src={logoPadrao}
-              alt="Irmãos de Rua"
-              className="h-24 w-auto object-contain mb-4"
-            />
+            <div className="inline-block bg-white rounded-2xl p-4 mb-4">
+              <img
+                src={logoPadrao}
+                alt="Irmãos de Rua"
+                className="h-24 w-auto object-contain"
+              />
+            </div>
             <p className="text-sm leading-relaxed max-w-[240px]" style={{ color: 'var(--color-on-dark-mid)' }}>
               Levando acolhimento e esperança para pessoas em situação de rua desde 2005.
             </p>

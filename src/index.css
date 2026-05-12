@@ -65,10 +65,10 @@
     --shadow-card-hover: 0 10px 30px -10px oklch(0 0 0 / 0.10), 0 4px 6px -4px oklch(0 0 0 / 0.06);
 
     /* Espaçamento de seção */
-    --section-y:           4rem;
-    --section-y-md:        5rem;
-    --section-y-compact:   3rem;
-    --section-y-compact-md: 4rem;
+    --section-y:           3rem;
+    --section-y-md:        3.75rem;
+    --section-y-compact:   2.25rem;
+    --section-y-compact-md: 3rem;
 
     /* Surface */
     --color-background:         oklch(1 0 0);

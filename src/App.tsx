@@ -8,6 +8,7 @@ const SobreNos = lazy(() => import('@/pages/SobreNos'))
 const Voluntario = lazy(() => import('@/pages/Voluntario'))
 const DoeAgora = lazy(() => import('@/pages/DoeAgora'))
 const Parceiros = lazy(() => import('@/pages/Parceiros'))
+const Galeria = lazy(() => import('@/pages/Galeria'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
 
 const router = createBrowserRouter([
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
   { path: '/voluntario',element: <Voluntario />,errorElement: <RouteError /> },
   { path: '/doe-agora', element: <DoeAgora />,  errorElement: <RouteError /> },
   { path: '/parceiros', element: <Parceiros />, errorElement: <RouteError /> },
+  { path: '/galeria',   element: <Galeria />,   errorElement: <RouteError /> },
   { path: '*',          element: <NotFound /> },
 ])
 

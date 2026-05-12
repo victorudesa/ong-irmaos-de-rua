@@ -180,7 +180,7 @@ Mapa de todas as etapas planejadas, com status atual.
   - `ActionsCarousel` — scroll horizontal com `useRef`, botões prev/next com estado
   - `HowToHelpGrid` — grid assimétrico (card "01" span 2 rows), layout mobile separado
   - Seção "Sobre" editorial com imagem placeholder e CTAs inline
-  - Grid Instagram 2×2 com header inline (título + botão na mesma linha)
+  - Galeria masonry com 6 imagens, lightbox e botão abaixo das fotos
 - **Build:** `tsc -b && vite build` passa limpo em 848ms, zero erros TypeScript.
 - **Commit:** `d4fdcb0`
 

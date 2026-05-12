@@ -1,3 +1,8 @@
+import { useMemo, useState } from 'react'
+import Lightbox from 'yet-another-react-lightbox'
+import Captions from 'yet-another-react-lightbox/plugins/captions'
+import 'yet-another-react-lightbox/styles.css'
+import 'yet-another-react-lightbox/plugins/captions.css'
 import { cn } from '@/lib/utils'
 import type { GalleryItem } from '@/lib/gallery'
 
@@ -8,21 +13,52 @@ type GalleryMasonryProps = {
 }
 
 const GalleryMasonry = ({ items, className, eagerFirst = false }: GalleryMasonryProps) => {
+  const [index, setIndex] = useState(-1)
+  const slides = useMemo(
+    () =>
+      items.map((item) => ({
+        src: item.src,
+        alt: item.alt,
+        width: item.width,
+        height: item.height,
+        description: item.caption,
+      })),
+    [items],
+  )
+
   return (
-    <div className={cn('columns-2 md:columns-3 [column-gap:0.75rem] sm:[column-gap:1rem]', className)}>
-      {items.map((item, index) => (
-        <figure key={item.src} className="mb-3 sm:mb-4 break-inside-avoid">
-          <img
-            src={item.src}
-            alt={item.alt}
-            width={item.width}
-            height={item.height}
-            loading={eagerFirst && index === 0 ? 'eager' : 'lazy'}
-            className="w-full rounded-[18px] object-cover transition-opacity duration-200 hover:opacity-90"
-          />
-        </figure>
-      ))}
-    </div>
+    <>
+      <div className={cn('columns-2 md:columns-3 [column-gap:0.75rem] sm:[column-gap:1rem]', className)}>
+        {items.map((item, itemIndex) => (
+          <figure key={item.src} className="mb-3 sm:mb-4 break-inside-avoid">
+            <button
+              type="button"
+              onClick={() => setIndex(itemIndex)}
+              className="group block w-full cursor-zoom-in rounded-[18px] p-0 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+              aria-label={`Abrir imagem: ${item.alt}`}
+            >
+              <img
+                src={item.src}
+                alt={item.alt}
+                width={item.width}
+                height={item.height}
+                loading={eagerFirst && itemIndex === 0 ? 'eager' : 'lazy'}
+                className="w-full rounded-[18px] object-cover transition-opacity duration-200 group-hover:opacity-90"
+              />
+            </button>
+          </figure>
+        ))}
+      </div>
+
+      <Lightbox
+        open={index >= 0}
+        close={() => setIndex(-1)}
+        index={index}
+        slides={slides}
+        plugins={[Captions]}
+        captions={{ descriptionTextAlign: 'center' }}
+      />
+    </>
   )
 }
 

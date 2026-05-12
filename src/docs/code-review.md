@@ -120,13 +120,12 @@ Também resolve o problema de "circular import" se outro componente quiser usar 
 
 **Onde:**
 - [src/components/MetricsGrid.tsx:17](../components/MetricsGrid.tsx#L17)
-- [src/pages/Index.tsx:502](../pages/Index.tsx#L502) — `Array.from({length: 4})` placeholder
 - [src/pages/DoeAgora.tsx:259](../pages/DoeAgora.tsx#L259) — `key={i}` no FAQ
 - [src/pages/Voluntario.tsx:288](../pages/Voluntario.tsx#L288) — `key={i}` no FAQ
 
 **Problema:** `key={index}` quebra a reconciliação do React quando a lista é reordenada/filtrada. Para listas estáticas funciona, mas:
 1. Os FAQs já têm `q` único — usar `key={faq.q}` é grátis e correto.
-2. O placeholder Instagram usa `Array.from({length:4}).map((_, i) => …)` — quando virar lista real de posts, o índice vai virar bug.
+2. Métricas podem usar `label` ou outro identificador estável.
 
 **Correção:**
 ```tsx
@@ -677,15 +676,9 @@ if (!card) return
 
 `querySelector<HTMLElement>(...)` retorna `HTMLElement | null` corretamente, sem cast.
 
-### 33. `arr.map((_, i) => …)` com placeholder de Instagram
+### 33. Placeholder de Instagram substituído
 
-**Onde:** [Index.tsx:500](../pages/Index.tsx#L500)
-
-```tsx
-{Array.from({ length: 4 }).map((_, i) => (...))}
-```
-
-OK como placeholder. Quando virar dados reais, mudar para `instagramPosts.map(post => …)`.
+**Status:** resolvido. O placeholder `Array.from({ length: 4 })` foi substituído pela galeria real em `src/lib/gallery.ts` + `GalleryMasonry`.
 
 ---
 

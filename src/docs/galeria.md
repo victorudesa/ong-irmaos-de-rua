@@ -1,25 +1,27 @@
-# Galeria — Planejamento
+# Galeria
 
-Seção de mídia na homepage + página dedicada com fotos e vídeos.
-
----
-
-## Decisões
-
-- **Masonry via CSS columns** — sem lib, zero bundle, suporte universal
-- **Vídeos no YouTube** — gratuito, ilimitado, CDN global; usar `unlisted` se não quiser exposição no canal
-- **Vídeo no grid** — thumbnail + ícone de play, clique abre YouTube em nova aba (sem embed, sem cookies)
-- **Thumbnail de vídeo** — gerada automaticamente pelo YouTube: `https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg`
-- **Sem card/borda/sombra** — só a mídia com `gap` uniforme entre itens
+Seção de mídia na homepage + página dedicada em `/galeria`.
 
 ---
 
-## Estrutura de dados
+## Estado atual
 
-```ts
-type MediaItem =
-  | { type: 'photo'; src: string; alt: string }
-  | { type: 'video'; thumb: string; alt: string; url: string }
+- Homepage usa um teaser com 6 imagens em masonry.
+- Página `/galeria` usa o mesmo masonry com todas as mídias cadastradas.
+- Clique em qualquer imagem abre fullscreen com `yet-another-react-lightbox`.
+- Captions simples aparecem centralizadas no lightbox.
+- Por enquanto a galeria tem apenas fotos; vídeos do YouTube entram depois.
+
+---
+
+## Arquivos principais
+
+```
+src/components/GalleryMasonry.tsx       Componente masonry + lightbox
+src/lib/gallery.ts                      Dados das imagens e captions
+src/pages/Galeria.tsx                   Página /galeria
+src/pages/Index.tsx                     Seção "Galeria" na homepage
+src/App.tsx                            Registro da rota /galeria
 ```
 
 ---
@@ -27,42 +29,68 @@ type MediaItem =
 ## Estrutura de arquivos
 
 ```
-src/assets/images/sections/galeria/
-  foto-01.jpg
-  foto-02.jpg
-  foto-03.jpg
-  foto-04.jpg
-  foto-05.jpg
-  foto-06.jpg
-  thumb-video-01.jpg   ← ou usar URL do YouTube diretamente
+src/assets/images/sections/masonry/
+  masonry-01.jpg
+  masonry-02.jpg
+  masonry-03.jpg
+  masonry-04.jpg
+  masonry-05.jpg
+  masonry-06.jpg
 ```
 
 ---
 
-## Etapas
+## Estrutura de dados atual
 
-### 1 — Conteúdo (você)
-- Separar 6 fotos para o teaser da homepage
-- Subir vídeos no YouTube (pode ser `unlisted`)
-- Copiar as URLs dos vídeos
+```ts
+type GalleryItem = {
+  src: string
+  alt: string
+  caption: string
+  width: number
+  height: number
+}
+```
 
-### 2 — Seção na homepage
-- Adicionar seção "Galeria" em `src/pages/Index.tsx` substituindo a seção Instagram
-- Grid masonry CSS columns (2 colunas mobile, 3 desktop)
-- 6 itens (mix de fotos e vídeos)
-- Botão "Ver toda a galeria →" linkando pra `/galeria`
-
-### 3 — Página `/galeria`
-- Criar `src/pages/Galeria.tsx` (lazy-loaded, mesmo padrão das outras páginas)
-- Grid maior com todas as mídias
-- Registrar rota em `src/App.tsx`
-
-### 4 — Navegação (opcional)
-- Adicionar link "Galeria" na Navbar se fizer sentido
+Para trocar uma legenda, edite `caption` em `src/lib/gallery.ts`.
+Para trocar o texto acessível, edite `alt`.
 
 ---
 
-## Notas futuras
+## Tamanhos recomendados
 
-- Adicionar nova mídia = adicionar arquivo na pasta + entrada no array, sem mexer no componente
-- Lightbox (abrir foto em fullscreen no próprio site) pode ser adicionado depois com `yet-another-react-lightbox` — pequena, moderna, sem overhead
+- Use fotos com cerca de **1200 px de largura**.
+- Varie a altura para o efeito masonry ficar natural.
+- Peso ideal: **200 KB a 500 KB** por imagem.
+- Formatos: JPG ou WebP.
+
+Fotos atuais:
+
+| Arquivo | Dimensão |
+|---|---:|
+| `masonry-01.jpg` | 1200 x 1600 |
+| `masonry-02.jpg` | 1200 x 900 |
+| `masonry-03.jpg` | 1201 x 1200 |
+| `masonry-04.jpg` | 1201 x 1500 |
+| `masonry-05.jpg` | 1201 x 800 |
+| `masonry-06.jpg` | 1201 x 1350 |
+
+---
+
+## Decisões técnicas
+
+- **Masonry via CSS columns**: 2 colunas mobile, 3 desktop.
+- **Sem cards, bordas ou sombra**: só imagem, raio e gap uniforme.
+- **Lightbox**: `yet-another-react-lightbox`.
+- **Captions**: plugin `Captions` do próprio pacote, sem dependência extra.
+- **Botão da home**: fica abaixo das fotos e linka para `/galeria`.
+
+---
+
+## Futuro: vídeos do YouTube
+
+- Subir vídeos no YouTube, de preferência como `unlisted` se não quiser exposição no canal.
+- Thumbnail pode vir direto do YouTube:
+  `https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg`
+- No grid, vídeo deve aparecer como thumbnail com ícone de play.
+- Clique pode abrir YouTube em nova aba ou usar plugin de vídeo do lightbox depois.

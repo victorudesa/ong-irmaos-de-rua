@@ -75,9 +75,9 @@ não ocupa a tela toda, então uma imagem mais larga e baixa é suficiente.
 | Hero principal | `1920 × 1080` | 16:9 | 1 | `hero-bg.webp` |
 | Foto "Quem Somos" | `800 × 600` | 4:3 | 1 | `quem-somos.webp` |
 | Cards carousel (cada) | `720 × 400` | 16:9 | 5 | `acao-marmita.webp` etc. |
-| Grid Instagram (cada) | `600 × 600` | 1:1 | 4 | `insta-01.webp` etc. |
+| Galeria masonry | largura `1200` | variado | 6 | `masonry-01.webp` etc. |
 
-**Total homepage: 11 fotos**
+**Total homepage: 13 fotos**
 
 ### Nomes sugeridos para os cards do carousel
 ```
@@ -89,14 +89,22 @@ src/assets/acoes/
   acao-semanais.webp
 ```
 
-### Nomes sugeridos para o grid Instagram
+### Galeria masonry
+
+Use todas com largura próxima de **1200 px** e varie a altura para criar o efeito masonry:
+
 ```
-src/assets/instagram/
-  insta-01.webp
-  insta-02.webp
-  insta-03.webp
-  insta-04.webp
+src/assets/images/sections/masonry/
+  masonry-01.jpg   1200 x 1600
+  masonry-02.jpg   1200 x 900
+  masonry-03.jpg   1201 x 1200
+  masonry-04.jpg   1201 x 1500
+  masonry-05.jpg   1201 x 800
+  masonry-06.jpg   1201 x 1350
 ```
+
+As imagens e legendas são cadastradas em `src/lib/gallery.ts`.
+O componente `src/components/GalleryMasonry.tsx` monta o masonry e abre o lightbox ao clicar.
 
 ---
 

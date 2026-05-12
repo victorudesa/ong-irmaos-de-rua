@@ -517,7 +517,7 @@ Manter o que o projeto antigo já fazia bem, e cobrir os gaps:
 | Logo mark Navbar | Caixa vermelha | Caixa ink (quase preta) | Menos impacto visual competindo com o CTA |
 | MetricsGrid | Layout genérico | Strip branca, números display grandes, `+` em primary | Impacto imediato nas métricas |
 | CtaBanner | Apenas layout centered | Dual: editorial left-aligned + centered (backwards-compatible) | Homepage usa layout editorial; páginas internas mantêm centered |
-| Homepage (Index.tsx) | Layout sem identidade visual forte | Hero 2-col com tipografia fluida, CarouselActions, grid assimétrico, 2×2 Instagram | Implementação do redesign do Claude Design handoff |
+| Homepage (Index.tsx) | Layout sem identidade visual forte | Hero 2-col com tipografia fluida, CarouselActions, grid assimétrico, galeria masonry com lightbox | Implementação do redesign + galeria real |
 
 ---
 
@@ -530,7 +530,7 @@ Manter o que o projeto antigo já fazia bem, e cobrir os gaps:
 3. **Organismos compartilhados** — `Layout`, `Section`, `PageHero`, `CtaBanner` (dual-mode), `MetricsGrid`, `WhatsAppButton`
 4. **Navbar** — logo mark ink, fundo off-white quente
 5. **Footer** — fundo ink, logo mark vermelho, colunas tokenizadas
-6. **Homepage (`Index.tsx`)** — redesign completo: hero 2-col fluido, ActionsCarousel, HowToHelpGrid assimétrico, seção "Sobre", grid Instagram 2×2
+6. **Homepage (`Index.tsx`)** — redesign completo: hero 2-col fluido, ActionsCarousel, HowToHelpGrid assimétrico, seção "Sobre", galeria masonry com lightbox
 7. **Componentes shadcn instalados** — `button`, `input`, `label`, `textarea`, `accordion`
 8. **Formulário de voluntário** — `react-hook-form` + Zod, componente `VoluntarioForm`
 9. **Página Doe Agora** — redesign completo: hero photo-variant, impacto cards, PIX card dark, TED card, impact strip, FAQ accordion

@@ -25,14 +25,14 @@ const Navbar = () => {
       className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-ink/8 transition-shadow duration-200 ${
         scrolled ? 'shadow-[0_2px_20px_oklch(0_0_0/0.06)]' : 'shadow-none'
       }`}
-      style={{ background: 'oklch(0.97 0.012 60 / 0.92)' }}
+      style={{ background: 'oklch(0.97 0.012 60 / 0.80)' }}
     >
       <div className="container mx-auto px-6 md:px-8 max-w-[1200px] flex items-center justify-between h-16">
         <Link to="/" className="flex items-center text-ink no-underline">
           <img
             src={logoHorizontal}
             alt="Irmãos de Rua"
-            className="h-10 w-auto object-contain"
+            className="h-8 md:h-10 w-auto object-contain"
           />
         </Link>
 

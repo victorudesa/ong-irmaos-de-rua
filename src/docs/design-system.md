@@ -300,13 +300,34 @@ Gera utilitárias `shadow-card` e `shadow-card-hover` automaticamente. Substitui
 
 ## 5. Botões
 
-Todo botão do projeto passa por dois componentes — nunca estilos inline em `<button>` ou `<a>`.
+Todo botão do projeto passa por três componentes — nunca estilos inline em `<button>` ou `<a>`.
 
 | Componente | Quando usar |
 | --- | --- |
 | `<Button>` | Ação nativa HTML: submit de form, `onClick`, reload |
 | `<LinkButton>` | Navegação interna via React Router (`<Link>`) |
-| `<a href>` | Links externos (fora do React Router) |
+| `<ExternalLinkButton>` | Links externos (WhatsApp, redes sociais, parceiros) — força `target="_blank"`, `rel="noopener noreferrer"` e mostra ícone de link externo |
+
+### `<ExternalLinkButton>`
+
+Para links que saem do site. Compartilha as mesmas variantes/sizes que `<Button>` e `<LinkButton>` via `buttonVariants`.
+
+```tsx
+import { ExternalLinkButton } from '@/components/ui/external-link-button'
+
+<ExternalLinkButton href="https://wa.me/..." variant="outline">
+  Fale Conosco
+</ExternalLinkButton>
+
+// Esconder o ícone quando o contexto já indica saída (ex: ícone do WhatsApp)
+<ExternalLinkButton href="https://wa.me/..." variant="default" hideIcon>
+  <WhatsAppIcon /> Falar conosco
+</ExternalLinkButton>
+```
+
+**Props extras:**
+- `hideIcon` — esconde o ícone padrão de link externo
+- `ariaLabel` — usado quando os filhos não são apenas texto
 
 Implementação em CVA: [src/components/ui/button.variants.ts](../components/ui/button.variants.ts).
 

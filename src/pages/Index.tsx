@@ -302,7 +302,7 @@ const Index = () => {
     <Layout>
       {/* ── HERO ── */}
       <section
-        className="relative overflow-hidden flex flex-col justify-between md:justify-end min-h-[88svh] md:min-h-[100svh] pt-12"
+        className="relative overflow-hidden flex flex-col justify-between md:justify-end min-h-[88svh] md:min-h-[85svh] pt-12"
       >
         <picture>
           <source media="(max-width: 768px)" srcSet={heroBgMobile} />
@@ -331,7 +331,7 @@ const Index = () => {
             style={{ textShadow: '0 2px 16px oklch(0 0 0 / 0.35)' }}
           >
             Acolhendo{' '}
-            <em className="font-display not-italic" style={{ color: 'var(--color-amber)', fontStyle: 'italic' }}>irmãos e irmãs</em>{' '}
+            <em className="font-display not-italic text-white" style={{ fontStyle: 'italic' }}>irmãos e irmãs</em>{' '}
             desde 2005
           </h1>
 
@@ -368,15 +368,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div
-          className="absolute bottom-8 right-[clamp(20px,5vw,60px)] flex items-center gap-2.5 md:flex hidden"
-          style={{ color: 'var(--color-on-dark-low)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', writingMode: 'vertical-rl' }}
-          aria-hidden="true"
-        >
-          <span>Scroll</span>
-          <div style={{ width: '1px', height: '40px', background: 'linear-gradient(to bottom, transparent, var(--color-on-dark-low))' }} />
-        </div>
       </section>
 
       {/* ── QUEM SOMOS ── */}
